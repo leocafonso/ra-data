@@ -1,0 +1,17 @@
+[package]
+name = "ra-metapac-gen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+heck = { workspace = true }
+quote = { workspace = true }
+proc-macro2 = { workspace = true }
+glob = { workspace = true }
+walkdir = { workspace = true }
+ra-data-types = { path = "../ra-data-types" }
+chiptool = { workspace = true }
+regex = { workspace = true }

@@ -1,0 +1,1075 @@
+block/SYSC:
+  description: System Control.
+  items:
+  - name: CMC
+    description: Clock Operation Mode Control Register.
+    byte_offset: 2048
+    bit_size: 8
+    fieldset: CMC
+  - name: SOMRG
+    description: Sub-clock Oscillator Margin Check Register.
+    byte_offset: 2051
+    bit_size: 8
+    fieldset: SOMRG
+  - name: MIOTRM
+    description: Middle-speed On-chip Oscillator Trimming Register.
+    byte_offset: 2052
+    bit_size: 8
+    fieldset: MIOTRM
+  - name: LIOTRM
+    description: Low-speed On-chip Oscillator Trimming Register.
+    byte_offset: 2053
+    bit_size: 8
+    fieldset: LIOTRM
+  - name: HOCOCR
+    description: High-speed On-chip Oscillator Control Register.
+    byte_offset: 2056
+    bit_size: 8
+    fieldset: HOCOCR
+  - name: MOCOCR
+    description: Middle-speed On-chip Oscillator Control Register.
+    byte_offset: 2057
+    bit_size: 8
+    fieldset: MOCOCR
+  - name: LOCOCR
+    description: Low-speed On-chip Oscillator Control Register.
+    byte_offset: 2058
+    bit_size: 8
+    fieldset: LOCOCR
+  - name: MOSCCR
+    description: Main Clock Oscillator Control Register.
+    byte_offset: 2059
+    bit_size: 8
+    fieldset: MOSCCR
+  - name: SOSCCR
+    description: Sub-clock Oscillator Control Register.
+    byte_offset: 2060
+    bit_size: 8
+    fieldset: SOSCCR
+  - name: OSTC
+    description: Oscillation Stabilization Time Counter Status Register.
+    byte_offset: 2064
+    access: Read
+    bit_size: 8
+    fieldset: OSTC
+  - name: OSTS
+    description: Oscillation Stabilization Time Select Register.
+    byte_offset: 2065
+    bit_size: 8
+    fieldset: OSTS
+  - name: OSCSF
+    description: Oscillation Stabilization Flag Register.
+    byte_offset: 2066
+    access: Read
+    bit_size: 8
+    fieldset: OSCSF
+  - name: HOCODIV
+    description: High-speed On-chip Oscillator Frequency Select Register.
+    byte_offset: 2072
+    bit_size: 8
+    fieldset: HOCODIV
+  - name: MOCODIV
+    description: Middle-speed On-chip Oscillator Frequency Select Register.
+    byte_offset: 2073
+    bit_size: 8
+    fieldset: MOCODIV
+  - name: MOSCDIV
+    description: MOSC Clock Division Register.
+    byte_offset: 2074
+    bit_size: 8
+    fieldset: MOSCDIV
+  - name: FOCOSCR
+    description: FOCO Clock Source Control Register.
+    byte_offset: 2080
+    bit_size: 8
+    fieldset: FOCOSCR
+  - name: FMAINSCR
+    description: FMAIN Clock Source Control Register.
+    byte_offset: 2081
+    bit_size: 8
+    fieldset: FMAINSCR
+  - name: FSUBSCR
+    description: FSUB Clock Source Control Register.
+    byte_offset: 2082
+    bit_size: 8
+    fieldset: FSUBSCR
+  - name: ICLKSCR
+    description: ICLK Clock Source Control Register.
+    byte_offset: 2083
+    bit_size: 8
+    fieldset: ICLKSCR
+  - name: OSMC
+    description: Subsystem Clock Supply Mode Control Register.
+    byte_offset: 2084
+    bit_size: 8
+    fieldset: OSMC
+  - name: RESF
+    description: Reset Status Flag Register.
+    byte_offset: 2096
+    access: Read
+    bit_size: 8
+    fieldset: RESF
+  - name: PORSR
+    description: Power-On Reset Status Register.
+    byte_offset: 2097
+    bit_size: 8
+    fieldset: PORSR
+  - name: LVD1CR
+    description: Voltage Monitor 1 Circuit Control Register.
+    byte_offset: 2112
+    bit_size: 8
+    fieldset: LVD1CR
+  - name: LVD1MKR
+    description: Voltage Monitor 1 Circuit Mask Register.
+    byte_offset: 2113
+    bit_size: 8
+    fieldset: LVD1MKR
+  - name: LVD1SR
+    description: Voltage Monitor 1 Circuit Status Register.
+    byte_offset: 2115
+    bit_size: 8
+    fieldset: LVD1SR
+  - name: SBYCR
+    description: Standby Control Register.
+    byte_offset: 2144
+    bit_size: 16
+    fieldset: SBYCR
+  - name: PSMCR
+    description: Power Save Memory Control Register.
+    byte_offset: 2146
+    bit_size: 8
+    fieldset: PSMCR
+  - name: SYOCDCR
+    description: System Control OCD Control Register.
+    byte_offset: 2147
+    bit_size: 8
+    fieldset: SYOCDCR
+  - name: PRCR
+    description: Protect Register.
+    byte_offset: 2302
+    bit_size: 16
+    fieldset: PRCR
+  - name: MSTPCRA
+    description: Module Stop Control Register A.
+    byte_offset: 3074
+    bit_size: 16
+    fieldset: MSTPCRA
+fieldset/CMC:
+  description: Clock Operation Mode Control Register.
+  bit_size: 8
+  fields:
+  - name: MODRV
+    description: Main Clock Oscillator Drive Capability Switching.
+    bit_offset: 0
+    bit_size: 1
+    enum: MODRV
+  - name: SODRV
+    description: Sub-Clock Oscillator Drive Capability Switching.
+    bit_offset: 1
+    bit_size: 2
+    enum: SODRV
+  - name: XTSEL
+    description: Selecting Clock Oscillator.
+    bit_offset: 3
+    bit_size: 1
+    enum: XTSEL
+  - name: SOSEL
+    description: Sub Clock Oscillator Switching.
+    bit_offset: 4
+    bit_size: 1
+    enum: SOSEL
+  - name: MOSEL
+    description: Main Clock Oscillator Switching.
+    bit_offset: 6
+    bit_size: 2
+    enum: MOSEL
+fieldset/FMAINSCR:
+  description: FMAIN Clock Source Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: FMAIN Clock Source Select.
+    bit_offset: 0
+    bit_size: 1
+    enum: FMAINSCR_CKSEL
+  - name: CKST
+    description: FMAIN Clock Source Status.
+    bit_offset: 1
+    bit_size: 1
+    enum: FMAINSCR_CKST
+fieldset/FOCOSCR:
+  description: FOCO Clock Source Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: FOCO Clock Source Select.
+    bit_offset: 0
+    bit_size: 1
+    enum: FOCOSCR_CKSEL
+  - name: CKST
+    description: FOCO Clock Source Status.
+    bit_offset: 1
+    bit_size: 1
+    enum: FOCOSCR_CKST
+fieldset/FSUBSCR:
+  description: FSUB Clock Source Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: FSUB Clock Source Select.
+    bit_offset: 0
+    bit_size: 1
+    enum: FSUBSCR_CKSEL
+fieldset/HOCOCR:
+  description: High-speed On-chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: HCSTP
+    description: HOCO Stop.
+    bit_offset: 0
+    bit_size: 1
+    enum: HCSTP
+fieldset/HOCODIV:
+  description: High-speed On-chip Oscillator Frequency Select Register.
+  bit_size: 8
+  fields:
+  - name: DIV
+    description: High-speed On-chip Oscillator Clock Division Ratio.
+    bit_offset: 0
+    bit_size: 3
+    enum: HOCODIV_DIV
+fieldset/ICLKSCR:
+  description: ICLK Clock Source Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: ICLK Clock Source Select.
+    bit_offset: 0
+    bit_size: 1
+    enum: ICLKSCR_CKSEL
+  - name: CKST
+    description: ICLK Clock Source Status.
+    bit_offset: 1
+    bit_size: 1
+    enum: ICLKSCR_CKST
+fieldset/LIOTRM:
+  description: Low-speed On-chip Oscillator Trimming Register.
+  bit_size: 8
+  fields:
+  - name: LIOTRM
+    description: LOCO User Trimming.
+    bit_offset: 0
+    bit_size: 8
+fieldset/LOCOCR:
+  description: Low-speed On-chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: LCSTP
+    description: LOCO Stop.
+    bit_offset: 0
+    bit_size: 1
+    enum: LCSTP
+fieldset/LVD1CR:
+  description: Voltage Monitor 1 Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: LVD1V
+    description: Voltage Detection 1 Level Select.
+    bit_offset: 0
+    bit_size: 5
+    enum: LVD1V
+  - name: IRQSEL
+    description: Voltage Monitor 1 Interrupt Type Select.
+    bit_offset: 5
+    bit_size: 1
+    enum: IRQSEL
+  - name: LVD1SEL
+    description: Operation mode of LVD1.
+    bit_offset: 6
+    bit_size: 1
+    enum: LVD1SEL
+  - name: LVD1EN
+    description: Enabling Operation of LVD1.
+    bit_offset: 7
+    bit_size: 1
+    enum: LVD1EN
+fieldset/LVD1MKR:
+  description: Voltage Monitor 1 Circuit Mask Register.
+  bit_size: 8
+  fields:
+  - name: MK
+    description: Specification of Whether to Enable or Disable Rewriting th LVD1CR Register.
+    bit_offset: 0
+    bit_size: 1
+    enum: MK
+fieldset/LVD1SR:
+  description: Voltage Monitor 1 Circuit Status Register.
+  bit_size: 8
+  fields:
+  - name: DET
+    description: Voltage Monitor 1 Voltage Variation Detection Flag.
+    bit_offset: 0
+    bit_size: 1
+    enum: DET
+  - name: MON
+    description: Voltage Monitor 1 Signal Monitor Flag.
+    bit_offset: 1
+    bit_size: 1
+    enum: MON
+fieldset/MIOTRM:
+  description: Middle-speed On-chip Oscillator Trimming Register.
+  bit_size: 8
+  fields:
+  - name: MIOTRM
+    description: MOCO User Trimming.
+    bit_offset: 0
+    bit_size: 8
+fieldset/MOCOCR:
+  description: Middle-speed On-chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: MCSTP
+    description: MOCO Stop.
+    bit_offset: 0
+    bit_size: 1
+    enum: MCSTP
+fieldset/MOCODIV:
+  description: Middle-speed On-chip Oscillator Frequency Select Register.
+  bit_size: 8
+  fields:
+  - name: DIV
+    description: Selection of the Middle-speed On-chip Oscillator Clock Frequency.
+    bit_offset: 0
+    bit_size: 2
+    enum: MOCODIV_DIV
+fieldset/MOSCCR:
+  description: Main Clock Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: MOSTP
+    description: Main Clock Oscillator Stop.
+    bit_offset: 0
+    bit_size: 1
+    enum: MOSTP
+fieldset/MOSCDIV:
+  description: MOSC Clock Division Register.
+  bit_size: 8
+  fields:
+  - name: DIV
+    description: Selection Division Ratio for the MOSC Clock.
+    bit_offset: 0
+    bit_size: 3
+    enum: MOSCDIV_DIV
+fieldset/MSTPCRA:
+  description: Module Stop Control Register A.
+  bit_size: 16
+  fields:
+  - name: MSTPA22
+    description: DTC Module Stop.
+    bit_offset: 6
+    bit_size: 1
+    enum: MSTPA22
+fieldset/OSCSF:
+  description: Oscillation Stabilization Flag Register.
+  bit_size: 8
+  fields:
+  - name: HOCOSF
+    description: HOCO Clock Oscillation Stabilization Flag.
+    bit_offset: 0
+    bit_size: 1
+    enum: HOCOSF
+fieldset/OSMC:
+  description: Subsystem Clock Supply Mode Control Register.
+  bit_size: 8
+  fields:
+  - name: WUTMMCK0
+    description: Selection of the Operating clock source for the Realtime Clock, 32-bit Interval Timer, Serial Interface UARTA.
+    bit_offset: 4
+    bit_size: 1
+    enum: WUTMMCK0
+fieldset/OSTC:
+  description: Oscillation Stabilization Time Counter Status Register.
+  bit_size: 8
+  fields:
+  - name: MOST
+    description: Selection of the Oscillation Stabilization Time.
+    bit_offset: 0
+    bit_size: 8
+    enum: MOST
+fieldset/OSTS:
+  description: Oscillation Stabilization Time Select Register.
+  bit_size: 8
+  fields:
+  - name: OSTSB
+    description: Selection of the Oscillation Stabilization Time.
+    bit_offset: 0
+    bit_size: 3
+    enum: OSTSB
+fieldset/PORSR:
+  description: Power-On Reset Status Register.
+  bit_size: 8
+  fields:
+  - name: PORF
+    description: Checking Occurrence of Power-on Reset.
+    bit_offset: 0
+    bit_size: 1
+    enum: PORF
+fieldset/PRCR:
+  description: Protect Register.
+  bit_size: 16
+  fields:
+  - name: PRC0
+    description: Enable writing to the registers related to the clock generation circuit.
+    bit_offset: 0
+    bit_size: 1
+    enum: PRC0
+  - name: PRC1
+    description: Enable writing to the registers related to the low power modes.
+    bit_offset: 1
+    bit_size: 1
+    enum: PRC1
+  - name: PRC3
+    description: Enable writing to the registers related to the LVD.
+    bit_offset: 3
+    bit_size: 1
+    enum: PRC3
+  - name: PRKEY
+    description: PRC Key Code.
+    bit_offset: 8
+    bit_size: 8
+fieldset/PSMCR:
+  description: Power Save Memory Control Register.
+  bit_size: 8
+  fields:
+  - name: RAMSD
+    description: Operating Mode of the RAM.
+    bit_offset: 0
+    bit_size: 2
+    enum: RAMSD
+fieldset/RESF:
+  description: Reset Status Flag Register.
+  bit_size: 8
+  fields:
+  - name: LVIRF
+    description: Internal Reset Request by Voltage Detector (LVD0 or LVD1).
+    bit_offset: 0
+    bit_size: 1
+    enum: LVIRF
+  - name: RPERF
+    description: Internal Reset Request by RAM Parity Error.
+    bit_offset: 2
+    bit_size: 1
+    enum: RPERF
+  - name: IWDTRF
+    description: Internal Reset Request by Independent Watchdog Timer (IWDT).
+    bit_offset: 4
+    bit_size: 1
+    enum: IWDTRF
+  - name: SWRF
+    description: Internal Reset Request by Software Reset.
+    bit_offset: 5
+    bit_size: 1
+    enum: SWRF
+fieldset/SBYCR:
+  description: Standby Control Register.
+  bit_size: 16
+  fields:
+  - name: FLSTP
+    description: Flash Mode in Sleep Mode or in Snooze Mode.
+    bit_offset: 7
+    bit_size: 1
+    enum: FLSTP
+  - name: FWKUP
+    description: Setting for Starting the High-speed On-chip Oscillator at the times of release from Software Standby Mode and of Transitions to Snooze Mode.
+    bit_offset: 8
+    bit_size: 1
+    enum: FWKUP
+  - name: RTCLPC
+    description: SOSC Setting in Software Standby Mode or in Snooze Mode.
+    bit_offset: 9
+    bit_size: 1
+    enum: RTCLPC
+  - name: SSBY
+    description: Software Standby Mode Select.
+    bit_offset: 15
+    bit_size: 1
+    enum: SSBY
+fieldset/SOMRG:
+  description: Sub-clock Oscillator Margin Check Register.
+  bit_size: 8
+  fields:
+  - name: SOSCMRG
+    description: Sub Clock Oscillator Margin Check Switching.
+    bit_offset: 0
+    bit_size: 2
+    enum: SOSCMRG
+fieldset/SOSCCR:
+  description: Sub-clock Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: SOSTP
+    description: Sub Clock Oscillator Stop.
+    bit_offset: 0
+    bit_size: 1
+    enum: SOSTP
+fieldset/SYOCDCR:
+  description: System Control OCD Control Register.
+  bit_size: 8
+  fields:
+  - name: DBGEN
+    description: Debugger Enable bit.
+    bit_offset: 7
+    bit_size: 1
+    enum: DBGEN
+enum/DBGEN:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: On-chip debugger is disabled.
+    value: 0
+  - name: V_1
+    description: On-chip debugger is enabled.
+    value: 1
+enum/DET:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Not detected.
+    value: 0
+  - name: V_1
+    description: Vdet1 crossing is detected.
+    value: 1
+enum/FLSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Flash active.
+    value: 0
+  - name: V_1
+    description: Flash stop.
+    value: 1
+enum/FMAINSCR_CKSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: FOCO.
+    value: 0
+  - name: V_1
+    description: MOSC.
+    value: 1
+enum/FMAINSCR_CKST:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: FOCO.
+    value: 0
+  - name: V_1
+    description: MOSC.
+    value: 1
+enum/FOCOSCR_CKSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: HOCO.
+    value: 0
+  - name: V_1
+    description: MOCO.
+    value: 1
+enum/FOCOSCR_CKST:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: HOCO.
+    value: 0
+  - name: V_1
+    description: MOCO.
+    value: 1
+enum/FSUBSCR_CKSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: SOSC.
+    value: 0
+  - name: V_1
+    description: LOCO.
+    value: 1
+enum/FWKUP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Starting of the high-speed on-chip oscillator is at normal speed.
+    value: 0
+  - name: V_1
+    description: Starting of the high-speed on-chip oscillator is at high speed.
+    value: 1
+enum/HCSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Operate the HOCO clock.
+    value: 0
+  - name: V_1
+    description: Stop the HOCO clock.
+    value: 1
+enum/HOCODIV_DIV:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: × 1/1.
+    value: 0
+  - name: V_001
+    description: × 1/2.
+    value: 1
+  - name: V_010
+    description: × 1/4.
+    value: 2
+  - name: V_011
+    description: × 1/8.
+    value: 3
+  - name: V_100
+    description: × 1/16.
+    value: 4
+  - name: V_101
+    description: × 1/32.
+    value: 5
+enum/HOCOSF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: The HOCO clock is being started at high speed and waiting for the precision of its oscillation to become stable is in progress.
+    value: 0
+  - name: V_1
+    description: The HOCO clock is operating with high precision.
+    value: 1
+enum/ICLKSCR_CKSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: FMAIN.
+    value: 0
+  - name: V_1
+    description: FSUB.
+    value: 1
+enum/ICLKSCR_CKST:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: FMAIN.
+    value: 0
+  - name: V_1
+    description: FSUB.
+    value: 1
+enum/IRQSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Non-maskable interrupt.
+    value: 0
+  - name: V_1
+    description: Maskable interrupt.
+    value: 1
+enum/IWDTRF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Internal reset request is not generated, or the RESF register is cleared.
+    value: 0
+  - name: V_1
+    description: Internal reset request is generated.
+    value: 1
+enum/LCSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Operate the LOCO clock.
+    value: 0
+  - name: V_1
+    description: Stop the LOCO clock.
+    value: 1
+enum/LVD1EN:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Operation stopped.
+    value: 0
+  - name: V_1
+    description: Operation enabled.
+    value: 1
+enum/LVD1SEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Interrupt mode.
+    value: 0
+  - name: V_1
+    description: Reset mode.
+    value: 1
+enum/LVD1V:
+  bit_size: 5
+  variants:
+  - name: V_0x0E
+    description: Vdet1_0.
+    value: 14
+  - name: V_0x0F
+    description: Vdet1_1.
+    value: 15
+  - name: V_0x10
+    description: Vdet1_2.
+    value: 16
+  - name: V_0x11
+    description: Vdet1_3.
+    value: 17
+  - name: V_0x12
+    description: Vdet1_4.
+    value: 18
+  - name: V_0x13
+    description: Vdet1_5.
+    value: 19
+  - name: V_0x14
+    description: Vdet1_6.
+    value: 20
+  - name: V_0x15
+    description: Vdet1_7.
+    value: 21
+  - name: V_0x16
+    description: Vdet1_8.
+    value: 22
+  - name: V_0x17
+    description: Vdet1_9.
+    value: 23
+  - name: V_0x18
+    description: Vdet1_A.
+    value: 24
+  - name: V_0x19
+    description: Vdet1_B.
+    value: 25
+  - name: V_0x1A
+    description: Vdet1_C.
+    value: 26
+  - name: V_0x1B
+    description: Vdet1_D.
+    value: 27
+  - name: V_0x1C
+    description: Vdet1_E.
+    value: 28
+  - name: V_0x1D
+    description: Vdet1_F.
+    value: 29
+  - name: V_0x1E
+    description: Vdet1_10.
+    value: 30
+  - name: V_0x1F
+    description: Vdet1_11.
+    value: 31
+enum/LVIRF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Internal reset request is not generated, or the RESF register is cleared.
+    value: 0
+  - name: V_1
+    description: Internal reset request is generated.
+    value: 1
+enum/MCSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: MOCO clock is operating.
+    value: 0
+  - name: V_1
+    description: MOCO clock is stopped.
+    value: 1
+enum/MK:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Rewriting of the LVD1CR register is disabled.
+    value: 0
+  - name: V_1
+    description: Rewriting of the LVD1CR register is enabled (reset and interrupt generation by LVD1 are masked).
+    value: 1
+enum/MOCODIV_DIV:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: × 1/1.
+    value: 0
+  - name: V_01
+    description: × 1/2.
+    value: 1
+  - name: V_10
+    description: × 1/4.
+    value: 2
+enum/MODRV:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: 1 MHz to 10 MHz.
+    value: 0
+  - name: V_1
+    description: 10 MHz to 20 MHz.
+    value: 1
+enum/MON:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: VCC < Vdet1.
+    value: 0
+  - name: V_1
+    description: VCC ≥ Vdet1 or MON is disabled.
+    value: 1
+enum/MOSCDIV_DIV:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: × 1/1.
+    value: 0
+  - name: V_001
+    description: × 1/2.
+    value: 1
+  - name: V_010
+    description: × 1/4.
+    value: 2
+  - name: V_011
+    description: × 1/8.
+    value: 3
+  - name: V_100
+    description: × 1/16.
+    value: 4
+enum/MOSEL:
+  bit_size: 2
+  variants:
+  - name: V_01
+    description: Resonator.
+    value: 1
+  - name: V_11
+    description: External clock input mode.
+    value: 3
+enum/MOST:
+  bit_size: 8
+  variants:
+  - name: V_0x00
+    description: Less than 28/fMOSC.
+    value: 0
+  - name: V_0x80
+    description: 28/fMOSC min.
+    value: 128
+  - name: V_0xC0
+    description: 29/fMOSC min.
+    value: 192
+  - name: V_0xE0
+    description: 210/fMOSC min.
+    value: 224
+  - name: V_0xF0
+    description: 211/fMOSC min.
+    value: 240
+  - name: V_0xF8
+    description: 213/fMOSC min.
+    value: 248
+  - name: V_0xFC
+    description: 215/fMOSC min.
+    value: 252
+  - name: V_0xFE
+    description: 217/fMOSC min.
+    value: 254
+  - name: V_0xFF
+    description: 218/fMOSC min.
+    value: 255
+enum/MOSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Operate the main clock oscillator.
+    value: 0
+  - name: V_1
+    description: Stop the main clock oscillator.
+    value: 1
+enum/MSTPA22:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Cancel the module-stop state.
+    value: 0
+  - name: V_1
+    description: Enter the module-stop state.
+    value: 1
+enum/OSTSB:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: 28/fMOSC.
+    value: 0
+  - name: V_001
+    description: 29/fMOSC.
+    value: 1
+  - name: V_010
+    description: 210/fMOSC.
+    value: 2
+  - name: V_011
+    description: 211/fMOSC.
+    value: 3
+  - name: V_100
+    description: 213/fMOSC.
+    value: 4
+  - name: V_101
+    description: 215/fMOSC.
+    value: 5
+  - name: V_110
+    description: 217/fMOSC.
+    value: 6
+  - name: V_111
+    description: 218/fMOSC.
+    value: 7
+enum/PORF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: A value 1 has not been written, or a power-on reset has occurred.
+    value: 0
+  - name: V_1
+    description: No power-on reset has occurred.
+    value: 1
+enum/PRC0:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Disable writes.
+    value: 0
+  - name: V_1
+    description: Enable writes.
+    value: 1
+enum/PRC1:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Disable writes.
+    value: 0
+  - name: V_1
+    description: Enable writes.
+    value: 1
+enum/PRC3:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Disable writes.
+    value: 0
+  - name: V_1
+    description: Enable writes.
+    value: 1
+enum/RAMSD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Normal mode (continues to operate).
+    value: 0
+  - name: V_01
+    description: Setting prohibited.
+    value: 1
+  - name: V_10
+    description: Standby mode.
+    value: 2
+  - name: V_11
+    description: Shutdown mode.
+    value: 3
+enum/RPERF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Internal reset request is not generated, or the RESF register is cleared.
+    value: 0
+  - name: V_1
+    description: Internal reset request is generated.
+    value: 1
+enum/RTCLPC:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Enables supply of SOSC clock to peripheral functions.
+    value: 0
+  - name: V_1
+    description: Stops supply SOSC clock to peripheral functions other than the Realtime clock.
+    value: 1
+enum/SODRV:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Low Power Mode 1.
+    value: 0
+  - name: V_01
+    description: Normal Mode.
+    value: 1
+  - name: V_10
+    description: Low Power Mode 2.
+    value: 2
+  - name: V_11
+    description: Low Power Mode 3.
+    value: 3
+enum/SOSCMRG:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Normal Current.
+    value: 0
+  - name: V_01
+    description: Lower Margin check.
+    value: 1
+  - name: V_10
+    description: Upper Margin check.
+    value: 2
+  - name: V_11
+    description: Setting prohibited.
+    value: 3
+enum/SOSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Port mode.
+    value: 0
+  - name: V_1
+    description: Resonator.
+    value: 1
+enum/SOSTP:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Operate the sub-clock oscillator.
+    value: 0
+  - name: V_1
+    description: Stop the sub-clock oscillator.
+    value: 1
+enum/SSBY:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Sleep mode.
+    value: 0
+  - name: V_1
+    description: Software Standby mode.
+    value: 1
+enum/SWRF:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Internal reset request is not generated, or the RESF register is cleared.
+    value: 0
+  - name: V_1
+    description: Internal reset request is generated.
+    value: 1
+enum/WUTMMCK0:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: SOSC.
+    value: 0
+  - name: V_1
+    description: LOCO.
+    value: 1
+enum/XTSEL:
+  bit_size: 1
+  variants:
+  - name: V_0
+    description: Select MOSEL Contents.
+    value: 0
+  - name: V_1
+    description: Select SOSEL Contents.
+    value: 1

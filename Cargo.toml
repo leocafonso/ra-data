@@ -1,0 +1,23 @@
+[workspace]
+resolver = "2"
+members = [
+    "ra-data-types",
+    "ra-data-gen",
+    "ra-metapac-gen",
+]
+
+[workspace.dependencies]
+anyhow = "1.0"
+chiptool = { path = "../chiptool" }
+serde = { version = "1.0", features = ["derive"] }
+serde_yaml = "=0.9.34-deprecated"
+serde_json = "1.0"
+roxmltree = "0.20"
+glob = "0.3"
+heck = "0.5"
+quote = "1.0"
+proc-macro2 = "1.0"
+walkdir = "2.5"
+log = "0.4"
+env_logger = "0.11"
+regex = "1.10"

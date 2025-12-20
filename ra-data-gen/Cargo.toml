@@ -1,0 +1,23 @@
+[package]
+name = "ra-data-gen"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ra-data-types = { path = "../ra-data-types" }
+anyhow.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+roxmltree.workspace = true
+glob.workspace = true
+log.workspace = true
+env_logger.workspace = true
+pretty_env_logger = "0.5"
+regex = "1.10"
+ref_thread_local = "0.1"
+rayon = { version = "1.10", optional = true }
+
+[features]
+default = ["rayon"]
+rayon = ["dep:rayon"]

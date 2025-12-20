@@ -1,0 +1,18 @@
+# Build artifacts
+target/
+build/
+out/
+tmp/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data sources (if downloaded/generated)
+sources/
