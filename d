@@ -21,35 +21,28 @@ case "$CMD" in
         python3 scripts/sanitize_svd.py sources/
     ;;
     extract-all)
-        for peri in "$@"; do
-            echo "Extracting peripheral $peri..."
-            rm -rf tmp/$peri
-            mkdir -p tmp/$peri
+        peri=$1
+        shift
+        echo "Extracting peripheral $peri with extra args: $@"
 
-            for f in sources/svd/*.svd; do
-                [ -e "$f" ] || continue
-                name=$(basename "$f" .svd)
-                echo -n "  processing $name ... "
-                if chiptool extract-peripheral --svd "$f" --peripheral "$peri" > "tmp/$peri/$name.yaml" 2> "tmp/$peri/$name.err"; then
-                    echo OK
+        rm -rf tmp/$peri
+        mkdir -p tmp/$peri
+
+        for f in sources/svd/*.svd; do
+            [ -e "$f" ] || continue
+            name=$(basename "$f" .svd)
+            echo -n "  processing $name ... "
+            if chiptool extract-peripheral --svd "$f" --peripheral "$peri" "$@" > "tmp/$peri/$name.yaml" 2> "tmp/$peri/$name.err"; then
+                echo OK
+                rm -f "tmp/$peri/$name.err"
+            else
+                if grep -q 'peripheral not found' "tmp/$peri/$name.err"; then
+                    echo "No Peripheral"
                 else
-                    if grep -q 'peripheral not found' "tmp/$peri/$name.err"; then
-                        echo "No Peripheral"
-                    else
-                        echo "OTHER FAILURE"
-                    fi
-                    rm -f "tmp/$peri/$name.yaml"
+                    echo "OTHER FAILURE"
                 fi
-            done
-
-            mkdir -p data/registers
-            for f in tmp/$peri/*.yaml; do
-                if [ -e "$f" ]; then
-                    cp "$f" "data/registers/$peri.yaml"
-                    echo "  Copied $f to data/registers/$peri.yaml"
-                    break
-                fi
-            done
+                rm -f "tmp/$peri/$name.yaml"
+            fi
         done
     ;;
     gen-pac)

@@ -23,6 +23,9 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA4E1.*:SRAM", PeriInfo { peri_type: "sram", version: "v2_tz" }),
 
     // GPIO mappings
+    ("R7FA0.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v3" }),
+    ("R7FA8.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
+    ("R7FA6T2.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
     (".*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v1" }),
     
     // SAU mappings (Serial Array Unit - Base)

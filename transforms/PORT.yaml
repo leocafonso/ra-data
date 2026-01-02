@@ -1,0 +1,18 @@
+transforms:
+  - !RenameRegisters
+    block: .*
+    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]$
+    to: $1
+  - !MergeBlocks
+    from: ^PORT[0-9]+$
+    to: PORT
+  - !MergeFieldsets
+    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]$
+    to: $1
+  - !MergeEnums
+    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]$
+    to: $1
+  - !DeleteEnums
+    from: .*
+    bit_size: 1
+    keep_desc: true
