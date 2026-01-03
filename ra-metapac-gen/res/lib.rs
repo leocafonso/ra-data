@@ -4,7 +4,11 @@ pub mod common;
 pub mod _peripherals;
 
 #[cfg(feature = "pac")]
-include!(env!("RA_METAPAC_PAC_PATH"));
+pub mod pac {
+    include!(env!("RA_METAPAC_PAC_PATH"));
+}
+#[cfg(feature = "pac")]
+pub use pac::*;
 
 #[cfg(feature = "metadata")]
 pub mod metadata {

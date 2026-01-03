@@ -1,0 +1,96 @@
+block/ICU_COMMON:
+  description: Interrupt Controller.
+  items:
+  - name: IRQCR
+    description: IRQ Control Register %s.
+    array:
+      len: 16
+      stride: 1
+    byte_offset: 0
+    bit_size: 8
+    fieldset: IRQCR
+  - name: NMICR
+    description: NMI Pin Interrupt Control Register.
+    byte_offset: 16
+    bit_size: 8
+    fieldset: NMICR
+fieldset/IRQCR:
+  description: IRQ Control Register %s.
+  bit_size: 8
+  fields:
+  - name: IRQMD
+    description: IRQi Detection Sense Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: IRQMD
+  - name: FCLKSEL
+    description: IRQi Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: FCLKSEL
+  - name: FLTEN
+    description: IRQi Digital Filter Enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/NMICR:
+  description: NMI Pin Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: NMIMD
+    description: NMI Detection Set.
+    bit_offset: 0
+    bit_size: 1
+  - name: NFCLKSEL
+    description: NMI Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: NFCLKSEL
+  - name: NFLTEN
+    description: NMI Digital Filter Enable.
+    bit_offset: 7
+    bit_size: 1
+enum/FCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3
+enum/IRQMD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: Rising and falling edges.
+    value: 2
+  - name: V_11
+    description: Low level.
+    value: 3
+enum/NFCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3

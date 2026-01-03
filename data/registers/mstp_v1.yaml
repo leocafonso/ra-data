@@ -1,0 +1,408 @@
+block/MSTP:
+  description: Module Stop Control.
+  items:
+  - name: MSTPCRB
+    description: Module Stop Control Register B.
+    byte_offset: 0
+    fieldset: MSTPCRB
+  - name: MSTPCRC
+    description: Module Stop Control Register C.
+    byte_offset: 4
+    fieldset: MSTPCRC
+  - name: MSTPCRD
+    description: Module Stop Control Register D.
+    byte_offset: 8
+    fieldset: MSTPCRD
+fieldset/MSTPCRB:
+  description: Module Stop Control Register B.
+  fields:
+  - name: MSTPB0
+    description: Module Stop bit 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: MSTPB1
+    description: Module Stop bit 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: MSTPB2
+    description: Module Stop bit 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: MSTPB3
+    description: Module Stop bit 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: MSTPB4
+    description: Module Stop bit 4.
+    bit_offset: 4
+    bit_size: 1
+  - name: MSTPB5
+    description: Module Stop bit 5.
+    bit_offset: 5
+    bit_size: 1
+  - name: MSTPB6
+    description: Module Stop bit 6.
+    bit_offset: 6
+    bit_size: 1
+  - name: MSTPB7
+    description: Module Stop bit 7.
+    bit_offset: 7
+    bit_size: 1
+  - name: MSTPB8
+    description: Module Stop bit 8.
+    bit_offset: 8
+    bit_size: 1
+  - name: MSTPB9
+    description: Module Stop bit 9.
+    bit_offset: 9
+    bit_size: 1
+  - name: MSTPB10
+    description: Module Stop bit 10.
+    bit_offset: 10
+    bit_size: 1
+  - name: MSTPB11
+    description: Module Stop bit 11.
+    bit_offset: 11
+    bit_size: 1
+  - name: MSTPB12
+    description: Module Stop bit 12.
+    bit_offset: 12
+    bit_size: 1
+  - name: MSTPB13
+    description: Module Stop bit 13.
+    bit_offset: 13
+    bit_size: 1
+  - name: MSTPB14
+    description: Module Stop bit 14.
+    bit_offset: 14
+    bit_size: 1
+  - name: MSTPB15
+    description: Module Stop bit 15.
+    bit_offset: 15
+    bit_size: 1
+  - name: MSTPB16
+    description: Module Stop bit 16.
+    bit_offset: 16
+    bit_size: 1
+  - name: MSTPB17
+    description: Module Stop bit 17.
+    bit_offset: 17
+    bit_size: 1
+  - name: MSTPB18
+    description: Module Stop bit 18.
+    bit_offset: 18
+    bit_size: 1
+  - name: MSTPB19
+    description: Module Stop bit 19.
+    bit_offset: 19
+    bit_size: 1
+  - name: MSTPB20
+    description: Module Stop bit 20.
+    bit_offset: 20
+    bit_size: 1
+  - name: MSTPB21
+    description: Module Stop bit 21.
+    bit_offset: 21
+    bit_size: 1
+  - name: MSTPB22
+    description: Module Stop bit 22.
+    bit_offset: 22
+    bit_size: 1
+  - name: MSTPB23
+    description: Module Stop bit 23.
+    bit_offset: 23
+    bit_size: 1
+  - name: MSTPB24
+    description: Module Stop bit 24.
+    bit_offset: 24
+    bit_size: 1
+  - name: MSTPB25
+    description: Module Stop bit 25.
+    bit_offset: 25
+    bit_size: 1
+  - name: MSTPB26
+    description: Module Stop bit 26.
+    bit_offset: 26
+    bit_size: 1
+  - name: MSTPB27
+    description: Module Stop bit 27.
+    bit_offset: 27
+    bit_size: 1
+  - name: MSTPB28
+    description: Module Stop bit 28.
+    bit_offset: 28
+    bit_size: 1
+  - name: MSTPB29
+    description: Module Stop bit 29.
+    bit_offset: 29
+    bit_size: 1
+  - name: MSTPB30
+    description: Module Stop bit 30.
+    bit_offset: 30
+    bit_size: 1
+  - name: MSTPB31
+    description: Module Stop bit 31.
+    bit_offset: 31
+    bit_size: 1
+fieldset/MSTPCRC:
+  description: Module Stop Control Register C.
+  fields:
+  - name: MSTPC0
+    description: Module Stop bit 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: MSTPC1
+    description: Module Stop bit 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: MSTPC2
+    description: Module Stop bit 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: MSTPC3
+    description: Module Stop bit 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: MSTPC4
+    description: Module Stop bit 4.
+    bit_offset: 4
+    bit_size: 1
+  - name: MSTPC5
+    description: Module Stop bit 5.
+    bit_offset: 5
+    bit_size: 1
+  - name: MSTPC6
+    description: Module Stop bit 6.
+    bit_offset: 6
+    bit_size: 1
+  - name: MSTPC7
+    description: Module Stop bit 7.
+    bit_offset: 7
+    bit_size: 1
+  - name: MSTPC8
+    description: Module Stop bit 8.
+    bit_offset: 8
+    bit_size: 1
+  - name: MSTPC9
+    description: Module Stop bit 9.
+    bit_offset: 9
+    bit_size: 1
+  - name: MSTPC10
+    description: Module Stop bit 10.
+    bit_offset: 10
+    bit_size: 1
+  - name: MSTPC11
+    description: Module Stop bit 11.
+    bit_offset: 11
+    bit_size: 1
+  - name: MSTPC12
+    description: Module Stop bit 12.
+    bit_offset: 12
+    bit_size: 1
+  - name: MSTPC13
+    description: Module Stop bit 13.
+    bit_offset: 13
+    bit_size: 1
+  - name: MSTPC14
+    description: Module Stop bit 14.
+    bit_offset: 14
+    bit_size: 1
+  - name: MSTPC15
+    description: Module Stop bit 15.
+    bit_offset: 15
+    bit_size: 1
+  - name: MSTPC16
+    description: Module Stop bit 16.
+    bit_offset: 16
+    bit_size: 1
+  - name: MSTPC17
+    description: Module Stop bit 17.
+    bit_offset: 17
+    bit_size: 1
+  - name: MSTPC18
+    description: Module Stop bit 18.
+    bit_offset: 18
+    bit_size: 1
+  - name: MSTPC19
+    description: Module Stop bit 19.
+    bit_offset: 19
+    bit_size: 1
+  - name: MSTPC20
+    description: Module Stop bit 20.
+    bit_offset: 20
+    bit_size: 1
+  - name: MSTPC21
+    description: Module Stop bit 21.
+    bit_offset: 21
+    bit_size: 1
+  - name: MSTPC22
+    description: Module Stop bit 22.
+    bit_offset: 22
+    bit_size: 1
+  - name: MSTPC23
+    description: Module Stop bit 23.
+    bit_offset: 23
+    bit_size: 1
+  - name: MSTPC24
+    description: Module Stop bit 24.
+    bit_offset: 24
+    bit_size: 1
+  - name: MSTPC25
+    description: Module Stop bit 25.
+    bit_offset: 25
+    bit_size: 1
+  - name: MSTPC26
+    description: Module Stop bit 26.
+    bit_offset: 26
+    bit_size: 1
+  - name: MSTPC27
+    description: Module Stop bit 27.
+    bit_offset: 27
+    bit_size: 1
+  - name: MSTPC28
+    description: Module Stop bit 28.
+    bit_offset: 28
+    bit_size: 1
+  - name: MSTPC29
+    description: Module Stop bit 29.
+    bit_offset: 29
+    bit_size: 1
+  - name: MSTPC30
+    description: Module Stop bit 30.
+    bit_offset: 30
+    bit_size: 1
+  - name: MSTPC31
+    description: Module Stop bit 31.
+    bit_offset: 31
+    bit_size: 1
+fieldset/MSTPCRD:
+  description: Module Stop Control Register D.
+  fields:
+  - name: MSTPD0
+    description: Module Stop bit 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: MSTPD1
+    description: Module Stop bit 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: MSTPD2
+    description: Module Stop bit 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: MSTPD3
+    description: Module Stop bit 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: MSTPD4
+    description: Module Stop bit 4.
+    bit_offset: 4
+    bit_size: 1
+  - name: MSTPD5
+    description: Module Stop bit 5.
+    bit_offset: 5
+    bit_size: 1
+  - name: MSTPD6
+    description: Module Stop bit 6.
+    bit_offset: 6
+    bit_size: 1
+  - name: MSTPD7
+    description: Module Stop bit 7.
+    bit_offset: 7
+    bit_size: 1
+  - name: MSTPD8
+    description: Module Stop bit 8.
+    bit_offset: 8
+    bit_size: 1
+  - name: MSTPD9
+    description: Module Stop bit 9.
+    bit_offset: 9
+    bit_size: 1
+  - name: MSTPD10
+    description: Module Stop bit 10.
+    bit_offset: 10
+    bit_size: 1
+  - name: MSTPD11
+    description: Module Stop bit 11.
+    bit_offset: 11
+    bit_size: 1
+  - name: MSTPD12
+    description: Module Stop bit 12.
+    bit_offset: 12
+    bit_size: 1
+  - name: MSTPD13
+    description: Module Stop bit 13.
+    bit_offset: 13
+    bit_size: 1
+  - name: MSTPD14
+    description: Module Stop bit 14.
+    bit_offset: 14
+    bit_size: 1
+  - name: MSTPD15
+    description: Module Stop bit 15.
+    bit_offset: 15
+    bit_size: 1
+  - name: MSTPD16
+    description: Module Stop bit 16.
+    bit_offset: 16
+    bit_size: 1
+  - name: MSTPD17
+    description: Module Stop bit 17.
+    bit_offset: 17
+    bit_size: 1
+  - name: MSTPD18
+    description: Module Stop bit 18.
+    bit_offset: 18
+    bit_size: 1
+  - name: MSTPD19
+    description: Module Stop bit 19.
+    bit_offset: 19
+    bit_size: 1
+  - name: MSTPD20
+    description: Module Stop bit 20.
+    bit_offset: 20
+    bit_size: 1
+  - name: MSTPD21
+    description: Module Stop bit 21.
+    bit_offset: 21
+    bit_size: 1
+  - name: MSTPD22
+    description: Module Stop bit 22.
+    bit_offset: 22
+    bit_size: 1
+  - name: MSTPD23
+    description: Module Stop bit 23.
+    bit_offset: 23
+    bit_size: 1
+  - name: MSTPD24
+    description: Module Stop bit 24.
+    bit_offset: 24
+    bit_size: 1
+  - name: MSTPD25
+    description: Module Stop bit 25.
+    bit_offset: 25
+    bit_size: 1
+  - name: MSTPD26
+    description: Module Stop bit 26.
+    bit_offset: 26
+    bit_size: 1
+  - name: MSTPD27
+    description: Module Stop bit 27.
+    bit_offset: 27
+    bit_size: 1
+  - name: MSTPD28
+    description: Module Stop bit 28.
+    bit_offset: 28
+    bit_size: 1
+  - name: MSTPD29
+    description: Module Stop bit 29.
+    bit_offset: 29
+    bit_size: 1
+  - name: MSTPD30
+    description: Module Stop bit 30.
+    bit_offset: 30
+    bit_size: 1
+  - name: MSTPD31
+    description: Module Stop bit 31.
+    bit_offset: 31
+    bit_size: 1

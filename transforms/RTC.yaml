@@ -1,0 +1,4 @@
+transforms:
+  - !DeleteEnums
+    from: ".*"
+    bit_size: 1

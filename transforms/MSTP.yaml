@@ -1,0 +1,5 @@
+transforms:
+  - !DeleteEnums
+    from: .*
+    bit_size: 1
+    keep_desc: true

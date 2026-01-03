@@ -1,0 +1,460 @@
+block/ICU:
+  description: Interrupt Controller.
+  items:
+  - name: IRQCR
+    description: IRQ Control Register %s.
+    array:
+      len: 8
+      stride: 1
+    byte_offset: 0
+    bit_size: 8
+    fieldset: IRQCR
+  - name: NMICR
+    description: NMI Pin Interrupt Control Register.
+    byte_offset: 256
+    bit_size: 8
+    fieldset: NMICR
+  - name: NMIER
+    description: Non-Maskable Interrupt Enable Register.
+    byte_offset: 288
+    bit_size: 16
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-Maskable Interrupt Status Clear Register.
+    byte_offset: 304
+    bit_size: 16
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-Maskable Interrupt Status Register.
+    byte_offset: 320
+    access: Read
+    bit_size: 16
+    fieldset: NMISR
+  - name: WUPEN
+    description: Wake Up Interrupt Enable Register.
+    byte_offset: 416
+    fieldset: WUPEN
+  - name: SELSR0
+    description: SYS Event Link Setting Register.
+    byte_offset: 512
+    bit_size: 16
+    fieldset: SELSR0
+  - name: IELSR
+    description: ICU Event Link Setting Register %s.
+    array:
+      len: 32
+      stride: 4
+    byte_offset: 768
+    fieldset: IELSR
+fieldset/IELSR:
+  description: ICU Event Link Setting Register %s.
+  fields:
+  - name: IELS
+    description: ICU Event selection to NVICSet the number for the event signal to be linked.
+    bit_offset: 0
+    bit_size: 8
+    enum: IELS
+  - name: Reserved
+    description: These bits are read as 00000000. The write value should be 00000000.
+    bit_offset: 8
+    bit_size: 8
+  - name: IR
+    description: Interrupt Status Flag.
+    bit_offset: 16
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 17
+    bit_size: 7
+  - name: DTCE
+    description: DTC Activation Enable.
+    bit_offset: 24
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 25
+    bit_size: 7
+fieldset/IRQCR:
+  description: IRQ Control Register %s.
+  bit_size: 8
+  fields:
+  - name: IRQMD
+    description: IRQ Detection Sense Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: IRQMD
+  - name: Reserved
+    description: These bits are read as 00. The write value should be 00.
+    bit_offset: 2
+    bit_size: 2
+  - name: FCLKSEL
+    description: IRQi Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: FCLKSEL
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 6
+    bit_size: 1
+  - name: FLTEN
+    description: IRQ Digital Filter Enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/NMICLR:
+  description: Non-Maskable Interrupt Status Clear Register.
+  bit_size: 16
+  fields:
+  - name: IWDTCLR
+    description: IWDTST Clear.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTCLR
+    description: WDTST Clear.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1CLR
+    description: LVD1ST Clear.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2CLR
+    description: LVD2ST Clear.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00. The write value should be 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTCLR
+    description: OSTST Clear.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMICLR
+    description: NMIST Clear.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPECLR
+    description: SRAM Parity Error Clear.
+    bit_offset: 8
+    bit_size: 1
+  - name: RECCCLR
+    description: SRAM ECC Error Interrupt Clear.
+    bit_offset: 9
+    bit_size: 1
+  - name: BUSSCLR
+    description: MPU Bus Slave Error Interrupt Clear.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMCLR
+    description: MPU Bus Master Error Interrupt Clear.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPECLR
+    description: CPU Stack Pointer Monitor Interrupt Clear.
+    bit_offset: 12
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 000. The write value should be 000.
+    bit_offset: 13
+    bit_size: 3
+fieldset/NMICR:
+  description: NMI Pin Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: NMIMD
+    description: NMI Detection Set.
+    bit_offset: 0
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 000. The write value should be 000.
+    bit_offset: 1
+    bit_size: 3
+  - name: NFCLKSEL
+    description: NMI Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: NFCLKSEL
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 6
+    bit_size: 1
+  - name: NFLTEN
+    description: NMI Digital Filter Enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-Maskable Interrupt Enable Register.
+  bit_size: 16
+  fields:
+  - name: IWDTEN
+    description: IWDT Underflow/Refresh Error Interrupt Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTEN
+    description: WDT Underflow/Refresh Error Interrupt Enable.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1EN
+    description: Voltage-Monitoring 1 Interrupt Enable.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2EN
+    description: Voltage-Monitoring 2 Interrupt Enable.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00. The write value should be 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTEN
+    description: Oscillation Stop Detection Interrupt Enable.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIEN
+    description: NMI Pin Interrupt Enable.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEEN
+    description: RAM Parity Error Interrupt Enable.
+    bit_offset: 8
+    bit_size: 1
+  - name: RECCEN
+    description: SRAM ECC Error Interrupt Enable.
+    bit_offset: 9
+    bit_size: 1
+  - name: BUSSEN
+    description: MPU Bus Slave Error Interrupt Enable.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMEN
+    description: MPU Bus Master Error Interrupt Enable.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPEEN
+    description: CPU Stack Pointer Monitor Interrupt Enable.
+    bit_offset: 12
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 000. The write value should be 000.
+    bit_offset: 13
+    bit_size: 3
+fieldset/NMISR:
+  description: Non-Maskable Interrupt Status Register.
+  bit_size: 16
+  fields:
+  - name: IWDTST
+    description: IWDT Underflow/Refresh Error Status Flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTST
+    description: WDT Underflow/Refresh Error Status Flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1ST
+    description: Voltage-Monitoring 1 Interrupt Status Flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2ST
+    description: Voltage-Monitoring 2 Interrupt Status Flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTST
+    description: Oscillation Stop Detection Interrupt Status Flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIST
+    description: NMI Status Flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEST
+    description: RAM Parity Error Interrupt Status Flag.
+    bit_offset: 8
+    bit_size: 1
+  - name: RECCST
+    description: SRAM ECC Error Interrupt Status Flag.
+    bit_offset: 9
+    bit_size: 1
+  - name: BUSSST
+    description: MPU Bus Slave Error Interrupt Status Flag.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMST
+    description: MPU Bus Master Error Interrupt Status Flag.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPEST
+    description: CPU Stack Pointer Monitor Interrupt Status Flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 000.
+    bit_offset: 13
+    bit_size: 3
+fieldset/SELSR0:
+  description: SYS Event Link Setting Register.
+  bit_size: 16
+  fields:
+  - name: SELS
+    description: SYS Event Link Select.
+    bit_offset: 0
+    bit_size: 8
+    enum: SELS
+  - name: Reserved
+    description: These bits are read as 00000000. The write value should be 00000000.
+    bit_offset: 8
+    bit_size: 8
+fieldset/WUPEN:
+  description: Wake Up Interrupt Enable Register.
+  fields:
+  - name: IRQWUPEN0
+    description: IRQ0 interrupt S/W standby returns enable bit.
+    bit_offset: 0
+    bit_size: 1
+  - name: IRQWUPEN1
+    description: IRQ1 interrupt S/W standby returns enable bit.
+    bit_offset: 1
+    bit_size: 1
+  - name: IRQWUPEN2
+    description: IRQ2 interrupt S/W standby returns enable bit.
+    bit_offset: 2
+    bit_size: 1
+  - name: IRQWUPEN3
+    description: IRQ3 interrupt S/W standby returns enable bit.
+    bit_offset: 3
+    bit_size: 1
+  - name: IRQWUPEN4
+    description: IRQ4 interrupt S/W standby returns enable bit.
+    bit_offset: 4
+    bit_size: 1
+  - name: IRQWUPEN5
+    description: IRQ5 interrupt S/W standby returns enable bit.
+    bit_offset: 5
+    bit_size: 1
+  - name: IRQWUPEN6
+    description: IRQ6 interrupt S/W standby returns enable bit.
+    bit_offset: 6
+    bit_size: 1
+  - name: IRQWUPEN7
+    description: IRQ7 interrupt S/W standby returns enable bit.
+    bit_offset: 7
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00000000. The write value should be 00000000.
+    bit_offset: 8
+    bit_size: 8
+  - name: IWDTWUPEN
+    description: IWDT interrupt S/W standby returns enable bit.
+    bit_offset: 16
+    bit_size: 1
+  - name: KEYWUPEN
+    description: Key interrupt S/W standby returns enable bit.
+    bit_offset: 17
+    bit_size: 1
+  - name: LVD1WUPEN
+    description: LVD1 interrupt S/W standby returns enable bit.
+    bit_offset: 18
+    bit_size: 1
+  - name: LVD2WUPEN
+    description: LVD2 interrupt S/W standby returns enable bit.
+    bit_offset: 19
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 000. The write value should be 000.
+    bit_offset: 20
+    bit_size: 3
+  - name: ACMPLP0WUPEN
+    description: ACMPLP0 interrupt S/W standby returns enable bit.
+    bit_offset: 23
+    bit_size: 1
+  - name: RTCALMWUPEN
+    description: RTC alarm interrupt S/W standby returns enable bit.
+    bit_offset: 24
+    bit_size: 1
+  - name: RTCPRDWUPEN
+    description: RCT period interrupt S/W standby returns enable bit.
+    bit_offset: 25
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 26
+    bit_size: 1
+  - name: USBFSWUPEN
+    description: USBFS interrupt S/W standby returns enable bit.
+    bit_offset: 27
+    bit_size: 1
+  - name: AGT1UDWUPEN
+    description: AGT1 underflow interrupt S/W standby returns enable bit.
+    bit_offset: 28
+    bit_size: 1
+  - name: AGT1CAWUPEN
+    description: AGT1 compare match A interrupt S/W standby returns enable bit.
+    bit_offset: 29
+    bit_size: 1
+  - name: AGT1CBWUPEN
+    description: AGT1 compare match B interrupt S/W standby returns enable bit.
+    bit_offset: 30
+    bit_size: 1
+  - name: IIC0WUPEN
+    description: IIC0 address match interrupt S/W standby returns enable bit.
+    bit_offset: 31
+    bit_size: 1
+enum/FCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3
+enum/IELS:
+  bit_size: 8
+  variants:
+  - name: V_0x000
+    description: Nothing is selected.
+    value: 0
+enum/IRQMD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: Rising and falling edges.
+    value: 2
+  - name: V_11
+    description: Low level.
+    value: 3
+enum/NFCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3
+enum/SELS:
+  bit_size: 8
+  variants:
+  - name: V_0x00
+    description: Disable event output to the associated low-power mode module.
+    value: 0

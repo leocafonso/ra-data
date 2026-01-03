@@ -68,6 +68,7 @@ fn main() -> anyhow::Result<()> {
     writeln!(cargo_toml, "metadata = []")?;
     writeln!(cargo_toml, "rt = [\"cortex-m-rt/device\"]")?;
     writeln!(cargo_toml, "defmt = [\"dep:defmt\"]")?;
+    writeln!(cargo_toml, "embassy = [\"dep:embassy-hal-internal\"]")?;
     cargo_toml.push_str(&chip_features);
 
     writeln!(cargo_toml, "\n[package.metadata.embassy_docs]")?;
@@ -97,7 +98,10 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     for peri in &chip.peripherals {
         let mod_name = format!("{}_{}", peri.peri_type.to_lowercase(), peri.version.to_lowercase());
         let block_name = block_map.get(&mod_name).cloned().unwrap_or_else(|| heck::AsPascalCase(&peri.peri_type).to_string());
+        writeln!(file, "    #[derive(Copy, Clone)]")?;
         writeln!(file, "    pub struct {}(());", peri.name)?;
+        writeln!(file, "    #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "    impl embassy_hal_internal::PeripheralType for {} {{}}", peri.name)?;
         writeln!(file, "    impl {} {{", peri.name)?;
         writeln!(file, "        pub unsafe fn steal() -> crate::_peripherals::{}::{} {{", mod_name, block_name)?;
         writeln!(file, "            crate::_peripherals::{}::{}::from_ptr({:#010x} as _)", mod_name, block_name, peri.address)?;
@@ -109,6 +113,9 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     for peri in &chip.peripherals {
         writeln!(file, "        pub {}: {},", peri.name.to_lowercase(), peri.name)?;
     }
+    for i in 0..interrupt_count {
+        writeln!(file, "        pub iel{}: IEL{},", i, i)?;
+    }
     writeln!(file, "    }}")?;
     writeln!(file, "    impl Peripherals {{")?;
     writeln!(file, "        pub unsafe fn steal() -> Self {{")?;
@@ -116,10 +123,50 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     for peri in &chip.peripherals {
         writeln!(file, "                {}: {}(()),", peri.name.to_lowercase(), peri.name)?;
     }
+    for i in 0..interrupt_count {
+        writeln!(file, "                iel{}: IEL{}(()),", i, i)?;
+    }
     writeln!(file, "            }}")?;
     writeln!(file, "        }}")?;
     writeln!(file, "    }}")?;
+    for i in 0..interrupt_count {
+        writeln!(file, "    #[derive(Copy, Clone)]")?;
+        writeln!(file, "    pub struct IEL{}(());", i)?;
+        writeln!(file, "    #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "    impl embassy_hal_internal::PeripheralType for IEL{} {{}}", i)?;
+    }
     writeln!(file, "}}")?;
+
+    writeln!(file, "#[macro_export]")?;
+    writeln!(file, "macro_rules! foreach_interrupt {{")?;
+    writeln!(file, "    ($($m:tt)*) => {{")?;
+    for i in 0..interrupt_count {
+        writeln!(file, "        $($m)*!(IEL{});", i)?;
+    }
+    writeln!(file, "    }};")?;
+    writeln!(file, "}}")?;
+
+    writeln!(file, "#[derive(Copy, Clone, Debug, PartialEq, Eq)]")?;
+    writeln!(file, "#[repr(u16)]")?;
+    writeln!(file, "pub enum Interrupt {{")?;
+    for i in 0..interrupt_count {
+        writeln!(file, "    IEL{} = {},", i, i)?;
+    }
+    writeln!(file, "}}")?;
+
+    writeln!(file, "unsafe impl cortex_m::interrupt::InterruptNumber for Interrupt {{")?;
+    writeln!(file, "    #[inline(always)]")?;
+    writeln!(file, "    fn number(self) -> u16 {{")?;
+    writeln!(file, "        self as u16")?;
+    writeln!(file, "    }}")?;
+    writeln!(file, "}}")?;
+
+    writeln!(file, "#[cfg(feature = \"embassy\")]")?;
+    writeln!(file, "embassy_hal_internal::interrupt_mod!(")?;
+    for i in 0..interrupt_count {
+        writeln!(file, "    IEL{},", i)?;
+    }
+    writeln!(file, ");")?;
 
     writeln!(file, "extern \"C\" {{")?;
     for i in 0..interrupt_count {

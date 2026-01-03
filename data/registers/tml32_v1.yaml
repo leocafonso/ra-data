@@ -1,0 +1,374 @@
+block/TML32:
+  description: 32-bit Interval Timer.
+  items:
+  - name: ITLCMP0
+    description: Interval Timer Compare Registers 0%s.
+    array:
+      len: 2
+      stride: 2
+    byte_offset: 0
+    bit_size: 16
+  - name: ITLCAP00
+    description: Interval Timer Capture Register 00.
+    byte_offset: 4
+    access: Read
+    bit_size: 16
+  - name: ITLCTL0
+    description: Interval Timer Control Register.
+    byte_offset: 6
+    bit_size: 8
+    fieldset: ITLCTL0
+  - name: ITLCSEL0
+    description: Interval Timer Clock Select Register 0.
+    byte_offset: 7
+    bit_size: 8
+    fieldset: ITLCSEL0
+  - name: ITLFDIV00
+    description: Interval Timer Frequency Division Register 0.
+    byte_offset: 8
+    bit_size: 8
+    fieldset: ITLFDIV00
+  - name: ITLFDIV01
+    description: Interval Timer Frequency Division Register 1.
+    byte_offset: 9
+    bit_size: 8
+    fieldset: ITLFDIV01
+  - name: ITLCC0
+    description: Interval Timer Capture Control Register 0.
+    byte_offset: 10
+    bit_size: 8
+    fieldset: ITLCC0
+  - name: ITLS0
+    description: Interval Timer Status Register.
+    byte_offset: 11
+    bit_size: 8
+    fieldset: ITLS0
+  - name: ITLMKF0
+    description: Interval Timer Match Detection Mask Register.
+    byte_offset: 12
+    bit_size: 8
+    fieldset: ITLMKF0
+fieldset/ITLCC0:
+  description: Interval Timer Capture Control Register 0.
+  bit_size: 8
+  fields:
+  - name: CTRS
+    description: Selection of Capture Trigger.
+    bit_offset: 0
+    bit_size: 2
+    enum: CTRS
+  - name: CAPCCR
+    description: Selection of Capture Counter Clearing After Capturing.
+    bit_offset: 3
+    bit_size: 1
+  - name: CAPR
+    description: Software Capture Trigger.
+    bit_offset: 4
+    bit_size: 1
+  - name: CAPF
+    description: Capture Completion Flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: CAPFCR
+    description: Capture Completion Flag Clear.
+    bit_offset: 6
+    bit_size: 1
+  - name: CAPEN
+    description: Capture Enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/ITLCSEL0:
+  description: Interval Timer Clock Select Register 0.
+  bit_size: 8
+  fields:
+  - name: ISEL
+    description: Selection of Interval Timer Count Clock (fITL0).
+    bit_offset: 0
+    bit_size: 3
+    enum: ISEL
+  - name: CSEL
+    description: Selection of Interval Timer Count Clock for Capturing (fITL1).
+    bit_offset: 4
+    bit_size: 3
+    enum: CSEL
+fieldset/ITLCTL0:
+  description: Interval Timer Control Register.
+  bit_size: 8
+  fields:
+  - name: EN0
+    description: '8-bit Counter Mode: ITL000 Count Enable.'
+    bit_offset: 0
+    bit_size: 1
+  - name: EN1
+    description: '8-bit Counter Mode: ITL001 Count Enable.'
+    bit_offset: 1
+    bit_size: 1
+  - name: EN2
+    description: '8-bit Counter Mode: ITL012 Count Enable.'
+    bit_offset: 2
+    bit_size: 1
+  - name: EN3
+    description: '8-bit Counter Mode: ITL013 Count Enable.'
+    bit_offset: 3
+    bit_size: 1
+  - name: MD
+    description: Selection of 8-bit, 16-bit, or 32-bit Counter Mode.
+    bit_offset: 6
+    bit_size: 2
+    enum: MD
+fieldset/ITLFDIV00:
+  description: Interval Timer Frequency Division Register 0.
+  bit_size: 8
+  fields:
+  - name: FDIV0
+    description: '8-bit Counter Mode: Counter Clock for ITL000.'
+    bit_offset: 0
+    bit_size: 3
+    enum: FDIV0
+  - name: FDIV1
+    description: '8-bit Counter Mode: Counter Clock for ITL001.'
+    bit_offset: 4
+    bit_size: 3
+    enum: FDIV1
+fieldset/ITLFDIV01:
+  description: Interval Timer Frequency Division Register 1.
+  bit_size: 8
+  fields:
+  - name: FDIV2
+    description: '8-bit Counter Mode: Counter Clock for ITL012.'
+    bit_offset: 0
+    bit_size: 3
+    enum: FDIV2
+  - name: FDIV3
+    description: '8-bit Counter Mode: Counter Clock for ITL013.'
+    bit_offset: 4
+    bit_size: 3
+    enum: FDIV3
+fieldset/ITLMKF0:
+  description: Interval Timer Match Detection Mask Register.
+  bit_size: 8
+  fields:
+  - name: MKF00
+    description: Mask for Compare Match Status Flag for Channel 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: MKF01
+    description: Mask for Compare Match Status Flag for Channel 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: MKF02
+    description: Mask for Compare Match Status Flag for Channel 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: MKF03
+    description: Mask for Compare Match Status Flag for Channel 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: MKF0C
+    description: Mask for Capture Detection Status Flag.
+    bit_offset: 4
+    bit_size: 1
+fieldset/ITLS0:
+  description: Interval Timer Status Register.
+  bit_size: 8
+  fields:
+  - name: ITF00
+    description: Compare Match Detection Flag for Channel 0.
+    bit_offset: 0
+    bit_size: 1
+  - name: ITF01
+    description: Compare Match Detection Flag for Channel 1.
+    bit_offset: 1
+    bit_size: 1
+  - name: ITF02
+    description: Compare Match Detection Flag for Channel 2.
+    bit_offset: 2
+    bit_size: 1
+  - name: ITF03
+    description: Compare Match Detection Flag for Channel 3.
+    bit_offset: 3
+    bit_size: 1
+  - name: ITF0C
+    description: Capture Detection Flag.
+    bit_offset: 4
+    bit_size: 1
+enum/CSEL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Counting stops.
+    value: 0
+  - name: V_001
+    description: HOCO.
+    value: 1
+  - name: V_010
+    description: MOCO.
+    value: 2
+  - name: V_011
+    description: MOSC.
+    value: 3
+  - name: V_100
+    description: FSXP.
+    value: 4
+  - name: V_101
+    description: Event input from the ELC.
+    value: 5
+enum/CTRS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Software trigger.
+    value: 0
+  - name: V_01
+    description: Interrupt on compare match with ITLCMP01.
+    value: 1
+  - name: V_10
+    description: FSXP (rising edge).
+    value: 2
+  - name: V_11
+    description: Event input from ELC (rising edge).
+    value: 3
+enum/FDIV0:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: fITL0.
+    value: 0
+  - name: V_001
+    description: fITL0/2.
+    value: 1
+  - name: V_010
+    description: fITL0/4.
+    value: 2
+  - name: V_011
+    description: fITL0/8.
+    value: 3
+  - name: V_100
+    description: fITL0/16.
+    value: 4
+  - name: V_101
+    description: fITL0/32.
+    value: 5
+  - name: V_110
+    description: fITL0/64.
+    value: 6
+  - name: V_111
+    description: fITL0/128.
+    value: 7
+enum/FDIV1:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: fITL0.
+    value: 0
+  - name: V_001
+    description: fITL0/2.
+    value: 1
+  - name: V_010
+    description: fITL0/4.
+    value: 2
+  - name: V_011
+    description: fITL0/8.
+    value: 3
+  - name: V_100
+    description: fITL0/16.
+    value: 4
+  - name: V_101
+    description: fITL0/32.
+    value: 5
+  - name: V_110
+    description: fITL0/64.
+    value: 6
+  - name: V_111
+    description: fITL0/128.
+    value: 7
+enum/FDIV2:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: fITL0.
+    value: 0
+  - name: V_001
+    description: fITL0/2.
+    value: 1
+  - name: V_010
+    description: fITL0/4.
+    value: 2
+  - name: V_011
+    description: fITL0/8.
+    value: 3
+  - name: V_100
+    description: fITL0/16.
+    value: 4
+  - name: V_101
+    description: fITL0/32.
+    value: 5
+  - name: V_110
+    description: fITL0/64.
+    value: 6
+  - name: V_111
+    description: fITL0/128.
+    value: 7
+enum/FDIV3:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: fITL0.
+    value: 0
+  - name: V_001
+    description: fITL0/2.
+    value: 1
+  - name: V_010
+    description: fITL0/4.
+    value: 2
+  - name: V_011
+    description: fITL0/8.
+    value: 3
+  - name: V_100
+    description: fITL0/16.
+    value: 4
+  - name: V_101
+    description: fITL0/32.
+    value: 5
+  - name: V_110
+    description: fITL0/64.
+    value: 6
+  - name: V_111
+    description: fITL0/128.
+    value: 7
+enum/ISEL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Counting stops.
+    value: 0
+  - name: V_001
+    description: HOCO.
+    value: 1
+  - name: V_010
+    description: MOCO.
+    value: 2
+  - name: V_011
+    description: MOSC.
+    value: 3
+  - name: V_100
+    description: FSXP.
+    value: 4
+  - name: V_101
+    description: Event input from the ELC.
+    value: 5
+enum/MD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: The interval timer operates in 8-bit counter mode.
+    value: 0
+  - name: V_01
+    description: The interval timer operates in 16-bit counter mode (channel 0 is connected with channel 1 and channel 2 is connected with channel 3).
+    value: 1
+  - name: V_10
+    description: The interval timer operates in 32-bit counter mode (channels 0 to 3 are connected).
+    value: 2
+  - name: V_11
+    description: Setting prohibited.
+    value: 3

@@ -1,0 +1,1202 @@
+block/TAU:
+  description: Timer Array Unit.
+  items:
+  - name: TDR
+    description: Timer Data Register 00.
+    array:
+      len: 8
+      stride: 2
+    byte_offset: 0
+    bit_size: 16
+  - name: TCR0
+    description: Timer Counter Register 0%s.
+    array:
+      len: 8
+      stride: 2
+    byte_offset: 256
+    access: Read
+    bit_size: 16
+  - name: TMR00
+    description: Timer Mode Register 00.
+    byte_offset: 272
+    bit_size: 16
+    fieldset: TMR00
+  - name: TMR01
+    description: Timer Mode Register 01.
+    byte_offset: 274
+    bit_size: 16
+    fieldset: TMR01
+  - name: TMR02
+    description: Timer Mode Register 02.
+    byte_offset: 276
+    bit_size: 16
+    fieldset: TMR02
+  - name: TMR03
+    description: Timer Mode Register 03.
+    byte_offset: 278
+    bit_size: 16
+    fieldset: TMR03
+  - name: TMR04
+    description: Timer Mode Register 04.
+    byte_offset: 280
+    bit_size: 16
+    fieldset: TMR04
+  - name: TMR05
+    description: Timer Mode Register 05.
+    byte_offset: 282
+    bit_size: 16
+    fieldset: TMR05
+  - name: TMR06
+    description: Timer Mode Register 06.
+    byte_offset: 284
+    bit_size: 16
+    fieldset: TMR06
+  - name: TMR07
+    description: Timer Mode Register 07.
+    byte_offset: 286
+    bit_size: 16
+    fieldset: TMR07
+  - name: TSR0
+    description: Timer Status Register 0%s.
+    array:
+      len: 8
+      stride: 2
+    byte_offset: 288
+    access: Read
+    bit_size: 16
+    fieldset: TSR0
+  - name: TE0
+    description: Timer Channel Enable Status Register 0.
+    byte_offset: 304
+    access: Read
+    bit_size: 16
+    fieldset: TE0
+  - name: TS0
+    description: Timer Channel Start Register 0.
+    byte_offset: 306
+    bit_size: 16
+    fieldset: TS0
+  - name: TT0
+    description: Timer Channel Stop Register 0.
+    byte_offset: 308
+    bit_size: 16
+    fieldset: TT0
+  - name: TPS0
+    description: Timer Clock Select Register 0.
+    byte_offset: 310
+    bit_size: 16
+    fieldset: TPS0
+  - name: TO0
+    description: Timer Output Register 0.
+    byte_offset: 312
+    bit_size: 16
+    fieldset: TO0
+  - name: TOE0
+    description: Timer Output Enable Register 0.
+    byte_offset: 314
+    bit_size: 16
+    fieldset: TOE0
+  - name: TOL0
+    description: Timer Output Level Register 0.
+    byte_offset: 316
+    bit_size: 16
+    fieldset: TOL0
+  - name: TOM0
+    description: Timer Output Mode Register 0.
+    byte_offset: 318
+    bit_size: 16
+    fieldset: TOM0
+fieldset/TE0:
+  description: Timer Channel Enable Status Register 0.
+  bit_size: 16
+  fields:
+  - name: TE
+    description: Indication of Operation Enabled or Stopped State of Channel n.
+    bit_offset: 0
+    bit_size: 8
+    enum: TE
+  - name: TEH1
+    description: Indication of whether Operation of the Higher 8-bit Timer is Enabled or Stopped when Channel 1 is in the 8-bit Timer Mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: TEH3
+    description: Indication of whether Operation of the Higher 8-bit Timer is Enabled or Stopped when Channel 3 is in the 8-bit Timer Mode.
+    bit_offset: 11
+    bit_size: 1
+fieldset/TMR00:
+  description: Timer Mode Register 00.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR00_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR00_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR00_STS
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR00_CKS
+fieldset/TMR01:
+  description: Timer Mode Register 01.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR01_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR01_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR01_STS
+  - name: SPLIT
+    description: Selection of 8 or 16-bit Timer Operation for Channels 1 and 3.
+    bit_offset: 11
+    bit_size: 1
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR01_CKS
+fieldset/TMR02:
+  description: Timer Mode Register 02.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR02_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR02_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR02_STS
+  - name: MASTER
+    description: Selection Between Using Channel n Independently or Simultaneously with Another Channel (as a Slave or Master).
+    bit_offset: 11
+    bit_size: 1
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR02_CKS
+fieldset/TMR03:
+  description: Timer Mode Register 03.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR03_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR03_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR03_STS
+  - name: SPLIT
+    description: Selection of 8 or 16-bit Timer Operation for Channels 1 and 3.
+    bit_offset: 11
+    bit_size: 1
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR03_CKS
+fieldset/TMR04:
+  description: Timer Mode Register 04.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR04_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR04_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR04_STS
+  - name: MASTER
+    description: Selection Between Using Channel n Independently or Simultaneously with Another Channel (as a Slave or Master).
+    bit_offset: 11
+    bit_size: 1
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR04_CKS
+fieldset/TMR05:
+  description: Timer Mode Register 05.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR05_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR05_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR05_STS
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR05_CKS
+fieldset/TMR06:
+  description: Timer Mode Register 06.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR06_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR06_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR06_STS
+  - name: MASTER
+    description: Selection Between Using Channel n Independently or Simultaneously with Another Channel (as a Slave or Master).
+    bit_offset: 11
+    bit_size: 1
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR06_CKS
+fieldset/TMR07:
+  description: Timer Mode Register 07.
+  bit_size: 16
+  fields:
+  - name: OPIRQ
+    description: Setting of Starting Count and Interrupt.
+    bit_offset: 0
+    bit_size: 1
+  - name: MD
+    description: Selection of Operation Mode at Channel n.
+    bit_offset: 1
+    bit_size: 3
+    enum: TMR07_MD
+  - name: CIS
+    description: Selection of TI0n Pin Input Valid Edge.
+    bit_offset: 6
+    bit_size: 2
+    enum: TMR07_CIS
+  - name: STS
+    description: Setting of Start Trigger or Capture Trigger of Channel n.
+    bit_offset: 8
+    bit_size: 3
+    enum: TMR07_STS
+  - name: CCS
+    description: Selection of Counter Clock (fTCLK) of Channel n.
+    bit_offset: 12
+    bit_size: 1
+  - name: CKS
+    description: Selection of Operation Clock (fMCK) of Channel n.
+    bit_offset: 14
+    bit_size: 2
+    enum: TMR07_CKS
+fieldset/TO0:
+  description: Timer Output Register 0.
+  bit_size: 16
+  fields:
+  - name: TO
+    description: Timer Output of Channel n.
+    bit_offset: 0
+    bit_size: 8
+    enum: TO
+fieldset/TOE0:
+  description: Timer Output Enable Register 0.
+  bit_size: 16
+  fields:
+  - name: TOE
+    description: Enabling or Disabling Timer Output for Channel n.
+    bit_offset: 0
+    bit_size: 8
+    enum: TOE
+fieldset/TOL0:
+  description: Timer Output Level Register 0.
+  bit_size: 16
+  fields:
+  - name: TOL
+    description: Control of Timer Output of Channel n.
+    bit_offset: 1
+    bit_size: 7
+    enum: TOL
+fieldset/TOM0:
+  description: Timer Output Mode Register 0.
+  bit_size: 16
+  fields:
+  - name: TOM
+    description: Control of Timer Output Mode of Channel n.
+    bit_offset: 1
+    bit_size: 7
+    enum: TOM
+fieldset/TPS0:
+  description: Timer Clock Select Register 0.
+  bit_size: 16
+  fields:
+  - name: PRS0
+    description: Selection of Operation Clock (CK00).
+    bit_offset: 0
+    bit_size: 4
+    enum: PRS0
+  - name: PRS1
+    description: Selection of Operation Clock (CK01).
+    bit_offset: 4
+    bit_size: 4
+    enum: PRS1
+  - name: PRS2
+    description: Selection of Operation Clock (CK02).
+    bit_offset: 8
+    bit_size: 2
+    enum: PRS2
+  - name: PRS3
+    description: Selection of Operation Clock (CK03).
+    bit_offset: 12
+    bit_size: 2
+    enum: PRS3
+fieldset/TS0:
+  description: Timer Channel Start Register 0.
+  bit_size: 16
+  fields:
+  - name: TS
+    description: Operation Enable (Start) Trigger of Channel n.
+    bit_offset: 0
+    bit_size: 8
+    enum: TS
+  - name: TSH1
+    description: Trigger to Enable Operation (Start Operation) of the Higher 8-bit Timer when Channel 1 is in the 8-bit Timer Mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: TSH3
+    description: Trigger to Enable Operation (Start Operation) of the Higher 8-bit Timer when Channel 3 is in the 8-bit Timer Mode.
+    bit_offset: 11
+    bit_size: 1
+fieldset/TSR0:
+  description: Timer Status Register 0%s.
+  bit_size: 16
+  fields:
+  - name: OVF
+    description: Counter Overflow State of Channel n.
+    bit_offset: 0
+    bit_size: 1
+fieldset/TT0:
+  description: Timer Channel Stop Register 0.
+  bit_size: 16
+  fields:
+  - name: TT
+    description: Operation Stop Trigger of Channel n.
+    bit_offset: 0
+    bit_size: 8
+    enum: TT
+  - name: TTH1
+    description: Trigger to Stop Operation of the Higher 8-bit Timer when Channel 1 is in the 8-bit Timer Mode.
+    bit_offset: 9
+    bit_size: 1
+  - name: TTH3
+    description: Trigger to Stop Operation of the Higher 8-bit Timer when Channel 3 is in the 8-bit Timer Mode.
+    bit_offset: 11
+    bit_size: 1
+enum/PRS0:
+  bit_size: 4
+  variants:
+  - name: V_0x0
+    description: PCLKB.
+    value: 0
+  - name: V_0x1
+    description: PCLKB/2.
+    value: 1
+  - name: V_0x2
+    description: PCLKB/22.
+    value: 2
+  - name: V_0x3
+    description: PCLKB/23.
+    value: 3
+  - name: V_0x4
+    description: PCLKB/24.
+    value: 4
+  - name: V_0x5
+    description: PCLKB/25.
+    value: 5
+  - name: V_0x6
+    description: PCLKB/26.
+    value: 6
+  - name: V_0x7
+    description: PCLKB/27.
+    value: 7
+  - name: V_0x8
+    description: PCLKB/28.
+    value: 8
+  - name: V_0x9
+    description: PCLKB/29.
+    value: 9
+  - name: V_0xA
+    description: PCLKB/210.
+    value: 10
+  - name: V_0xB
+    description: PCLKB/211.
+    value: 11
+  - name: V_0xC
+    description: PCLKB/212.
+    value: 12
+  - name: V_0xD
+    description: PCLKB/213.
+    value: 13
+  - name: V_0xE
+    description: PCLKB/214.
+    value: 14
+  - name: V_0xF
+    description: PCLKB/215.
+    value: 15
+enum/PRS1:
+  bit_size: 4
+  variants:
+  - name: V_0x0
+    description: PCLKB.
+    value: 0
+  - name: V_0x1
+    description: PCLKB/2.
+    value: 1
+  - name: V_0x2
+    description: PCLKB/22.
+    value: 2
+  - name: V_0x3
+    description: PCLKB/23.
+    value: 3
+  - name: V_0x4
+    description: PCLKB/24.
+    value: 4
+  - name: V_0x5
+    description: PCLKB/25.
+    value: 5
+  - name: V_0x6
+    description: PCLKB/26.
+    value: 6
+  - name: V_0x7
+    description: PCLKB/27.
+    value: 7
+  - name: V_0x8
+    description: PCLKB/28.
+    value: 8
+  - name: V_0x9
+    description: PCLKB/29.
+    value: 9
+  - name: V_0xA
+    description: PCLKB/210.
+    value: 10
+  - name: V_0xB
+    description: PCLKB/211.
+    value: 11
+  - name: V_0xC
+    description: PCLKB/212.
+    value: 12
+  - name: V_0xD
+    description: PCLKB/213.
+    value: 13
+  - name: V_0xE
+    description: PCLKB/214.
+    value: 14
+  - name: V_0xF
+    description: PCLKB/215.
+    value: 15
+enum/PRS2:
+  bit_size: 2
+  variants:
+  - name: V_0x0
+    description: PCLKB/2.
+    value: 0
+  - name: V_0x1
+    description: PCLKB/22.
+    value: 1
+  - name: V_0x2
+    description: PCLKB/24.
+    value: 2
+  - name: V_0x3
+    description: PCLKB/26.
+    value: 3
+enum/PRS3:
+  bit_size: 2
+  variants:
+  - name: V_0x0
+    description: PCLKB/28.
+    value: 0
+  - name: V_0x1
+    description: PCLKB/210.
+    value: 1
+  - name: V_0x2
+    description: PCLKB/212.
+    value: 2
+  - name: V_0x3
+    description: PCLKB/214.
+    value: 3
+enum/TE:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: Operation is stopped.
+    value: 0
+  - name: V_1
+    description: Operation is enabled.
+    value: 1
+enum/TMR00_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR00_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR00_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR00_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR01_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR01_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR01_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture & one-count mode.
+    value: 6
+enum/TMR01_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the Ti0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the Ti0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR02_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR02_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR02_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR02_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR03_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR03_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR03_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture & one-count mode.
+    value: 6
+enum/TMR03_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the Ti0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the Ti0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR04_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR04_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR04_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR04_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR05_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR05_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR05_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR05_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR06_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR06_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR06_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR06_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TMR07_CIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: 'Both edges (when low-level width is measured) Start trigger: Falling edge, Capture trigger: Rising edge.'
+    value: 2
+  - name: V_11
+    description: 'Both edges (when high-level width is measured) Start trigger: Rising edge, Capture trigger: Falling edge.'
+    value: 3
+enum/TMR07_CKS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Operation clock CK00 set by timer clock select register 0 (TPS0).
+    value: 0
+  - name: V_01
+    description: Operation clock CK02 set by timer clock select register 0 (TPS0).
+    value: 1
+  - name: V_10
+    description: Operation clock CK01 set by timer clock select register 0 (TPS0).
+    value: 2
+  - name: V_11
+    description: Operation clock CK03 set by timer clock select register 0 (TPS0).
+    value: 3
+enum/TMR07_MD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Interval timer mode.
+    value: 0
+  - name: V_010
+    description: Capture mode.
+    value: 2
+  - name: V_011
+    description: Event counter mode.
+    value: 3
+  - name: V_100
+    description: One-count mode.
+    value: 4
+  - name: V_110
+    description: Capture and one-count mode.
+    value: 6
+enum/TMR07_STS:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Only software trigger start is valid (other trigger sources are unselected).
+    value: 0
+  - name: V_001
+    description: Valid edge of the TI0n pin input is used as both the start trigger and capture trigger.
+    value: 1
+  - name: V_010
+    description: Both the edges of the TI0n pin input are used as a start trigger and a capture trigger.
+    value: 2
+  - name: V_100
+    description: Interrupt signal of the master channel is used (when the channel is used as a slave channel with the simultaneous channel operation function).
+    value: 4
+enum/TO:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: Timer output value is 0.
+    value: 0
+  - name: V_1
+    description: Timer output value is 1.
+    value: 1
+enum/TOE:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: Disables timer output.
+    value: 0
+  - name: V_1
+    description: Enables timer output.
+    value: 1
+enum/TOL:
+  bit_size: 7
+  variants:
+  - name: V_0
+    description: Positive logic output (active-high).
+    value: 0
+  - name: V_1
+    description: Negative logic output (active-low).
+    value: 1
+enum/TOM:
+  bit_size: 7
+  variants:
+  - name: V_0
+    description: Master channel output mode (to produce toggled output by timer interrupt request signal (TAU0_TMI0n)).
+    value: 0
+  - name: V_1
+    description: Slave channel output mode (output is set by the timer interrupt request signal (TAU0_TMI0n) of the master channel, and reset by the timer interrupt request signal (TAU0_TMI0p) of the slave channel).
+    value: 1
+enum/TS:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: No trigger operation.
+    value: 0
+  - name: V_1
+    description: The TE0.TE[n] bit is set to 1 and the count operation becomes enabled.
+    value: 1
+enum/TT:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: No trigger operation.
+    value: 0
+  - name: V_1
+    description: The TE0.TE[n] bit is cleared to 0 and the count operation is stopped.
+    value: 1

@@ -15,4 +15,6 @@ include = [
 [dependencies]
 cortex-m = "0.7.7"
 cortex-m-rt = { version = "0.7.3", optional = true }
+critical-section = "1.1"
 defmt = { version = "0.3.0", optional = true }
+embassy-hal-internal = { path = "../../../embassy-leo/embassy-hal-internal", optional = true }

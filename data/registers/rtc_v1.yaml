@@ -1,0 +1,319 @@
+block/RTC_C:
+  description: Realtime Clock.
+  items:
+  - name: SEC
+    description: Second Count Register.
+    byte_offset: 0
+    bit_size: 8
+    fieldset: SEC
+  - name: MIN
+    description: Minute Count Register.
+    byte_offset: 1
+    bit_size: 8
+    fieldset: MIN
+  - name: HOUR
+    description: Hour Count Register.
+    byte_offset: 2
+    bit_size: 8
+    fieldset: HOUR
+  - name: WEEK
+    description: Day-of-Week Count Register.
+    byte_offset: 3
+    bit_size: 8
+    fieldset: WEEK
+  - name: DAY
+    description: Day Count Register.
+    byte_offset: 4
+    bit_size: 8
+    fieldset: DAY
+  - name: MONTH
+    description: Month Count Register.
+    byte_offset: 5
+    bit_size: 8
+    fieldset: MONTH
+  - name: YEAR
+    description: Year Count Register.
+    byte_offset: 6
+    bit_size: 8
+    fieldset: YEAR
+  - name: SUBCUD
+    description: Time Error Correction Register.
+    byte_offset: 7
+    bit_size: 8
+    fieldset: SUBCUD
+  - name: ALARMWM
+    description: Alarm Minute Register.
+    byte_offset: 8
+    bit_size: 8
+    fieldset: ALARMWM
+  - name: ALARMWH
+    description: Alarm Hour Register.
+    byte_offset: 9
+    bit_size: 8
+    fieldset: ALARMWH
+  - name: ALARMWW
+    description: Alarm Day-of-Week Register.
+    byte_offset: 10
+    bit_size: 8
+    fieldset: ALARMWW
+  - name: RTCC0
+    description: Realtime Clock Control Register 0.
+    byte_offset: 11
+    bit_size: 8
+    fieldset: RTCC0
+  - name: RTCC1
+    description: Realtime Clock Control Register 1.
+    byte_offset: 12
+    bit_size: 8
+    fieldset: RTCC1
+fieldset/ALARMWH:
+  description: Alarm Hour Register.
+  bit_size: 8
+  fields:
+  - name: WH1
+    description: 1-digit hour setting.
+    bit_offset: 0
+    bit_size: 4
+  - name: WH10
+    description: 10-digit hour setting.
+    bit_offset: 4
+    bit_size: 2
+fieldset/ALARMWM:
+  description: Alarm Minute Register.
+  bit_size: 8
+  fields:
+  - name: WM1
+    description: 1-digit minute setting.
+    bit_offset: 0
+    bit_size: 4
+  - name: WM10
+    description: 10-digit minute setting.
+    bit_offset: 4
+    bit_size: 3
+fieldset/ALARMWW:
+  description: Alarm Day-of-Week Register.
+  bit_size: 8
+  fields:
+  - name: WW0
+    description: Alarm enabled setting "Sunday".
+    bit_offset: 0
+    bit_size: 1
+  - name: WW1
+    description: Alarm enabled setting "Monday".
+    bit_offset: 1
+    bit_size: 1
+  - name: WW2
+    description: Alarm enabled setting "Tuesday".
+    bit_offset: 2
+    bit_size: 1
+  - name: WW3
+    description: Alarm enabled setting "Wednesday".
+    bit_offset: 3
+    bit_size: 1
+  - name: WW4
+    description: Alarm enabled setting "Thursday".
+    bit_offset: 4
+    bit_size: 1
+  - name: WW5
+    description: Alarm enabled setting "Friday".
+    bit_offset: 5
+    bit_size: 1
+  - name: WW6
+    description: Alarm enabled setting "Saturday".
+    bit_offset: 6
+    bit_size: 1
+fieldset/DAY:
+  description: Day Count Register.
+  bit_size: 8
+  fields:
+  - name: DAY1
+    description: 1-day count.
+    bit_offset: 0
+    bit_size: 4
+  - name: DAY10
+    description: 10-day count.
+    bit_offset: 4
+    bit_size: 2
+fieldset/HOUR:
+  description: Hour Count Register.
+  bit_size: 8
+  fields:
+  - name: HOUR1
+    description: 1-hour count.
+    bit_offset: 0
+    bit_size: 4
+  - name: HOUR10
+    description: 10-hour count.
+    bit_offset: 4
+    bit_size: 2
+fieldset/MIN:
+  description: Minute Count Register.
+  bit_size: 8
+  fields:
+  - name: MIN1
+    description: 1-minute count.
+    bit_offset: 0
+    bit_size: 4
+  - name: MIN10
+    description: 10- minute count.
+    bit_offset: 4
+    bit_size: 3
+fieldset/MONTH:
+  description: Month Count Register.
+  bit_size: 8
+  fields:
+  - name: MONTH1
+    description: 1-month count.
+    bit_offset: 0
+    bit_size: 4
+  - name: MONTH10
+    description: 10-month count.
+    bit_offset: 4
+    bit_size: 1
+fieldset/RTCC0:
+  description: Realtime Clock Control Register 0.
+  bit_size: 8
+  fields:
+  - name: CT
+    description: Fixed-cycle interrupt (RTC_ALM_OR_PRD) selection.
+    bit_offset: 0
+    bit_size: 3
+    enum: CT
+  - name: AMPM
+    description: Selection of 12- or 24-hour system.
+    bit_offset: 3
+    bit_size: 1
+  - name: RTC128EN
+    description: Selection of the operating clock for the realtime clock (RTCCLK).
+    bit_offset: 4
+    bit_size: 1
+  - name: RCLOE1
+    description: RTCOUT pin output control.
+    bit_offset: 5
+    bit_size: 1
+  - name: RTCE
+    description: Realtime clock operation control.
+    bit_offset: 7
+    bit_size: 1
+fieldset/RTCC1:
+  description: Realtime Clock Control Register 1.
+  bit_size: 8
+  fields:
+  - name: RWAIT
+    description: Wait control of realtime clock.
+    bit_offset: 0
+    bit_size: 1
+  - name: RWST
+    description: Wait status flag of realtime clock.
+    bit_offset: 1
+    bit_size: 1
+  - name: RIFG
+    description: Fixed-cycle interrupt status flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: WAFG
+    description: Alarm detection status flag.
+    bit_offset: 4
+    bit_size: 1
+  - name: WALIE
+    description: Control of alarm interrupt (RTC_ALM_OR_PRD).
+    bit_offset: 6
+    bit_size: 1
+  - name: WALE
+    description: Alarm operation control.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SEC:
+  description: Second Count Register.
+  bit_size: 8
+  fields:
+  - name: SEC1
+    description: 1-second count.
+    bit_offset: 0
+    bit_size: 4
+  - name: SEC10
+    description: 10-second count.
+    bit_offset: 4
+    bit_size: 3
+fieldset/SUBCUD:
+  description: Time Error Correction Register.
+  bit_size: 8
+  fields:
+  - name: F
+    description: Adjustment Value.
+    bit_offset: 0
+    bit_size: 6
+  - name: F6
+    description: Setting of time error correction value.
+    bit_offset: 6
+    bit_size: 1
+  - name: DEV
+    description: Setting of time error correction timing.
+    bit_offset: 7
+    bit_size: 1
+fieldset/WEEK:
+  description: Day-of-Week Count Register.
+  bit_size: 8
+  fields:
+  - name: WEEK
+    description: Day-of-Week Counting.
+    bit_offset: 0
+    bit_size: 3
+    enum: WEEK
+fieldset/YEAR:
+  description: Year Count Register.
+  bit_size: 8
+  fields:
+  - name: YEAR1
+    description: 1-year count.
+    bit_offset: 0
+    bit_size: 4
+  - name: YEAR10
+    description: 10-year count.
+    bit_offset: 4
+    bit_size: 4
+enum/CT:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Does not use fixed-cycle interrupt.
+    value: 0
+  - name: V_001
+    description: Once per 0.5 s (synchronized with second count up).
+    value: 1
+  - name: V_010
+    description: Once per 1 s (same time as second count up).
+    value: 2
+  - name: V_011
+    description: Once per 1 m (second 00 of every minute).
+    value: 3
+  - name: V_100
+    description: Once per 1 hour (minute 00 and second 00 of every hour).
+    value: 4
+  - name: V_101
+    description: Once per 1 day (hour 00, minute 00, and second 00 of every day).
+    value: 5
+enum/WEEK:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Sunday.
+    value: 0
+  - name: V_001
+    description: Monday.
+    value: 1
+  - name: V_010
+    description: Tuesday.
+    value: 2
+  - name: V_011
+    description: Wednesday.
+    value: 3
+  - name: V_100
+    description: Thursday.
+    value: 4
+  - name: V_101
+    description: Friday.
+    value: 5
+  - name: V_110
+    description: Saturday.
+    value: 6

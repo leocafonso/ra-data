@@ -1,0 +1,7 @@
+transforms:
+  - !DeleteEnums
+    from: ".*"
+    bit_size: 1
+  - !DeleteRegisters
+    block: "TML32"
+    from: "ITLCMP0_[LH]"

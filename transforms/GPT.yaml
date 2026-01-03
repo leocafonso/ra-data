@@ -1,0 +1,10 @@
+transforms:
+  - !DeleteEnums
+    from: .*
+    bit_size: 1
+    keep_desc: true
+  - !Rename
+    from: GPT\d*(?:E|EH)?\d+
+    to: GPT
+
+
