@@ -3,6 +3,7 @@ mod generate;
 mod pinmapping;
 mod util;
 mod perimap;
+mod interrupts;
 
 #[macro_export]
 macro_rules! regex {
@@ -64,8 +65,11 @@ fn main() -> anyhow::Result<()> {
     stopwatch.section("Parsing pin mappings");
     let pin_mappings = pinmapping::PinMappings::parse()?;
 
+    stopwatch.section("Parsing interrupts");
+    let family_interrupts = interrupts::parse_all()?;
+
     stopwatch.section("Generating data");
-    generate::generate(&rzones, &pin_mappings)?;
+    generate::generate(&rzones, &pin_mappings, &family_interrupts)?;
 
     stopwatch.section("Parsing other stuff");
 

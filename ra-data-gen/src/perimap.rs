@@ -20,23 +20,8 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA2.*:GPT.*", PeriInfo { peri_type: "timer", version: "v3" }),
     (".*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v1" }),
 
-    // TAU mappings (Timer Array Unit)
-    (".*:TAU\\d*", PeriInfo { peri_type: "tau", version: "v1" }),
-
-    // TML mappings (32-bit Interval Timer)
-    (".*:TML\\d*", PeriInfo { peri_type: "tml32", version: "v1" }),
-
     // RTC mappings (Realtime Clock)
     (".*:RTC(?:_C)?", PeriInfo { peri_type: "rtc", version: "v1" }),
-
-    // IWDT mappings (Independent Watchdog Timer)
-    (".*:IWDT\\d*", PeriInfo { peri_type: "iwdt", version: "v1" }),
-
-    // WDT mappings (Watchdog Timer)
-    (".*:WDT\\d*", PeriInfo { peri_type: "wdt", version: "v1" }),
-
-    // AGT mappings (Asynchronous General-Purpose Timer)
-    (".*:AGT\\d+", PeriInfo { peri_type: "agt", version: "v1" }),
 
     // ICU mappings (Interrupt Controller Unit)
     ("R7FA0.*:ICU", PeriInfo { peri_type: "icu", version: "v1" }),

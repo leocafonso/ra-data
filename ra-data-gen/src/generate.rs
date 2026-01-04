@@ -1,13 +1,13 @@
+use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
 use anyhow::Context;
-use serde::Serialize;
 use crate::rzone::Rzones;
 use crate::pinmapping::PinMappings;
 use crate::perimap::PERIMAP;
 use ra_data_types::*;
 
-pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings) -> anyhow::Result<()> {
+pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings, family_interrupts: &BTreeMap<String, Vec<Interrupt>>) -> anyhow::Result<()> {
     let chips_dir = Path::new("./build/data/chips/");
     let regs_out_dir = Path::new("./build/data/registers/");
     fs::create_dir_all(chips_dir).context("failed to create chips directory")?;
@@ -63,6 +63,17 @@ pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings) -> anyhow::Result<(
             }
         }
 
+        let family_dir = {
+            let dname = parsed.family.to_lowercase();
+            if dname.starts_with("r7f") || dname.starts_with("r7k") {
+                format!("ra{}", &dname[4..])
+            } else {
+                dname
+            }
+        };
+
+        let interrupts = family_interrupts.get(&family_dir).cloned().unwrap_or_default();
+
         let chip = Chip {
             name: name.clone(),
             family: parsed.family.clone(),
@@ -75,6 +86,7 @@ pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings) -> anyhow::Result<(
                 size: m.size,
             }).collect(),
             peripherals,
+            interrupts,
             packages,
         };
 

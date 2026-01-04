@@ -139,12 +139,75 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
 
     writeln!(file, "#[macro_export]")?;
     writeln!(file, "macro_rules! foreach_interrupt {{")?;
-    writeln!(file, "    ($($m:tt)*) => {{")?;
+    writeln!(file, "    ($m:path, $($args:tt)*) => {{")?;
+    writeln!(file, "        $m! {{ $($args)* {{")?;
     for i in 0..interrupt_count {
-        writeln!(file, "        $($m)*!(IEL{});", i)?;
+        writeln!(file, "            IEL{} = {},", i, i)?;
     }
+    writeln!(file, "        }} }}")?;
+    writeln!(file, "    }};")?;
+    writeln!(file, "    ($($m:tt)*) => {{")?;
+    writeln!(file, "        $($m)*! {{")?;
+    for i in 0..interrupt_count {
+        writeln!(file, "            IEL{} = {},", i, i)?;
+    }
+    writeln!(file, "        }}")?;
     writeln!(file, "    }};")?;
     writeln!(file, "}}")?;
+
+    writeln!(file, "#[macro_export]")?;
+    writeln!(file, "macro_rules! foreach_event {{")?;
+    writeln!(file, "    ($m:path, $($args:tt)*) => {{")?;
+    writeln!(file, "        $m! {{ $($args)* {{")?;
+    for irq in &chip.interrupts {
+        let name = heck::AsPascalCase(&irq.name).to_string();
+        writeln!(file, "            {} = {},", name, irq.value)?;
+    }
+    writeln!(file, "        }} }}")?;
+    writeln!(file, "    }};")?;
+    writeln!(file, "    ($($m:tt)*) => {{")?;
+    writeln!(file, "        $($m)*! {{")?;
+    for irq in &chip.interrupts {
+        let name = heck::AsPascalCase(&irq.name).to_string();
+        writeln!(file, "            {} = {},", name, irq.value)?;
+    }
+    writeln!(file, "        }}")?;
+    writeln!(file, "    }};")?;
+    writeln!(file, "}}")?;
+
+    writeln!(file, "#[derive(Copy, Clone, Debug, PartialEq, Eq)]")?;
+    writeln!(file, "#[repr(u16)]")?;
+    writeln!(file, "pub enum Event {{")?;
+    let mut seen_values = std::collections::HashSet::new();
+    let mut aliases = Vec::new();
+    for irq in &chip.interrupts {
+        let name = heck::AsPascalCase(&irq.name).to_string();
+        if seen_values.contains(&irq.value) {
+            aliases.push((name, irq.value, irq.description.clone()));
+            continue;
+        }
+        seen_values.insert(irq.value);
+        if let Some(desc) = &irq.description {
+            writeln!(file, "    /// {}", desc)?;
+        }
+        writeln!(file, "    {} = {},", name, irq.value)?;
+    }
+    writeln!(file, "}}")?;
+
+    if !aliases.is_empty() {
+        writeln!(file, "#[allow(non_upper_case_globals)]")?;
+        writeln!(file, "impl Event {{")?;
+        for (name, value, desc) in aliases {
+            if let Some(d) = desc {
+                writeln!(file, "    /// {}", d)?;
+            }
+            // Find the original name for this value to point the alias to it
+            let original_irq = chip.interrupts.iter().find(|i| i.value == value).unwrap();
+            let original_name = heck::AsPascalCase(&original_irq.name).to_string();
+            writeln!(file, "    pub const {}: Self = Self::{};", name, original_name)?;
+        }
+        writeln!(file, "}}")?;
+    }
 
     writeln!(file, "#[derive(Copy, Clone, Debug, PartialEq, Eq)]")?;
     writeln!(file, "#[repr(u16)]")?;

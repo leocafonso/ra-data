@@ -8,7 +8,15 @@ pub struct Chip {
     pub interrupt_count: u32,
     pub memory: Vec<Memory>,
     pub peripherals: Vec<Peripheral>,
+    pub interrupts: Vec<Interrupt>,
     pub packages: Vec<Package>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Interrupt {
+    pub name: String,
+    pub value: u32,
+    pub description: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
