@@ -7,7 +7,13 @@ use crate::pinmapping::PinMappings;
 use crate::perimap::PERIMAP;
 use ra_data_types::*;
 
-pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings, family_interrupts: &BTreeMap<String, Vec<Interrupt>>) -> anyhow::Result<()> {
+pub fn generate(
+    rzones: &Rzones,
+    pin_mappings: &PinMappings,
+    family_interrupts: &BTreeMap<String, Vec<Interrupt>>,
+    chip_mstp: &BTreeMap<String, BTreeMap<String, crate::mstp::MstpInfo>>,
+    chip_timers: &BTreeMap<String, BTreeMap<String, u32>>,
+) -> anyhow::Result<()> {
     let chips_dir = Path::new("./build/data/chips/");
     let regs_out_dir = Path::new("./build/data/registers/");
     fs::create_dir_all(chips_dir).context("failed to create chips directory")?;
@@ -48,16 +54,31 @@ pub fn generate(rzones: &Rzones, pin_mappings: &PinMappings, family_interrupts: 
         }
 
         let mut peripherals = Vec::new();
+        let mstp_map = chip_mstp.iter()
+            .find(|(k, _)| name.starts_with(*k))
+            .map(|(_, v)| v);
+        let timer_map = chip_timers.iter()
+            .find(|(k, _)| name.starts_with(*k))
+            .map(|(_, v)| v);
+
         for p in &parsed.peripherals {
             let key = format!("{}:{}", name, p.name);
             if let Some(info) = PERIMAP.get(&key) {
                 let reg_key = format!("{}_{}", info.peri_type, info.version);
                 if available_registers.contains(&reg_key) {
+                    let mstp = mstp_map.and_then(|m| m.get(&p.name)).map(|m| Mstp {
+                        register: m.register.clone(),
+                        bit: m.bit,
+                    });
+                    let bit_width = timer_map.and_then(|m| m.get(&p.name)).cloned();
+
                     peripherals.push(Peripheral {
                         name: p.name.clone(),
                         address: p.address,
                         peri_type: info.peri_type.to_string(),
                         version: info.version.to_string(),
+                        mstp,
+                        bit_width,
                     });
                 }
             }

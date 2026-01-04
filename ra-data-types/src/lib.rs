@@ -34,6 +34,14 @@ pub struct Peripheral {
     #[serde(rename = "type")]
     pub peri_type: String,
     pub version: String,
+    pub mstp: Option<Mstp>,
+    pub bit_width: Option<u32>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Mstp {
+    pub register: String,
+    pub bit: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

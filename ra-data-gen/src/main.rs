@@ -4,6 +4,8 @@ mod pinmapping;
 mod util;
 mod perimap;
 mod interrupts;
+mod mstp;
+mod timer;
 
 #[macro_export]
 macro_rules! regex {
@@ -68,8 +70,14 @@ fn main() -> anyhow::Result<()> {
     stopwatch.section("Parsing interrupts");
     let family_interrupts = interrupts::parse_all()?;
 
+    stopwatch.section("Parsing MSTP");
+    let chip_mstp = mstp::parse_all()?;
+
+    stopwatch.section("Parsing Timers");
+    let chip_timers = timer::parse_all()?;
+
     stopwatch.section("Generating data");
-    generate::generate(&rzones, &pin_mappings, &family_interrupts)?;
+    generate::generate(&rzones, &pin_mappings, &family_interrupts, &chip_mstp, &chip_timers)?;
 
     stopwatch.section("Parsing other stuff");
 

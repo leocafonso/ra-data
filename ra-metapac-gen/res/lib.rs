@@ -15,3 +15,8 @@ pub mod metadata {
     include!("metadata.rs");
     include!(env!("RA_METAPAC_METADATA_PATH"));
 }
+
+pub trait Peripheral {
+    #[cfg(feature = "metadata")]
+    fn metadata() -> &'static metadata::Peripheral;
+}
