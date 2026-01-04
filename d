@@ -4,7 +4,7 @@ set -e
 export RUST_BACKTRACE=full
 cd $(dirname $0)
 CMD=$1
-REV=7bcbf08f1ec848ee36c461bd2330ff82720e6a5b
+REV=c31a1f2e8abad8b6e4413cc5394b80f27719e69c
 shift
 
 case "$CMD" in
