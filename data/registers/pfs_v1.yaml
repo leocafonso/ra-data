@@ -1,0 +1,86 @@
+enum/PSEL:
+  bit_size: 5
+  variants:
+  - name: NONE
+    value: 0
+  - name: AGT
+    value: 1
+  - name: GPT
+    value: 3
+  - name: SCI
+    value: 7
+
+fieldset/PmnPFS:
+  fields:
+  - name: PODR
+    bit_offset: 0
+    bit_size: 1
+    description: Port Output Data
+  - name: PIDR
+    bit_offset: 1
+    bit_size: 1
+    description: Pin State Monitor
+  - name: PDR
+    bit_offset: 2
+    bit_size: 1
+    description: Pin Direction (0:Input, 1:Output)
+  - name: PCR
+    bit_offset: 4
+    bit_size: 1
+    description: Pull-up Control (1:Enabled)
+  - name: NCODR
+    bit_offset: 6
+    bit_size: 1
+    description: N-Channel Open-Drain Control
+  - name: DSCR
+    bit_offset: 10
+    bit_size: 2
+    description: Drive Capacity (00:Low, 01:Middle, 11:High)
+  - name: EOFR
+    bit_offset: 12
+    bit_size: 2
+    description: Edge Detection for ELC events
+  - name: ISEL
+    bit_offset: 14
+    bit_size: 1
+    description: IRQ Input Enable
+  - name: ASEL
+    bit_offset: 15
+    bit_size: 1
+    description: Analog Input Enable
+  - name: PMR
+    bit_offset: 16
+    bit_size: 1
+    description: Port Mode Control (0:GPIO, 1:Peripheral)
+  - name: PSEL
+    bit_offset: 24
+    bit_size: 5
+    description: Peripheral Select
+    enum: PSEL
+
+block/PFS:
+  items:
+  - name: PmnPFS
+    description: Pin Function Select Register
+    byte_offset: 0
+    array:
+      len: 512 # Port 0-9, 16 pins each.
+      stride: 4
+    fieldset: PmnPFS
+  - name: PWPR
+    description: Write-Protect Register
+    byte_offset: 0x503
+    bit_size: 8
+    fieldset: PWPR
+
+fieldset/PWPR:
+  bit_size: 8
+  fields:
+  - name: PFSWE
+    bit_offset: 6
+    bit_size: 1
+    description: PFS Register Write Enable
+  - name: B0WI
+    bit_offset: 7
+    bit_size: 1
+    description: PFSWE Bit Write Disable

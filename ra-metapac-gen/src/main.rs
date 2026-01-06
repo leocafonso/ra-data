@@ -121,22 +121,57 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
         writeln!(file, "    }}")?;
     }
 
+    let mut pins = std::collections::BTreeSet::new();
+    for pkg in &chip.packages {
+        for pin in &pkg.pins {
+            for signal in &pin.signals {
+                if signal.starts_with('p') && signal.len() >= 4 && signal[1..].chars().all(|c| c.is_ascii_digit()) {
+                    pins.insert(signal.to_ascii_uppercase());
+                }
+            }
+        }
+    }
+
     writeln!(file, "    pub struct Peripherals {{")?;
     for peri in &chip.peripherals {
+        writeln!(file, "        #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "        pub {}: embassy_hal_internal::Peri<'static, {}>,", peri.name.to_lowercase(), peri.name)?;
+        writeln!(file, "        #[cfg(not(feature = \"embassy\"))]")?;
         writeln!(file, "        pub {}: {},", peri.name.to_lowercase(), peri.name)?;
     }
     for i in 0..interrupt_count {
+        writeln!(file, "        #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "        pub iel{}: embassy_hal_internal::Peri<'static, IEL{}>,", i, i)?;
+        writeln!(file, "        #[cfg(not(feature = \"embassy\"))]")?;
         writeln!(file, "        pub iel{}: IEL{},", i, i)?;
+    }
+    for pin in &pins {
+        writeln!(file, "        #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "        pub {}: embassy_hal_internal::Peri<'static, {}>,", pin.to_lowercase(), pin)?;
+        writeln!(file, "        #[cfg(not(feature = \"embassy\"))]")?;
+        writeln!(file, "        pub {}: {},", pin.to_lowercase(), pin)?;
     }
     writeln!(file, "    }}")?;
     writeln!(file, "    impl Peripherals {{")?;
     writeln!(file, "        pub unsafe fn steal() -> Self {{")?;
     writeln!(file, "            Self {{")?;
     for peri in &chip.peripherals {
+        writeln!(file, "                #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "                {}: embassy_hal_internal::Peri::new_unchecked({}(())),", peri.name.to_lowercase(), peri.name)?;
+        writeln!(file, "                #[cfg(not(feature = \"embassy\"))]")?;
         writeln!(file, "                {}: {}(()),", peri.name.to_lowercase(), peri.name)?;
     }
     for i in 0..interrupt_count {
+        writeln!(file, "                #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "                iel{}: embassy_hal_internal::Peri::new_unchecked(IEL{}(())),", i, i)?;
+        writeln!(file, "                #[cfg(not(feature = \"embassy\"))]")?;
         writeln!(file, "                iel{}: IEL{}(()),", i, i)?;
+    }
+    for pin in &pins {
+        writeln!(file, "                #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "                {}: embassy_hal_internal::Peri::new_unchecked({}(())),", pin.to_lowercase(), pin)?;
+        writeln!(file, "                #[cfg(not(feature = \"embassy\"))]")?;
+        writeln!(file, "                {}: {}(()),", pin.to_lowercase(), pin)?;
     }
     writeln!(file, "            }}")?;
     writeln!(file, "        }}")?;
@@ -146,6 +181,12 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
         writeln!(file, "    pub struct IEL{}(());", i)?;
         writeln!(file, "    #[cfg(feature = \"embassy\")]")?;
         writeln!(file, "    impl embassy_hal_internal::PeripheralType for IEL{} {{}}", i)?;
+    }
+    for pin in &pins {
+        writeln!(file, "    #[derive(Copy, Clone)]")?;
+        writeln!(file, "    pub struct {}(());", pin)?;
+        writeln!(file, "    #[cfg(feature = \"embassy\")]")?;
+        writeln!(file, "    impl embassy_hal_internal::PeripheralType for {} {{}}", pin)?;
     }
     writeln!(file, "}}")?;
 
@@ -193,6 +234,19 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     writeln!(file, "        $m! {{")?;
     for (i, peri) in chip.peripherals.iter().enumerate() {
         writeln!(file, "            {} = {},", peri.name, i)?;
+    }
+    writeln!(file, "        }}")?;
+    writeln!(file, "    }};")?;
+    writeln!(file, "}}")?;
+
+    writeln!(file, "#[macro_export]")?;
+    writeln!(file, "macro_rules! foreach_pin {{")?;
+    writeln!(file, "    ($m:path) => {{")?;
+    writeln!(file, "        $m! {{")?;
+    for pin in &pins {
+        let port = pin[1..2].parse::<u8>().unwrap_or(0);
+        let pin_num = pin[2..].parse::<u8>().unwrap_or(0);
+        writeln!(file, "            ({}, {}, {}),", pin, port, pin_num)?;
     }
     writeln!(file, "        }}")?;
     writeln!(file, "    }};")?;

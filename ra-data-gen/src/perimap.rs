@@ -11,6 +11,7 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA8.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
     ("R7FA6T2.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
     (".*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v1" }),
+    (".*:PFS", PeriInfo { peri_type: "pfs", version: "v1" }),
 
     // Timer mappings (General PWM Timer)
     ("R7FA4E2.*:GPT.*", PeriInfo { peri_type: "timer", version: "v2" }),
