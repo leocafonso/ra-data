@@ -68,7 +68,7 @@ fn main() -> anyhow::Result<()> {
     writeln!(cargo_toml, "metadata = []")?;
     writeln!(cargo_toml, "rt = [\"cortex-m-rt/device\"]")?;
     writeln!(cargo_toml, "defmt = [\"dep:defmt\"]")?;
-    writeln!(cargo_toml, "embassy = [\"dep:embassy-hal-internal\"]")?;
+    writeln!(cargo_toml, "embassy = [\"dep:embassy-hal-internal\", \"embassy-hal-internal/cortex-m\", \"embassy-hal-internal/prio-bits-3\"]")?;
     cargo_toml.push_str(&chip_features);
 
     writeln!(cargo_toml, "\n[package.metadata.embassy_docs]")?;

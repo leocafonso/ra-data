@@ -13,5 +13,5 @@ proc-macro2 = { workspace = true }
 glob = { workspace = true }
 walkdir = { workspace = true }
 ra-data-types = { path = "../ra-data-types" }
-chiptool = { workspace = true }
+chiptool = { git = "https://github.com/embassy-rs/chiptool.git" }
 regex = { workspace = true }
