@@ -3,6 +3,7 @@ use std::fs;
 use std::path::Path;
 use anyhow::Context;
 use roxmltree::Node;
+use crate::regex;
 
 #[derive(Debug, Clone)]
 pub struct MstpInfo {
@@ -53,11 +54,13 @@ fn parse_svd(path: &Path, _chip_name: &str) -> anyhow::Result<BTreeMap<String, M
                     // Example: "Serial Communication Interface 0 Module Stop" -> "SCI0"
                     // Example: "12-bit A/D Converter 0 Module Stop" -> "ADC0"
                     
-                    if let Some(peri_name) = extract_peri_name(field_desc) {
-                        mstp_map.insert(peri_name, MstpInfo {
-                            register: reg_name.to_string(),
-                            bit,
-                        });
+                    if let Some(peri_names) = extract_peri_names(field_desc) {
+                        for peri_name in peri_names {
+                            mstp_map.insert(peri_name, MstpInfo {
+                                register: reg_name.to_string(),
+                                bit,
+                            });
+                        }
                     }
                 }
             }
@@ -67,98 +70,50 @@ fn parse_svd(path: &Path, _chip_name: &str) -> anyhow::Result<BTreeMap<String, M
     Ok(mstp_map)
 }
 
-fn extract_peri_name(desc: &str) -> Option<String> {
+fn extract_peri_names(desc: &str) -> Option<Vec<String>> {
     let desc = desc.to_uppercase();
     let desc = desc.strip_suffix(" MODULE STOP").unwrap_or(&desc);
     let desc = desc.strip_suffix(" MODULE STOP.").unwrap_or(desc);
 
-    // Common mappings
-    if desc.starts_with("GPT") {
-        return Some(desc.split_whitespace().next()?.to_string());
+    if desc.contains("PORT OUTPUT ENABLE") {
+        return None;
     }
-    if desc.starts_with("SERIAL COMMUNICATION INTERFACE") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("SCI{}", num));
-    }
-    if desc.starts_with("12-BIT A/D CONVERTER") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("ADC{}", num));
-    }
-    if desc.starts_with("12-BIT D/A CONVERTER") {
-        let parts: Vec<&str> = desc.split_whitespace().collect();
-        if let Some(num) = parts.last().and_then(|s| s.parse::<u32>().ok()) {
-             return Some(format!("DAC{}", num));
+
+    let mut names = Vec::new();
+
+    if desc.contains("GPT") || desc.contains("GENERAL PWM TIMER") {
+        // Pattern: ch13-ch8 or ch7-ch0 or ch6 - ch1
+        if let Some(caps) = regex!(r"CH([0-9]+)\s*-\s*CH([0-9]+)").captures(desc) {
+            let n1: u32 = caps[1].parse().ok()?;
+            let n2: u32 = caps[2].parse().ok()?;
+            let (start, end) = if n1 < n2 { (n1, n2) } else { (n2, n1) };
+            for i in start..=end {
+                names.push(format!("GPT{}", i));
+            }
         }
-        return Some("DAC0".to_string());
-    }
-    if desc.starts_with("SERIAL PERIPHERAL INTERFACE") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("SPI{}", num));
-    }
-    if desc.starts_with("I3C BUS INTERFACE") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("I3C{}", num));
-    }
-    if desc.starts_with("CANFD") {
-        return Some("CANFD0".to_string());
-    }
-    if desc.starts_with("UNIVERSAL SERIAL BUS 2.0 FS INTERFACE") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("USB_FS{}", num));
-    }
-    if desc.starts_with("PORT OUTPUT ENABLE FOR GPT GROUP") {
-        let group = desc.split_whitespace().last()?;
-        let num = match group {
-            "A" => 0,
-            "B" => 1,
-            "C" => 2,
-            "D" => 3,
-            _ => return None,
-        };
-        return Some(format!("GPT_POEG{}", num));
-    }
-    if desc.starts_with("LOW POWER ASYNCHRONOUS GENERAL PURPOSE TIMER") {
-        let num = desc.split_whitespace().last()?;
-        return Some(format!("AGTW{}", num));
-    }
-    if desc.starts_with("QUAD SERIAL PERIPHERAL INTERFACE") {
-        return Some("QSPI0".to_string());
-    }
-    if desc.starts_with("EVENT LINK CONTROL") {
-        return Some("ELC0".to_string());
-    }
-    if desc.starts_with("DATA OPERATION CIRCUIT") {
-        return Some("DOC0".to_string());
-    }
-    if desc.starts_with("CYCLIC REDUNDANCY CHECK CALCULATOR") {
-        return Some("CRC0".to_string());
-    }
-    if desc.starts_with("CLOCK FREQUENCY ACCURACY MEASUREMENT CIRCUIT") {
-        return Some("CAC0".to_string());
-    }
-    if desc.starts_with("SERIAL SOUND INTERFACE ENHANCED") {
-        return Some("SSIE0".to_string());
-    }
-    if desc.starts_with("TEMPERATURE SENSOR") {
-        return Some("TSN0".to_string());
-    }
-    if desc.starts_with("RANDOM NUMBER GENERATOR") {
-        return Some("TRNG0".to_string());
-    }
-    if desc.starts_with("DMA CONTROLLER/DATA TRANSFER CONTROLLER") {
-        return Some("DMAC0".to_string());
-    }
-    if desc.starts_with("SRAM0") {
-        return Some("SRAM0".to_string());
-    }
-    if desc.starts_with("STANDBY SRAM") {
-        return Some("SRAM_STB0".to_string());
-    }
-    
-    // Fallback: if it's just one word, it might be the peripheral name
-    let parts: Vec<&str> = desc.split_whitespace().collect();
-    if parts.len() == 1 {
-        return Some(parts[0].to_string());
+        // Pattern: 323 to 320 or 164 to 169 or 32EH0 to 32EH3 or 4-9
+        else if let Some(caps) = regex!(r"TIMER\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)\s+(?:TO|-)\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
+            let n1: u32 = caps[1].parse().ok()?;
+            let n2: u32 = caps[2].parse().ok()?;
+            let (start, end) = if n1 < n2 { (n1, n2) } else { (n2, n1) };
+            for i in start..=end {
+                names.push(format!("GPT{}", i));
+            }
+        }
+        // Pattern: 32n
+        else if desc.contains("32N") {
+            for i in 0..16 {
+                names.push(format!("GPT{}", i));
+            }
+        }
+        // Single channel GPT0, GPT1, etc.
+        else if let Some(caps) = regex!(r"(?:GPT|TIMER)\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
+            names.push(format!("GPT{}", &caps[1]));
+        }
+        
+        if !names.is_empty() {
+            return Some(names);
+        }
     }
 
     None

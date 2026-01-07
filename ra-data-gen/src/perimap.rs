@@ -14,15 +14,12 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     (".*:PFS", PeriInfo { peri_type: "pfs", version: "v1" }),
 
     // Timer mappings (General PWM Timer)
-    ("R7FA4E2.*:GPT.*", PeriInfo { peri_type: "timer", version: "v2" }),
-    ("R7FA8.*:GPT.*", PeriInfo { peri_type: "timer", version: "v2" }),
+    ("R7FA4E2.*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v2" }),
+    ("R7FA8.*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v2" }),
     ("R7FA6[MT]1.*:GPT[0-7]", PeriInfo { peri_type: "timer", version: "v4" }),
-    ("R7FA6[MT]1.*:GPT.*", PeriInfo { peri_type: "timer", version: "v3" }),
-    ("R7FA2.*:GPT.*", PeriInfo { peri_type: "timer", version: "v3" }),
+    ("R7FA6[MT]1.*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v3" }),
+    ("R7FA2.*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v3" }),
     (".*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v1" }),
-
-    // RTC mappings (Realtime Clock)
-    (".*:RTC(?:_C)?", PeriInfo { peri_type: "rtc", version: "v1" }),
 
     // ICU mappings (Interrupt Controller Unit)
     ("R7FA0.*:ICU", PeriInfo { peri_type: "icu", version: "v1" }),
