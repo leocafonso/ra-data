@@ -2,7 +2,6 @@ use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
 use anyhow::Context;
-use roxmltree::Node;
 
 pub fn parse_all() -> anyhow::Result<BTreeMap<String, BTreeMap<String, u32>>> {
     let mut chip_timers = BTreeMap::new();
@@ -57,7 +56,12 @@ fn parse_svd(path: &Path) -> anyhow::Result<BTreeMap<String, u32>> {
 
             if let Some(bw) = bit_width {
                 // Normalize name: GPT16E0 -> GPT0, GPT32E0 -> GPT0, GPT320 -> GPT0, GPT164 -> GPT4
-                let normalized_name = if name.starts_with("GPT16E") || name.starts_with("GPT32E") {
+                // Enhanced High Resolution: GPT32EH0 -> GPT0
+                let normalized_name = if name.starts_with("GPT32EH") {
+                    format!("GPT{}", &name[7..])
+                } else if name.starts_with("GPT16EH") {
+                    format!("GPT{}", &name[7..])
+                } else if name.starts_with("GPT16E") || name.starts_with("GPT32E") {
                     format!("GPT{}", &name[6..])
                 } else if name.starts_with("GPT32") {
                     format!("GPT{}", &name[5..])

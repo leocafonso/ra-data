@@ -56,11 +56,11 @@ pub fn generate(
         let mut peripherals = Vec::new();
         let mstp_map = chip_mstp.iter()
             .find(|(k, _)| name.starts_with(*k) || 
-                 (name.len() >= 8 && k.len() >= 8 && name[..8] == k[..8]))
+                 (name.len() >= 7 && k.len() >= 7 && name[..7] == k[..7]))
             .map(|(_, v)| v);
         let timer_map = chip_timers.iter()
             .find(|(k, _)| name.starts_with(*k) ||
-                 (name.len() >= 8 && k.len() >= 8 && name[..8] == k[..8]))
+                 (name.len() >= 7 && k.len() >= 7 && name[..7] == k[..7]))
             .map(|(_, v)| v);
 
         for p in &parsed.peripherals {

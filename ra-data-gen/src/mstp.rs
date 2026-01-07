@@ -2,7 +2,6 @@ use std::collections::BTreeMap;
 use std::fs;
 use std::path::Path;
 use anyhow::Context;
-use roxmltree::Node;
 use crate::regex;
 
 #[derive(Debug, Clone)]
@@ -92,7 +91,7 @@ fn extract_peri_names(desc: &str) -> Option<Vec<String>> {
             }
         }
         // Pattern: 323 to 320 or 164 to 169 or 32EH0 to 32EH3 or 4-9
-        else if let Some(caps) = regex!(r"TIMER\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)\s+(?:TO|-)\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
+        else if let Some(caps) = regex!(r"TIMER\s*(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)\s*(?:TO|-)\s*(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
             let n1: u32 = caps[1].parse().ok()?;
             let n2: u32 = caps[2].parse().ok()?;
             let (start, end) = if n1 < n2 { (n1, n2) } else { (n2, n1) };
@@ -107,7 +106,7 @@ fn extract_peri_names(desc: &str) -> Option<Vec<String>> {
             }
         }
         // Single channel GPT0, GPT1, etc.
-        else if let Some(caps) = regex!(r"(?:GPT|TIMER)\s+(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
+        else if let Some(caps) = regex!(r"(?:GPT|TIMER)\s*(?:32|16|8)?(?:EH|E|H|CH)?([0-9]+)").captures(desc) {
             names.push(format!("GPT{}", &caps[1]));
         }
         
