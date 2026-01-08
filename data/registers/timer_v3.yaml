@@ -73,39 +73,30 @@ block/GPT:
   - name: GTCNT
     description: General PWM Timer Counter.
     byte_offset: 72
-    fieldset: GTCNT
   - name: GTCCRA
     description: General PWM Timer Compare Capture Register A.
     byte_offset: 76
-    fieldset: GTCCRA
   - name: GTCCRB
     description: General PWM Timer Compare Capture Register B.
     byte_offset: 80
-    fieldset: GTCCRB
   - name: GTCCRC
     description: General PWM Timer Compare Capture Register C.
     byte_offset: 84
-    fieldset: GTCCRC
   - name: GTCCRE
     description: General PWM Timer Compare Capture Register E.
     byte_offset: 88
-    fieldset: GTCCRE
   - name: GTCCRD
     description: General PWM Timer Compare Capture Register D.
     byte_offset: 92
-    fieldset: GTCCRD
   - name: GTCCRF
     description: General PWM Timer Compare Capture Register F.
     byte_offset: 96
-    fieldset: GTCCRF
   - name: GTPR
     description: General PWM Timer Cycle Setting Register.
     byte_offset: 100
-    fieldset: GTPR
   - name: GTPBR
     description: General PWM Timer Cycle Setting Buffer Register.
     byte_offset: 104
-    fieldset: GTPBR
   - name: GTDTCR
     description: General PWM Timer Dead Time Control Register.
     byte_offset: 136
@@ -113,7 +104,6 @@ block/GPT:
   - name: GTDVU
     description: General PWM Timer Dead Time Value Register U.
     byte_offset: 140
-    fieldset: GTDVU
 fieldset/GTBER:
   description: General PWM Timer Buffer Enable Register.
   fields:
@@ -161,48 +151,6 @@ fieldset/GTBER:
     description: These bits are read as 000000000. The write value should be 000000000.
     bit_offset: 23
     bit_size: 9
-fieldset/GTCCRA:
-  description: General PWM Timer Compare Capture Register A.
-  fields:
-  - name: GTCCRA
-    description: Compare Capture Register A.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRB:
-  description: General PWM Timer Compare Capture Register B.
-  fields:
-  - name: GTCCRB
-    description: Compare Capture Register B.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRC:
-  description: General PWM Timer Compare Capture Register C.
-  fields:
-  - name: GTCCRC
-    description: Compare Capture Register C.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRD:
-  description: General PWM Timer Compare Capture Register D.
-  fields:
-  - name: GTCCRD
-    description: Compare Capture Register D.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRE:
-  description: General PWM Timer Compare Capture Register E.
-  fields:
-  - name: GTCCRE
-    description: Compare Capture Register E.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRF:
-  description: General PWM Timer Compare Capture Register F.
-  fields:
-  - name: GTCCRF
-    description: Compare Capture Register F.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTCLR:
   description: General PWM Timer Software Clear Register.
   fields:
@@ -301,13 +249,6 @@ fieldset/GTCLR:
     description: The write value should be 1111111111111111111.
     bit_offset: 13
     bit_size: 19
-fieldset/GTCNT:
-  description: General PWM Timer Counter.
-  fields:
-  - name: GTCNT
-    description: Counter.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTCR:
   description: General PWM Timer Control Register.
   fields:
@@ -711,13 +652,6 @@ fieldset/GTDTCR:
     description: These bits are read as 0000000000000000000000000000000. The write value should be 0000000000000000000000000000000.
     bit_offset: 1
     bit_size: 31
-fieldset/GTDVU:
-  description: General PWM Timer Dead Time Value Register U.
-  fields:
-  - name: GTDVU
-    description: Dead Time Value Register U.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTICASR:
   description: General PWM Timer Input Capture Source Select Register A.
   fields:
@@ -1207,20 +1141,6 @@ fieldset/GTIOR:
     bit_offset: 30
     bit_size: 2
     enum: NFCSB
-fieldset/GTPBR:
-  description: General PWM Timer Cycle Setting Buffer Register.
-  fields:
-  - name: GTPBR
-    description: Cycle Setting Buffer Register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTPR:
-  description: General PWM Timer Cycle Setting Register.
-  fields:
-  - name: GTPR
-    description: Cycle Setting Register.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTPSR:
   description: General PWM Timer Stop Source Select Register.
   fields:

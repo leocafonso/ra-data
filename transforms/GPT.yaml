@@ -6,5 +6,8 @@ transforms:
   - !Rename
     from: GPT\d*(?:E|EH)?\d+
     to: GPT
+  - !DeleteFieldsets
+    from: .*
+    useless: true
 
 

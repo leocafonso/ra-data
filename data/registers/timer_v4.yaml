@@ -77,67 +77,51 @@ block/GPT:
   - name: GTCNT
     description: General PWM Timer Counter.
     byte_offset: 72
-    fieldset: GTCNT
   - name: GTCCRA
     description: General PWM Timer Compare Capture Register A.
     byte_offset: 76
-    fieldset: GTCCRA
   - name: GTCCRB
     description: General PWM Timer Compare Capture Register B.
     byte_offset: 80
-    fieldset: GTCCRB
   - name: GTCCRC
     description: General PWM Timer Compare Capture Register C.
     byte_offset: 84
-    fieldset: GTCCRC
   - name: GTCCRE
     description: General PWM Timer Compare Capture Register E.
     byte_offset: 88
-    fieldset: GTCCRE
   - name: GTCCRD
     description: General PWM Timer Compare Capture Register D.
     byte_offset: 92
-    fieldset: GTCCRD
   - name: GTCCRF
     description: General PWM Timer Compare Capture Register F.
     byte_offset: 96
-    fieldset: GTCCRF
   - name: GTPR
     description: General PWM Timer Cycle Setting Register.
     byte_offset: 100
-    fieldset: GTPR
   - name: GTPBR
     description: General PWM Timer Cycle Setting Buffer Register.
     byte_offset: 104
-    fieldset: GTPBR
   - name: GTPDBR
     description: General PWM Timer Cycle Setting Double-Buffer Register.
     byte_offset: 108
-    fieldset: GTPDBR
   - name: GTADTRA
     description: A/D Converter Start Request Timing Register A.
     byte_offset: 112
-    fieldset: GTADTRA
   - name: GTADTBRA
     description: A/D Converter Start Request Timing Buffer Register A.
     byte_offset: 116
-    fieldset: GTADTBRA
   - name: GTADTDBRA
     description: A/D Converter Start Request Timing Double-Buffer Register A.
     byte_offset: 120
-    fieldset: GTADTDBRA
   - name: GTADTRB
     description: A/D Converter Start Request Timing Register B.
     byte_offset: 124
-    fieldset: GTADTRB
   - name: GTADTBRB
     description: A/D Converter Start Request Timing Buffer Register B.
     byte_offset: 128
-    fieldset: GTADTBRB
   - name: GTADTDBRB
     description: A/D Converter Start Request Timing Double-Buffer Register B.
     byte_offset: 132
-    fieldset: GTADTDBRB
   - name: GTDTCR
     description: General PWM Timer Dead Time Control Register.
     byte_offset: 136
@@ -145,19 +129,15 @@ block/GPT:
   - name: GTDVU
     description: General PWM Timer Dead Time Value Register U.
     byte_offset: 140
-    fieldset: GTDVU
   - name: GTDVD
     description: General PWM Timer Dead Time Value Register D.
     byte_offset: 144
-    fieldset: GTDVD
   - name: GTDBU
     description: General PWM Timer Dead Time Buffer Register U.
     byte_offset: 148
-    fieldset: GTDBU
   - name: GTDBD
     description: General PWM Timer Dead Time Buffer Register D.
     byte_offset: 152
-    fieldset: GTDBD
   - name: GTSOS
     description: General PWM Timer Output Protection Function Status Register.
     byte_offset: 156
@@ -167,48 +147,6 @@ block/GPT:
     description: General PWM Timer Output Protection Function Temporary Release Register.
     byte_offset: 160
     fieldset: GTSOTR
-fieldset/GTADTBRA:
-  description: A/D Converter Start Request Timing Buffer Register A.
-  fields:
-  - name: GTADTBRA
-    description: A/D Converter Start Request Timing Buffer Register A.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTADTBRB:
-  description: A/D Converter Start Request Timing Buffer Register B.
-  fields:
-  - name: GTADTBRB
-    description: A/D Converter Start Request Timing Buffer Register B.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTADTDBRA:
-  description: A/D Converter Start Request Timing Double-Buffer Register A.
-  fields:
-  - name: GTADTDBRA
-    description: A/D Converter Start Request Timing Double-Buffer Register A.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTADTDBRB:
-  description: A/D Converter Start Request Timing Double-Buffer Register B.
-  fields:
-  - name: GTADTDBRB
-    description: A/D Converter Start Request Timing Double-Buffer Register B.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTADTRA:
-  description: A/D Converter Start Request Timing Register A.
-  fields:
-  - name: GTADTRA
-    description: A/D Converter Start Request Timing Register A.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTADTRB:
-  description: A/D Converter Start Request Timing Register B.
-  fields:
-  - name: GTADTRB
-    description: A/D Converter Start Request Timing Register B.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTBER:
   description: General PWM Timer Buffer Enable Register.
   fields:
@@ -263,48 +201,6 @@ fieldset/GTBER:
       1: Double buffer operation (GTADTDBRB --> GTADTBRB --> GTADTDRB).
     bit_offset: 30
     bit_size: 1
-fieldset/GTCCRA:
-  description: General PWM Timer Compare Capture Register A.
-  fields:
-  - name: GTCCRA
-    description: Compare Capture Register A.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRB:
-  description: General PWM Timer Compare Capture Register B.
-  fields:
-  - name: GTCCRB
-    description: Compare Capture Register B.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRC:
-  description: General PWM Timer Compare Capture Register C.
-  fields:
-  - name: GTCCRC
-    description: Compare Capture Register C.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRD:
-  description: General PWM Timer Compare Capture Register D.
-  fields:
-  - name: GTCCRD
-    description: Compare Capture Register D.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRE:
-  description: General PWM Timer Compare Capture Register E.
-  fields:
-  - name: GTCCRE
-    description: Compare Capture Register E.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTCCRF:
-  description: General PWM Timer Compare Capture Register F.
-  fields:
-  - name: GTCCRF
-    description: Compare Capture Register F.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTCLR:
   description: General PWM Timer Software Clear Register.
   fields:
@@ -399,13 +295,6 @@ fieldset/GTCLR:
       1: GPT3212.GTCNT counter clears.
     bit_offset: 12
     bit_size: 1
-fieldset/GTCNT:
-  description: General PWM Timer Counter.
-  fields:
-  - name: GTCNT
-    description: Counter.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTCR:
   description: General PWM Timer Control Register.
   fields:
@@ -604,20 +493,6 @@ fieldset/GTCSR:
       1: Enable counter clear by the GTCLR register.
     bit_offset: 31
     bit_size: 1
-fieldset/GTDBD:
-  description: General PWM Timer Dead Time Buffer Register D.
-  fields:
-  - name: GTDBD
-    description: Dead Time Buffer Register D.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTDBU:
-  description: General PWM Timer Dead Time Buffer Register U.
-  fields:
-  - name: GTDVU
-    description: Dead Time Buffer Register U.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTDNSR:
   description: General PWM Timer Down Count Source Select Register.
   fields:
@@ -820,20 +695,6 @@ fieldset/GTDTCR:
       1: Automatically set the value written to GTDVU to GTDVD.
     bit_offset: 8
     bit_size: 1
-fieldset/GTDVD:
-  description: General PWM Timer Dead Time Value Register D.
-  fields:
-  - name: GTDVD
-    description: Dead Time Value Register D.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTDVU:
-  description: General PWM Timer Dead Time Value Register U.
-  fields:
-  - name: GTDVU
-    description: Dead Time Value Register U.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTICASR:
   description: General PWM Timer Input Capture Source Select Register A.
   fields:
@@ -1391,27 +1252,6 @@ fieldset/GTITC:
       1: Link with GPTn_OVF/GPTn_UDF interrupt skipping function.
     bit_offset: 14
     bit_size: 1
-fieldset/GTPBR:
-  description: General PWM Timer Cycle Setting Buffer Register.
-  fields:
-  - name: GTPBR
-    description: Cycle Setting Buffer Register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTPDBR:
-  description: General PWM Timer Cycle Setting Double-Buffer Register.
-  fields:
-  - name: GTPDBR
-    description: Cycle Setting Double-Buffer Register.
-    bit_offset: 0
-    bit_size: 32
-fieldset/GTPR:
-  description: General PWM Timer Cycle Setting Register.
-  fields:
-  - name: GTPR
-    description: Cycle Setting Register.
-    bit_offset: 0
-    bit_size: 32
 fieldset/GTPSR:
   description: General PWM Timer Stop Source Select Register.
   fields:
