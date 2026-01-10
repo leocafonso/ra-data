@@ -29,7 +29,7 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA8.*:ICU_COMMON(?:_NS)?", PeriInfo { peri_type: "icu", version: "v5" }),
 
     // System mappings
-    ("R7FA[46][EGLMT].*:MSTP", PeriInfo { peri_type: "mstp", version: "v2" }),
+    ("R7FA[46][ELMT].*:MSTP", PeriInfo { peri_type: "mstp", version: "v2" }),
     ("R7FA8.*:MSTP", PeriInfo { peri_type: "mstp", version: "v2" }),
     ("R7KA8.*:MSTP", PeriInfo { peri_type: "mstp", version: "v2" }),
     ("R7FA2.*:MSTP", PeriInfo { peri_type: "mstp", version: "v3" }),

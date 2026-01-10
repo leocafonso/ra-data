@@ -1,0 +1,5 @@
+transforms:
+  - !ModifyRegisters
+    blocks: ICU
+    registers: IELSR.*
+    fieldset: null

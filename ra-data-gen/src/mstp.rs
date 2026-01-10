@@ -33,13 +33,14 @@ fn parse_svd(path: &Path, _chip_name: &str) -> anyhow::Result<BTreeMap<String, M
     
     let mut mstp_map = BTreeMap::new();
 
-    let mstp_peri = doc.descendants()
-        .find(|n| n.has_tag_name("peripheral") && n.children().any(|c| c.has_tag_name("name") && c.text() == Some("MSTP")));
-
-    if let Some(mstp) = mstp_peri {
+    let peri_names = ["MSTP", "SYSTEM", "SYSC", "CPG"];
+    for mstp in doc.descendants().filter(|n| n.has_tag_name("peripheral") && n.children().any(|c| c.has_tag_name("name") && peri_names.contains(&c.text().unwrap_or("")))) {
+        let p_name = mstp.children().find(|n| n.has_tag_name("name")).and_then(|n| n.text()).unwrap_or("");
         for register in mstp.descendants().filter(|n| n.has_tag_name("register")) {
             let reg_name = register.children().find(|n| n.has_tag_name("name")).and_then(|n| n.text()).unwrap_or("");
-            
+            if !reg_name.starts_with("MSTPCR") {
+                continue;
+            }
             for field in register.descendants().filter(|n| n.has_tag_name("field")) {
                 let field_desc = field.children().find(|n| n.has_tag_name("description")).and_then(|n| n.text()).unwrap_or("");
                 
