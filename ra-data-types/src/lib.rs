@@ -17,6 +17,8 @@ pub struct Interrupt {
     pub name: String,
     pub value: u32,
     pub description: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub irq_number: Option<Vec<u32>>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

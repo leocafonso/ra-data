@@ -214,7 +214,11 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     writeln!(file, "        $m! {{ $($args)* {{")?;
     for irq in &chip.interrupts {
         let name = heck::AsPascalCase(&irq.name).to_string();
-        writeln!(file, "            {} = {},", name, irq.value)?;
+        let irq_nums = match &irq.irq_number {
+            Some(nums) => format!("({})", nums.iter().map(|n| n.to_string()).collect::<Vec<_>>().join(", ")),
+            None => "()".to_string(),
+        };
+        writeln!(file, "            ({}, {}, {}),", name, irq.value, irq_nums)?;
     }
     writeln!(file, "        }} }}")?;
     writeln!(file, "    }};")?;
@@ -222,7 +226,11 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     writeln!(file, "        $($m)*! {{")?;
     for irq in &chip.interrupts {
         let name = heck::AsPascalCase(&irq.name).to_string();
-        writeln!(file, "            {} = {},", name, irq.value)?;
+        let irq_nums = match &irq.irq_number {
+            Some(nums) => format!("({})", nums.iter().map(|n| n.to_string()).collect::<Vec<_>>().join(", ")),
+            None => "()".to_string(),
+        };
+        writeln!(file, "            ({}, {}, {}),", name, irq.value, irq_nums)?;
     }
     writeln!(file, "        }}")?;
     writeln!(file, "    }};")?;
