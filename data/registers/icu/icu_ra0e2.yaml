@@ -1,0 +1,565 @@
+block/ICU:
+  description: Interrupt Controller.
+  items:
+  - name: IRQCR
+    description: IRQ Control Register %s.
+    array:
+      len: 8
+      stride: 1
+    byte_offset: 0
+    bit_size: 8
+    fieldset: IRQCR
+  - name: NMICR
+    description: NMI Pin Interrupt Control Register.
+    byte_offset: 256
+    bit_size: 8
+    fieldset: NMICR
+  - name: NMIER
+    description: Non-maskable Interrupt Enable Register.
+    byte_offset: 288
+    bit_size: 16
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-maskable Interrupt Status Clear Register.
+    byte_offset: 304
+    bit_size: 16
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-maskable Interrupt Status Register.
+    byte_offset: 320
+    access: Read
+    bit_size: 16
+    fieldset: NMISR
+  - name: DTCENST0
+    description: DTC Enable Status Register 0.
+    byte_offset: 768
+    access: Read
+    fieldset: DTCENST0
+  - name: DTCENST1
+    description: DTC Enable Status Register 1.
+    byte_offset: 772
+    access: Read
+    fieldset: DTCENST1
+  - name: DTCENSET0
+    description: DTC Enable Set Register 0.
+    byte_offset: 784
+    fieldset: DTCENSET0
+  - name: DTCENSET1
+    description: DTC Enable Set Register 1.
+    byte_offset: 788
+    fieldset: DTCENSET1
+  - name: DTCENCLR0
+    description: DTC Enable Clear Register 0.
+    byte_offset: 800
+    fieldset: DTCENCLR0
+  - name: DTCENCLR1
+    description: DTC Enable Clear Register 1.
+    byte_offset: 804
+    fieldset: DTCENCLR1
+  - name: INTFLAG0
+    description: Interrupt Request Flag Monitor Register 0.
+    byte_offset: 816
+    access: Read
+    fieldset: INTFLAG0
+  - name: INTFLAG1
+    description: Interrupt Request Flag Monitor Register 1.
+    byte_offset: 820
+    access: Read
+    fieldset: INTFLAG1
+  - name: SBYEDCR0
+    description: Software Standby/Snooze End Control Register 0.
+    byte_offset: 832
+    fieldset: SBYEDCR0
+  - name: SBYEDCR1
+    description: Software Standby/Snooze End Control Register 1.
+    byte_offset: 836
+    fieldset: SBYEDCR1
+fieldset/DTCENCLR0:
+  description: DTC Enable Clear Register 0.
+  fields:
+  - name: CLR
+    description: |
+      DTC Enable Clear by Event Number i.
+      0: No effect.
+      1: DTC Disable by Event number i.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 11
+      - 12
+      - 14
+      - 15
+      - 17
+      - 18
+      - 21
+      - 22
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+fieldset/DTCENCLR1:
+  description: DTC Enable Clear Register 1.
+  fields:
+  - name: CLR
+    description: |
+      DTC Enable Clear by Event Number i.
+      0: No effect.
+      1: DTC Disable by Event number i.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 8
+      - 9
+      - 12
+      - 13
+fieldset/DTCENSET0:
+  description: DTC Enable Set Register 0.
+  fields:
+  - name: SET
+    description: |
+      DTC Enable Set by Event Number i.
+      0: No effect.
+      1: DTC Enable by Event number i.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 11
+      - 12
+      - 14
+      - 15
+      - 17
+      - 18
+      - 21
+      - 22
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+fieldset/DTCENSET1:
+  description: DTC Enable Set Register 1.
+  fields:
+  - name: SET
+    description: |
+      DTC Enable Set by Event Number i.
+      0: No effect.
+      1: DTC Enable by Event number i.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 8
+      - 9
+      - 12
+      - 13
+fieldset/DTCENST0:
+  description: DTC Enable Status Register 0.
+  fields:
+  - name: ST
+    description: |
+      DTC Enable Status by Event Number i.
+      0: DTC Disable by Event number i.
+      1: DTC Enable by Event number i.
+    bit_offset: 1
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 11
+      - 12
+      - 14
+      - 15
+      - 17
+      - 18
+      - 21
+      - 22
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+fieldset/DTCENST1:
+  description: DTC Enable Status Register 1.
+  fields:
+  - name: ST
+    description: |
+      DTC Enable Status by Event Number i.
+      0: DTC Disable by Event number i.
+      1: DTC Enable by Event number i.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 8
+      - 9
+      - 12
+      - 13
+fieldset/INTFLAG0:
+  description: Interrupt Request Flag Monitor Register 0.
+  fields:
+  - name: IF
+    description: |
+      Interrupt Request Flag Monitor.
+      0: Interrupt request of event number i is not being accepted by the ICU.
+      1: Interrupt request of event number i is being accepted by the ICU.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 32
+      stride: 1
+fieldset/INTFLAG1:
+  description: Interrupt Request Flag Monitor Register 1.
+  fields:
+  - name: IF
+    description: |
+      Interrupt Request Flag Monitor.
+      0: Interrupt source of event number i is not accepted by the ICU.
+      1: Interrupt source of event number i is accepted by the ICU.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 14
+      stride: 1
+fieldset/IRQCR:
+  description: IRQ Control Register %s.
+  bit_size: 8
+  fields:
+  - name: IRQMD
+    description: IRQi Detection Sense Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: IRQMD
+fieldset/NMICLR:
+  description: Non-maskable Interrupt Status Clear Register.
+  bit_size: 16
+  fields:
+  - name: IWDTCLR
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.IWDTST flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: LVD1CLR
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.LVD1ST flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: NMICLR
+    description: |
+      NMI Pin Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.NMIST flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPECLR
+    description: |
+      SRAM Parity Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.RPEST flag.
+    bit_offset: 8
+    bit_size: 1
+fieldset/NMICR:
+  description: NMI Pin Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: NMIMD
+    description: |
+      NMI Detection Set.
+      0: Falling edge.
+      1: Rising edge.
+    bit_offset: 0
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-maskable Interrupt Enable Register.
+  bit_size: 16
+  fields:
+  - name: IWDTEN
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: LVD1EN
+    description: |
+      Voltage Monitor 1 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: NMIEN
+    description: |
+      NMI Pin Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEEN
+    description: |
+      SRAM Parity Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 8
+    bit_size: 1
+fieldset/NMISR:
+  description: Non-maskable Interrupt Status Register.
+  bit_size: 16
+  fields:
+  - name: IWDTST
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 0
+    bit_size: 1
+  - name: LVD1ST
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 2
+    bit_size: 1
+  - name: NMIST
+    description: |
+      NMI Pin Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEST
+    description: |
+      SRAM Parity Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 8
+    bit_size: 1
+fieldset/SBYEDCR0:
+  description: Software Standby/Snooze End Control Register 0.
+  fields:
+  - name: IWDTED
+    description: |
+      IWDT Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by IWDT interrupt disabled.
+      1: Software Standby/Snooze Mode returns by IWDT interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: LVD1ED
+    description: |
+      LVD1 Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by LVD1 interrupt disabled.
+      1: Software Standby/Snooze Mode returns by LVD1 interrupt enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: IRQ0ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ0 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ0 interrupt enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: IRQ1ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ1 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ1 interrupt enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: IRQ2ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ2 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ2 interrupt enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: IRQ3ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ3 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ3 interrupt enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: IRQ4ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ4 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ4 interrupt enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: IRQ5ED
+    description: |
+      0: Software Standby/Snooze mode returns by IRQ5 interrupt disabled.
+      1: Software Standby/Snooze mode returns by IRQ5 interrupt enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: DTCED
+    description: |
+      DTC Transfer Complete Interrupt Snooze Mode Returns Enable.
+      0: Snooze Mode returns by DTC transfer complete interrupt disabled.
+      1: Snooze Mode returns by DTC transfer complete interrupt enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: SPI00RXED
+    description: |
+      SPI00 Transfer End or Buffer Empty Interrupt Snooze Mode Returns Enable.
+      0: Snooze Mode returns by SPI00 transfer end or buffer empty interrupt disabled.
+      1: Snooze Mode returns by SPI00 transfer end or buffer empty interrupt enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: UART0ERRED
+    description: |
+      UART0 Reception Communication Error Occurrence Interrupt Snooze Mode Returns Enable.
+      0: Snooze Mode returns by UART0 reception communication error occurrence interrupt disabled.
+      1: Snooze Mode returns by UART0 reception communication error occurrence interrupt enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: IICA0ED
+    description: |
+      IICA0 Address Match Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by IICA0 address match interrupt disabled.
+      1: Software Standby/Snooze Mode returns by IICA0 address match interrupt enabled.
+    bit_offset: 26
+    bit_size: 1
+  - name: UART0RXED
+    description: |
+      UART0 Reception Transfer End Interrupt Snooze Mode Returns Enable.
+      0: Snooze Mode returns by UART0 reception transfer end interrupt disabled.
+      1: Snooze Mode returns by UART0 reception transfer end interrupt enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: ADC12ED
+    description: |
+      End of A/D Conversion Interrupt Snooze Mode Returns Enable.
+      0: Snooze Mode returns by End of A/D conversion interrupt disabled.
+      1: Snooze Mode returns by End of A/D conversion interrupt enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/SBYEDCR1:
+  description: Software Standby/Snooze End Control Register 1.
+  fields:
+  - name: RTCED
+    description: |
+      RTC Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by RTC interrupt disabled.
+      1: Software Standby/Snooze Mode returns by RTC interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: ITLED
+    description: |
+      Interval Signal of 32-bit Interval Timer Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by Interval signal of 32-bit interval timer interrupt disabled.
+      1: Software Standby/Snooze Mode returns by Interval signal of 32-bit interval timer interrupt enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: URE0ED
+    description: |
+      UARTA0 Reception Communication Error Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA0 reception communication error interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA0 reception communication error interrupt enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: UT0ED
+    description: |
+      UARTA0 Transmission Transfer End or Buffer Empty Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA0 transmission transfer end or buffer empty interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA0 transmission transfer end or buffer empty interrupt enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: UR0ED
+    description: |
+      UARTA0 Reception Transfer End Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA0 reception transfer end interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA0 reception transfer end interrupt enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: IICA1ED
+    description: |
+      IICA1 Address Match Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by IICA1 address match interrupt disabled.
+      1: Software Standby/Snooze Mode returns by IICA1 address match interrupt enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: URE1ED
+    description: |
+      UARTA1 Reception Communication Error Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA1 reception communication error interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA1 reception communication error interrupt enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: UT1ED
+    description: |
+      UARTA1 Transmission Transfer End or Buffer Empty Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA1 transmission transfer end or buffer empty interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA1 transmission transfer end or buffer empty interrupt enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: UR1ED
+    description: |
+      UARTA1 Reception Transfer End Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze Mode returns by UARTA1 reception transfer end interrupt disabled.
+      1: Software Standby/Snooze Mode returns by UARTA1 reception transfer end interrupt enabled.
+    bit_offset: 13
+    bit_size: 1
+enum/IRQMD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: Rising and falling edges.
+    value: 2
+  - name: V_11
+    description: Setting prohibited.
+    value: 3

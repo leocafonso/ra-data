@@ -1,0 +1,418 @@
+block/ICU:
+  description: ICU for CPU.
+  items:
+  - name: IRQCR
+    description: IRQ Control Register %s.
+    array:
+      len: 8
+      stride: 1
+    byte_offset: 0
+    bit_size: 8
+    fieldset: IRQCR
+  - name: NMICR
+    description: NMI Pin Interrupt Control Register.
+    byte_offset: 256
+    bit_size: 8
+    fieldset: NMICR
+  - name: NMIER
+    description: Non-Maskable Interrupt Enable Register.
+    byte_offset: 288
+    bit_size: 16
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-Maskable Interrupt Status Clear Register.
+    byte_offset: 304
+    bit_size: 16
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-Maskable Interrupt Status Register.
+    byte_offset: 320
+    access: Read
+    bit_size: 16
+    fieldset: NMISR
+  - name: WUPEN
+    description: Wake Up Interrupt Enable Register.
+    byte_offset: 416
+    fieldset: WUPEN
+  - name: IELEN
+    description: ICU Event Enable Register.
+    byte_offset: 448
+    bit_size: 8
+    fieldset: IELEN
+  - name: SELSR0
+    description: SYS Event Link Setting Register.
+    byte_offset: 512
+    bit_size: 16
+  - name: IELSR
+    description: ICU Event Link Setting Register %s.
+    array:
+      len: 32
+      stride: 4
+    byte_offset: 768
+fieldset/IELEN:
+  description: ICU Event Enable Register.
+  bit_size: 8
+  fields:
+  - name: IELEN
+    description: |
+      Parts Asynchronous Interrupts Enable (when LPOPTEN bit = 1).
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+fieldset/IRQCR:
+  description: IRQ Control Register %s.
+  bit_size: 8
+  fields:
+  - name: IRQMD
+    description: IRQi Detection Sense Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: IRQMD
+  - name: FCLKSEL
+    description: IRQi Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: FCLKSEL
+  - name: FLTEN
+    description: |
+      IRQi Digital Filter Enable.
+      0: Digital filter is disabled.
+      1: Digital filter is enabled.
+    bit_offset: 7
+    bit_size: 1
+fieldset/NMICLR:
+  description: Non-Maskable Interrupt Status Clear Register.
+  bit_size: 16
+  fields:
+  - name: IWDTCLR
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.IWDTST flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTCLR
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.WDTST flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1CLR
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.LVD1ST flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2CLR
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.LVD2ST flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: NMICLR
+    description: |
+      NMI Pin Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.NMIST flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPECLR
+    description: |
+      SRAM Parity Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.RPEST flag.
+    bit_offset: 8
+    bit_size: 1
+  - name: BUSSCLR
+    description: |
+      Bus Slave MPU Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.BUSSST flag.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMCLR
+    description: |
+      Bus Master MPU Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.BUSMST flag.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPECLR
+    description: |
+      CPU Stack Pointer Monitor Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.SPEST flag.
+    bit_offset: 12
+    bit_size: 1
+fieldset/NMICR:
+  description: NMI Pin Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: NMIMD
+    description: |
+      NMI Detection Set.
+      0: Falling edge.
+      1: Rising edge.
+    bit_offset: 0
+    bit_size: 1
+  - name: NFCLKSEL
+    description: NMI Digital Filter Sampling Clock Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: NFCLKSEL
+  - name: NFLTEN
+    description: |
+      NMI Digital Filter Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-Maskable Interrupt Enable Register.
+  bit_size: 16
+  fields:
+  - name: IWDTEN
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTEN
+    description: |
+      WDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1EN
+    description: |
+      Voltage monitor 1 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2EN
+    description: |
+      Voltage monitor 2 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: NMIEN
+    description: |
+      NMI Pin Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEEN
+    description: |
+      SRAM Parity Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: BUSSEN
+    description: |
+      Bus Slave MPU Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMEN
+    description: |
+      Bus Master MPU Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPEEN
+    description: |
+      CPU Stack Pointer Monitor Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 12
+    bit_size: 1
+fieldset/NMISR:
+  description: Non-Maskable Interrupt Status Register.
+  bit_size: 16
+  fields:
+  - name: IWDTST
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTST
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1ST
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2ST
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 3
+    bit_size: 1
+  - name: NMIST
+    description: |
+      NMI Pin Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 7
+    bit_size: 1
+  - name: RPEST
+    description: |
+      SRAM Parity Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 8
+    bit_size: 1
+  - name: BUSSST
+    description: |
+      Bus Slave MPU Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMST
+    description: |
+      Bus Master MPU Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPEST
+    description: |
+      CPU Stack Pointer Monitor Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 12
+    bit_size: 1
+fieldset/WUPEN:
+  description: Wake Up Interrupt Enable Register.
+  fields:
+  - name: IRQWUPEN
+    description: IRQ Interrupt Software Standby/Snooze Mode Returns Enable.
+    bit_offset: 0
+    bit_size: 8
+    enum: IRQWUPEN
+  - name: IWDTWUPEN
+    description: |
+      IWDT Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by IWDT interrupt disabled.
+      1: Software Standby/Snooze mode returns by IWDT interrupt enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: KEYWUPEN
+    description: |
+      Key Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by KEY interrupt disabled.
+      1: Software Standby/Snooze mode returns by KEY interrupt enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: LVD1WUPEN
+    description: |
+      LVD1 Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by LVD1 interrupt disabled.
+      1: Software Standby/Snooze mode returns by LVD1 interrupt enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: LVD2WUPEN
+    description: |
+      LVD2 Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by LVD2 interrupt disabled.
+      1: Software Standby/Snooze mode returns by LVD2 interrupt enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: AGT1UDWUPEN
+    description: |
+      AGT1 Underflow Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by AGT1 underflow interrupt disabled.
+      1: Software Standby/Snooze mode returns by AGT1 underflow.
+    bit_offset: 28
+    bit_size: 1
+  - name: AGT1CAWUPEN
+    description: |
+      AGT1 Compare Match A Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by AGT1 compare match A interrupt disabled.
+      1: Software Standby/Snooze mode returns by AGT1 compare match A interrupt enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: AGT1CBWUPEN
+    description: |
+      AGT1 Compare Match B Interrupt Software Standby/Snooze Mode Returns Enable.
+      0: Software Standby/Snooze mode returns by AGT1 compare match B interrupt disabled.
+      1: Software Standby/Snooze mode returns by AGT1 compare match B interrupt enabled.
+    bit_offset: 30
+    bit_size: 1
+enum/FCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3
+enum/IRQMD:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Falling edge.
+    value: 0
+  - name: V_01
+    description: Rising edge.
+    value: 1
+  - name: V_10
+    description: Rising and falling edges.
+    value: 2
+  - name: V_11
+    description: Low level.
+    value: 3
+enum/IRQWUPEN:
+  bit_size: 8
+  variants:
+  - name: V_0
+    description: Software Standby/Snooze mode returns by IRQn interrupt disabled.
+    value: 0
+  - name: V_1
+    description: Software Standby/Snooze mode returns by IRQn interrupt enabled.
+    value: 1
+enum/NFCLKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: PCLKB.
+    value: 0
+  - name: V_01
+    description: PCLKB/8.
+    value: 1
+  - name: V_10
+    description: PCLKB/32.
+    value: 2
+  - name: V_11
+    description: PCLKB/64.
+    value: 3

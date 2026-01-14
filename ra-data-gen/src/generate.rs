@@ -21,11 +21,23 @@ pub fn generate(
 
     let registers_dir = Path::new("data/registers/");
     let mut available_registers = std::collections::HashSet::new();
-    if registers_dir.exists() {
-        for entry in fs::read_dir(registers_dir)? {
+    
+    // Helper function to process YAML files recursively
+    fn process_register_dir(
+        dir: &Path, 
+        regs_out_dir: &Path, 
+        available_registers: &mut std::collections::HashSet<String>
+    ) -> anyhow::Result<()> {
+        if !dir.exists() {
+            return Ok(());
+        }
+        for entry in fs::read_dir(dir)? {
             let entry = entry?;
             let path = entry.path();
-            if path.extension().map_or(false, |ext| ext == "yaml") {
+            if path.is_dir() {
+                // Recursively process subdirectories
+                process_register_dir(&path, regs_out_dir, available_registers)?;
+            } else if path.extension().map_or(false, |ext| ext == "yaml") {
                 if let Some(stem) = path.file_stem().and_then(|s| s.to_str()) {
                     available_registers.insert(stem.to_string());
                     
@@ -37,7 +49,10 @@ pub fn generate(
                 }
             }
         }
+        Ok(())
     }
+    
+    process_register_dir(registers_dir, regs_out_dir, &mut available_registers)?;
 
     let generate_chip = |(name, parsed): (&String, &crate::rzone::ParsedRzone)| -> anyhow::Result<()> {
         let mut packages = Vec::new();

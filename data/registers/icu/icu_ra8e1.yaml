@@ -1,0 +1,371 @@
+block/ICU:
+  description: Interrupt Controller.
+  items:
+  - name: NMIER
+    description: Non-Maskable Interrupt Enable Register.
+    byte_offset: 256
+    bit_size: 16
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-Maskable Interrupt Status Clear Register.
+    byte_offset: 272
+    bit_size: 16
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-Maskable Interrupt Status Register.
+    byte_offset: 288
+    access: Read
+    bit_size: 16
+    fieldset: NMISR
+  - name: WUPEN0
+    description: Wake Up Interrupt Enable Register 0.
+    byte_offset: 416
+    fieldset: WUPEN0
+  - name: WUPEN1
+    description: Wake Up interrupt enable register 1.
+    byte_offset: 420
+    fieldset: WUPEN1
+  - name: IELSR
+    description: ICU Event Link Setting Register %s.
+    array:
+      len: 96
+      stride: 4
+    byte_offset: 768
+fieldset/NMICLR:
+  description: Non-Maskable Interrupt Status Clear Register.
+  bit_size: 16
+  fields:
+  - name: IWDTCLR
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.IWDTST flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTCLR
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.WDTST flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1CLR
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD1ST flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2CLR
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD2ST flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: OSTCLR
+    description: |
+      Oscillation Stop Detection Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.OSTST flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMICLR
+    description: |
+      NMI Pin Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.NMIST flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.BUSST flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.CMST flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: LUCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.LUST flag.
+    bit_offset: 15
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-Maskable Interrupt Enable Register.
+  bit_size: 16
+  fields:
+  - name: IWDTEN
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTEN
+    description: |
+      WDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1EN
+    description: |
+      Voltage monitor 1 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2EN
+    description: |
+      Voltage monitor 2 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: OSTEN
+    description: |
+      Main Clock Oscillation Stop Detection Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIEN
+    description: |
+      NMI Pin Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: LUEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 15
+    bit_size: 1
+fieldset/NMISR:
+  description: Non-Maskable Interrupt Status Register.
+  bit_size: 16
+  fields:
+  - name: IWDTST
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTST
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1ST
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2ST
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 3
+    bit_size: 1
+  - name: OSTST
+    description: |
+      Main Clock Oscillation Stop Detection Interrupt Status Flag.
+      0: Interrupt not requested for main clock oscillation stop.
+      1: Interrupt requested for main clock oscillation stop.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIST
+    description: |
+      NMI Pin Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSST
+    description: |
+      Bus Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 13
+    bit_size: 1
+  - name: LUST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 15
+    bit_size: 1
+fieldset/WUPEN0:
+  description: Wake Up Interrupt Enable Register 0.
+  fields:
+  - name: IRQWUPEN
+    bit_offset: 0
+    bit_size: 16
+    enum: IRQWUPEN
+  - name: IWDTWUPEN
+    description: |
+      IWDT Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by IWDT interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by IWDT interrupt is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: PVD1WUPEN
+    description: |
+      PVD1 Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by PVD1 interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by PVD1 interrupt is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: PVD2WUPEN
+    description: |
+      PVD2 Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by PVD2 interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by PVD2 interrupt is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: VBATTWUPEN
+    description: |
+      VBATT Monitor Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by VBATT monitor interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by VBATT monitor interrupt is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: RTCALMWUPEN
+    description: |
+      RTC Alarm Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by RTC alarm interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by RTC alarm interrupt is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: RTCPRDWUPEN
+    description: |
+      RTC Period Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by RTC period interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by RTC period interrupt is enabled.
+    bit_offset: 25
+    bit_size: 1
+  - name: USBFS0WUPEN
+    description: |
+      USBFS Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by USBFS interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by USBFS interrupt is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: AGT1UDWUPEN
+    description: |
+      AGT1 Underflow Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by AGT1 underflow interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by AGT1 underflow interrupt is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: AGT1CAWUPEN
+    description: |
+      AGT1 Compare Match A Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by AGT1 compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by AGT1 compare match A interrupt is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: AGT1CBWUPEN
+    description: |
+      AGT1 Compare Match B Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by AGT1 compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by AGT1 compare match B interrupt is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: IIC0WUPEN
+    description: |
+      IIC0 Address Match Interrupt Deep Sleep/Software Standby Mode Returns Enable.
+      0: Deep Sleep/Software Standby Mode returns by IIC0 address match A interrupt is disabled.
+      1: Deep Sleep/Software Standby Mode returns by IIC0 address match A interrupt is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/WUPEN1:
+  description: Wake Up interrupt enable register 1.
+  fields:
+  - name: COMPHS0WUPEN
+    description: |
+      Comparator-HS0 Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by Comparator-HS0 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Underflow interrupt is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: ULP0UWUPEN
+    description: |
+      ULPT0 Underflow Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Underflow interrupt is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: ULP0AWUPEN
+    description: |
+      ULPT0 Compare Match A Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 Compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Compare match A interrupt is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: ULP0BWUPEN
+    description: |
+      ULPT0 Compare Match B Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 Compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Compare match B interrupt is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: ULP1UWUPEN
+    description: |
+      ULPT1 Underflow Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Underflow interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Underflow interrupt is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: ULP1AWUPEN
+    description: |
+      ULPT1 Compare Match A Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Compare match A interrupt is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: ULP1BWUPEN
+    description: |
+      ULPT1 Compare Match B Interrupt Deep Sleep/Software Standby Mode returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Compare match B interrupt is enabled.
+    bit_offset: 14
+    bit_size: 1
+enum/IRQWUPEN:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Deep Sleep/Software Standby Mode returns by IRQn interrupt is disabled.
+    value: 0
+  - name: V_1
+    description: Deep Sleep/Software Standby Mode returns by IRQn interrupt is enabled.
+    value: 1

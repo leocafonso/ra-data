@@ -1,0 +1,1237 @@
+block/ICU:
+  description: Interrupt Controller.
+  items:
+  - name: NMIER
+    description: Non-Maskable Interrupt Enable Register.
+    byte_offset: 256
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-Maskable Interrupt Status Clear Register.
+    byte_offset: 272
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-Maskable Interrupt Status Register.
+    byte_offset: 288
+    access: Read
+    fieldset: NMISR
+  - name: WUPEN0
+    description: Wake Up Interrupt Enable Register 0.
+    byte_offset: 416
+    fieldset: WUPEN0
+  - name: WUPEN1
+    description: Wake Up Interrupt Enable Register 1.
+    byte_offset: 420
+    fieldset: WUPEN1
+  - name: DSLPWUPIRQEN0
+    description: Deep Sleep Wake Up IRQ Enable Register 0.
+    byte_offset: 532
+    fieldset: DSLPWUPIRQEN0
+  - name: DSLPWUPIRQEN1
+    description: Deep Sleep Wake Up IRQ Enable Register 1.
+    byte_offset: 536
+    fieldset: DSLPWUPIRQEN1
+  - name: DSLPWUPIRQEN2
+    description: Deep Sleep Wake Up IRQ Enable Register 2.
+    byte_offset: 540
+    fieldset: DSLPWUPIRQEN2
+  - name: DELSRm
+    description: DMAC Event Link Setting Register m (m = 0 to 7).
+    byte_offset: 640
+    fieldset: DELSRm
+  - name: IELSR
+    description: Interrupt Controller Unit Event Link Setting Register %s.
+    array:
+      len: 96
+      stride: 4
+    byte_offset: 768
+fieldset/DELSRm:
+  description: DMAC Event Link Setting Register m (m = 0 to 7).
+  fields:
+  - name: DELS
+    description: DMAC Event Link Select.
+    bit_offset: 0
+    bit_size: 10
+    enum: DELS
+  - name: IR
+    description: |
+      DMAC Activation Request Status flag.
+      0: No DMAC activation request occurred.
+      1: DMAC activation request occurred.
+    bit_offset: 16
+    bit_size: 1
+fieldset/DSLPWUPIRQEN0:
+  description: Deep Sleep Wake Up IRQ Enable Register 0.
+  fields:
+  - name: IRQ00
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IRQ01
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: IRQ02
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: IRQ03
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: IRQ04
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: IRQ05
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: IRQ06
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: IRQ07
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: IRQ08
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: IRQ09
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: IRQ10
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: IRQ11
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: IRQ12
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: IRQ13
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: IRQ14
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: IRQ15
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 15
+    bit_size: 1
+  - name: IRQ16
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: IRQ17
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: IRQ18
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: IRQ19
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: IRQ20
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: IRQ21
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 21
+    bit_size: 1
+  - name: IRQ22
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 22
+    bit_size: 1
+  - name: IRQ23
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 23
+    bit_size: 1
+  - name: IRQ24
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: IRQ25
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 25
+    bit_size: 1
+  - name: IRQ26
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 26
+    bit_size: 1
+  - name: IRQ27
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: IRQ28
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: IRQ29
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: IRQ30
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: IRQ31
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/DSLPWUPIRQEN1:
+  description: Deep Sleep Wake Up IRQ Enable Register 1.
+  fields:
+  - name: IRQ32
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IRQ33
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: IRQ34
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: IRQ35
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: IRQ36
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: IRQ37
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: IRQ38
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: IRQ39
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: IRQ40
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: IRQ41
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: IRQ42
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: IRQ43
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: IRQ44
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: IRQ45
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: IRQ46
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: IRQ47
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 15
+    bit_size: 1
+  - name: IRQ48
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: IRQ49
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: IRQ50
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: IRQ51
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: IRQ52
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: IRQ53
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 21
+    bit_size: 1
+  - name: IRQ54
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 22
+    bit_size: 1
+  - name: IRQ55
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 23
+    bit_size: 1
+  - name: IRQ56
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: IRQ57
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 25
+    bit_size: 1
+  - name: IRQ58
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 26
+    bit_size: 1
+  - name: IRQ59
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: IRQ60
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: IRQ61
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: IRQ62
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: IRQ63
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/DSLPWUPIRQEN2:
+  description: Deep Sleep Wake Up IRQ Enable Register 2.
+  fields:
+  - name: IRQ64
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IRQ65
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: IRQ66
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: IRQ67
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: IRQ68
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: IRQ69
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: IRQ70
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: IRQ71
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: IRQ72
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: IRQ73
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: IRQ74
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: IRQ75
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: IRQ76
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: IRQ77
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: IRQ78
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: IRQ79
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 15
+    bit_size: 1
+  - name: IRQ80
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: IRQ81
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: IRQ82
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: IRQ83
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: IRQ84
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: IRQ85
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 21
+    bit_size: 1
+  - name: IRQ86
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 22
+    bit_size: 1
+  - name: IRQ87
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 23
+    bit_size: 1
+  - name: IRQ88
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: IRQ89
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 25
+    bit_size: 1
+  - name: IRQ90
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 26
+    bit_size: 1
+  - name: IRQ91
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: IRQ92
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: IRQ93
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: IRQ94
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: IRQ95
+    description: |
+      IRQ Deep Sleep Returns Enable bit.
+      0: Deep Sleep returns by IRQ event is disabled.
+      1: Deep Sleep returns by IRQ event is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/NMICLR:
+  description: Non-Maskable Interrupt Status Clear Register.
+  fields:
+  - name: IWDTCLR
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.IWDTST flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTCLR
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.WDTST flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1CLR
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD1ST flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2CLR
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD2ST flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: SOSTCLR
+    description: |
+      Oscillation Stop Detection Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.OSTST flag.
+    bit_offset: 5
+    bit_size: 1
+  - name: OSTCLR
+    description: |
+      Oscillation Stop Detection Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.OSTST flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMICLR
+    description: |
+      NMI Pin Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.NMIST flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.BUSST flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.CMST flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: LMCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.LMST flag.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUCLR
+    description: |
+      0: No effect.
+      1: Clear the NMISR.LUST flag.
+    bit_offset: 15
+    bit_size: 1
+  - name: FPUEXCCLR
+    description: |
+      FPU Exception Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.FPUEXCST flag.
+    bit_offset: 16
+    bit_size: 1
+  - name: MRCRDCLR
+    description: |
+      MRAM MRC read Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.MRCRDST flag.
+    bit_offset: 17
+    bit_size: 1
+  - name: MRERDCLR
+    description: |
+      MRAM MRE read Error Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.MRERDST flag.
+    bit_offset: 18
+    bit_size: 1
+  - name: IPCCLR
+    description: |
+      IPC NMI CPU mutual Interrupt Status Flag Clear.
+      0: No effect.
+      1: Clear the NMISR.IPCST flag.
+    bit_offset: 20
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-Maskable Interrupt Enable Register.
+  fields:
+  - name: IWDTEN
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTEN
+    description: |
+      WDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1EN
+    description: |
+      Voltage monitor 1 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2EN
+    description: |
+      Voltage monitor 2 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: SOSTEN
+    description: |
+      Sub Oscillation Stop Detection Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: OSTEN
+    description: |
+      Oscillation Stop Detection Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIEN
+    description: |
+      NMI Pin Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: LMEN
+    description: |
+      Local Memory Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUEN
+    description: |
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 15
+    bit_size: 1
+  - name: FPUEXCEN
+    description: |
+      FPU Exception Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: MRCRDEN
+    description: |
+      MRAM MRC read Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 17
+    bit_size: 1
+  - name: MRERDEN
+    description: |
+      MRAM MRE read Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: IPCEN
+    description: |
+      IPC NMI CPU mutual Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 20
+    bit_size: 1
+fieldset/NMISR:
+  description: Non-Maskable Interrupt Status Register.
+  fields:
+  - name: IWDTST
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTST
+    description: |
+      WDT Underflow/Refresh Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1ST
+    description: |
+      Voltage Monitor 1 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2ST
+    description: |
+      Voltage Monitor 2 Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 3
+    bit_size: 1
+  - name: SOSTST
+    description: |
+      Sub Oscillation Stop Detection Interrupt Status Flag.
+      0: Interrupt not requested for sub oscillation stop.
+      1: Interrupt requested for sub oscillation stop.
+    bit_offset: 5
+    bit_size: 1
+  - name: OSTST
+    description: |
+      Main Clock Oscillation Stop Detection Interrupt Status Flag.
+      0: Interrupt not requested for main clock oscillation stop.
+      1: Interrupt requested for main clock oscillation stop.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIST
+    description: |
+      NMI Pin Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 7
+    bit_size: 1
+  - name: BUSST
+    description: |
+      Bus Error Interrupt Status Flag.
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 13
+    bit_size: 1
+  - name: LMST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 15
+    bit_size: 1
+  - name: FPUEXCST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 16
+    bit_size: 1
+  - name: MRCRDST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 17
+    bit_size: 1
+  - name: MRERDST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 18
+    bit_size: 1
+  - name: IPCST
+    description: |
+      0: Interrupt not requested.
+      1: Interrupt requested.
+    bit_offset: 20
+    bit_size: 1
+fieldset/WUPEN0:
+  description: Wake Up Interrupt Enable Register 0.
+  fields:
+  - name: IRQWUPEN
+    description: |
+      0: Software Standby Mode returns by IRQn interrupt is disabled.
+      1: Software Standby Mode returns by IRQn interrupt is enabled.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+  - name: IWDTWUPEN
+    description: |
+      IWDT Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by IWDT interrupt is disabled.
+      1: Software Standby Mode returns by IWDT interrupt is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: PVD1WUPEN
+    description: |
+      PVD1 Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by PVD1 interrupt is disabled.
+      1: Software Standby Mode returns by PVD1 interrupt is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: PVD2WUPEN
+    description: |
+      PVD2 Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by PVD2 interrupt is disabled.
+      1: Software Standby Mode returns by PVD2 interrupt is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: VBATTWUPEN
+    description: |
+      VBATT Monitor Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by VBATT monitor interrupt is disabled.
+      1: Software Standby Mode returns by VBATT monitor interrupt is enabled.
+    bit_offset: 20
+    bit_size: 1
+  - name: RTCALMWUPEN
+    description: |
+      RTC Alarm Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by RTC alarm interrupt is disabled.
+      1: Software Standby Mode returns by RTC alarm interrupt is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: RTCPRDWUPEN
+    description: |
+      RTC Period Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by RTC period interrupt is disabled.
+      1: Software Standby Mode returns by RTC period interrupt is enabled.
+    bit_offset: 25
+    bit_size: 1
+  - name: USBHSWUPEN
+    description: |
+      USBHS Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by USBHS interrupt is disabled.
+      1: Software Standby Mode returns by USBHS interrupt is enabled.
+    bit_offset: 26
+    bit_size: 1
+  - name: USBFS0WUPEN
+    description: |
+      USBFS Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by USBFS interrupt is disabled.
+      1: Software Standby Mode returns by USBFS interrupt is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: AGT1UDWUPEN
+    description: |
+      AGT1 Underflow Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by AGT1 underflow interrupt is disabled.
+      1: Software Standby Mode returns by AGT1 underflow interrupt is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: AGT1CAWUPEN
+    description: |
+      AGT1 Compare Match A Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by AGT1 compare match A interrupt is disabled.
+      1: Software Standby Mode returns by AGT1 compare match A interrupt is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: AGT1CBWUPEN
+    description: |
+      AGT1 Compare Match B Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by AGT1 compare match B interrupt is disabled.
+      1: Software Standby Mode returns by AGT1 compare match B interrupt is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: RIIC0WUPEN
+    description: |
+      RIIC0 Address Match Interrupt Software Standby Mode Returns Enable bit.
+      0: Software Standby Mode returns by IIC0 address match A interrupt is disabled.
+      1: Software Standby Mode returns by IIC0 address match A interrupt is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/WUPEN1:
+  description: Wake Up Interrupt Enable Register 1.
+  fields:
+  - name: COMPHS0WUPEN
+    description: |
+      Comparator-HS0 Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by Comparator-HS0 interrupt is disabled.
+      1: Software Standby returns by Comparator-HS0 interrupt is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: SOSCWUPEN
+    description: |
+      Sub Oscillation Stop Detection Interrupt Software Standby Returns Enable bit.
+      0: Software Standby returns by Sub Oscillation Stop Detection Interrupt is disabled.
+      1: Software Standby returns by Sub Oscillation Stop Detection Interrupt is enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: ULP0UWUPEN
+    description: |
+      ULPT0 Underflow Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT0 interrupt is disabled.
+      1: Software Standby returns by ULPT0 Underflow interrupt is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: ULP0AWUPEN
+    description: |
+      ULPT0 Compare Match A Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT0 Compare match A interrupt is disabled.
+      1: Software Standby returns by ULPT0 Compare match A interrupt is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: ULP0BWUPEN
+    description: |
+      ULPT0 Compare Match B Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT0 Compare match B interrupt is disabled.
+      1: Software Standby returns by ULPT0 Compare match B interrupt is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: I3CWUPEN
+    description: |
+      I3C Wakeup Condition Detection Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by I3C wake up interrupt is disabled.
+      1: Software Standby returns by I3C wake up interrupt is enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: ULP1UWUPEN
+    description: |
+      ULPT1 Underflow Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT1 Underflow interrupt is disabled.
+      1: Software Standby returns by ULPT1 Underflow interrupt is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: ULP1AWUPEN
+    description: |
+      ULPT1 Compare Match A Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT1 Compare match A interrupt is disabled.
+      1: Software Standby returns by ULPT1 Compare match A interrupt is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: ULP1BWUPEN
+    description: |
+      ULPT1 Compare Match B Interrupt Software Standby Mode returns Enable bit.
+      0: Software Standby returns by ULPT1 Compare match B interrupt is disabled.
+      1: Software Standby returns by ULPT1 Compare match B interrupt is enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: PDMWUPEN
+    description: |
+      PDMIF Sound Detection Interrupt Software Standby Returns Enable bit.
+      0: Software Standby returns by PDMIF Sound Detection interrupt is disabled.
+      1: Software Standby returns by PDMIF Sound Detection interrupt is enabled.
+    bit_offset: 15
+    bit_size: 1
+  - name: IRQWUPEN
+    description: |
+      Interrupt Software Standby Returns Enable bits IRQ31 to IRQ16.
+      0: Software Standby returns by IRQn interrupt is disabled.
+      1: Software Standby returns by IRQn interrupt is enabled.
+    bit_offset: 16
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+enum/DELS:
+  bit_size: 10
+  variants:
+  - name: V_0x00
+    description: Disable interrupts to the associated DMAC module.
+    value: 0

@@ -22,11 +22,48 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     (".*:GPT\\d+", PeriInfo { peri_type: "timer", version: "v1" }),
 
     // ICU mappings (Interrupt Controller Unit)
-    ("R7FA0.*:ICU", PeriInfo { peri_type: "icu", version: "v1" }),
-    ("R7FA2.*:ICU", PeriInfo { peri_type: "icu", version: "v2" }),
-    ("R7FA[46].*:ICU", PeriInfo { peri_type: "icu", version: "v3" }),
-    ("R7FA8.*:ICU(?:_NS)?", PeriInfo { peri_type: "icu", version: "v5" }), // RA8 ICU in rzone is actually ICU_COMMON
-    ("R7FA8.*:ICU_COMMON(?:_NS)?", PeriInfo { peri_type: "icu", version: "v5" }),
+    // RA0 family
+    ("R7FA0E1.*:ICU", PeriInfo { peri_type: "icu", version: "ra0e1" }),
+    ("R7FA0E2.*:ICU", PeriInfo { peri_type: "icu", version: "ra0e2" }),
+    ("R7FA0L1.*:ICU", PeriInfo { peri_type: "icu", version: "ra0l1" }),
+    // RA2 family
+    ("R7FA2A1.*:ICU", PeriInfo { peri_type: "icu", version: "ra2a1" }),
+    ("R7FA2A2.*:ICU", PeriInfo { peri_type: "icu", version: "ra2a2" }),
+    ("R7FA2E1.*:ICU", PeriInfo { peri_type: "icu", version: "ra2e1" }),
+    ("R7FA2E2.*:ICU", PeriInfo { peri_type: "icu", version: "ra2e2" }),
+    ("R7FA2E3.*:ICU", PeriInfo { peri_type: "icu", version: "ra2e3" }),
+    ("R7FA2L1.*:ICU", PeriInfo { peri_type: "icu", version: "ra2l1" }),
+    ("R7FA2L2.*:ICU", PeriInfo { peri_type: "icu", version: "ra2l2" }),
+    ("R7FA2T1.*:ICU", PeriInfo { peri_type: "icu", version: "ra2t1" }),
+    // RA4 family
+    ("R7FA4C1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4c1" }),
+    ("R7FA4E1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4e1" }),
+    ("R7FA4E2.*:ICU", PeriInfo { peri_type: "icu", version: "ra4e2" }),
+    ("R7FA4L1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4l1" }),
+    ("R7FA4M1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4m1" }),
+    ("R7FA4M2.*:ICU", PeriInfo { peri_type: "icu", version: "ra4m2" }),
+    ("R7FA4M3.*:ICU", PeriInfo { peri_type: "icu", version: "ra4m3" }),
+    ("R7FA4T1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4t1" }),
+    ("R7FA4W1.*:ICU", PeriInfo { peri_type: "icu", version: "ra4w1" }),
+    // RA6 family (some shared with RA4)
+    ("R7FA6E1.*:ICU", PeriInfo { peri_type: "icu", version: "ra6e1" }),
+    ("R7FA6E2.*:ICU", PeriInfo { peri_type: "icu", version: "ra4e2" }), // same as RA4E2
+    ("R7FA6M1.*:ICU", PeriInfo { peri_type: "icu", version: "ra6m1" }),
+    ("R7FA6M2.*:ICU", PeriInfo { peri_type: "icu", version: "ra6m2" }),
+    ("R7FA6M3.*:ICU", PeriInfo { peri_type: "icu", version: "ra6m2" }), // same as RA6M2
+    ("R7FA6M4.*:ICU", PeriInfo { peri_type: "icu", version: "ra4m3" }), // same as RA4M3
+    ("R7FA6M5.*:ICU", PeriInfo { peri_type: "icu", version: "ra6m5" }),
+    ("R7FA6T1.*:ICU", PeriInfo { peri_type: "icu", version: "ra6m1" }), // same as RA6M1
+    ("R7FA6T2.*:ICU", PeriInfo { peri_type: "icu", version: "ra6t2" }),
+    ("R7FA6T3.*:ICU", PeriInfo { peri_type: "icu", version: "ra6t3" }),
+    // RA8 family
+    ("R7FA8D1.*:ICU", PeriInfo { peri_type: "icu", version: "ra8d1" }),
+    ("R7FA8E.*:ICU", PeriInfo { peri_type: "icu", version: "ra8e1" }),
+    ("R7FA8M1.*:ICU", PeriInfo { peri_type: "icu", version: "ra8m1" }),
+    ("R7FA8T1.*:ICU", PeriInfo { peri_type: "icu", version: "ra8t1" }),
+    // RKA8 family
+    ("R7KA8[DMP].*:ICU", PeriInfo { peri_type: "icu", version: "rka8d2" }),
+    ("R7KA8T.*:ICU", PeriInfo { peri_type: "icu", version: "rka8t2" }),
 
     // System mappings
     ("R7FA[46][ELMT].*:MSTP", PeriInfo { peri_type: "mstp", version: "v2" }),

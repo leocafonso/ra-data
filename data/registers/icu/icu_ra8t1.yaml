@@ -1,0 +1,619 @@
+block/ICU:
+  description: Interrupt Controller.
+  items:
+  - name: SWIRQ_S
+    description: Software Interrupt Request Register for Secure Interrupt.
+    byte_offset: 16
+    bit_size: 8
+    fieldset: SWIRQ_S
+  - name: SWIRQ_NS
+    description: Software Interrupt Request Register for Non-secure Interrupt.
+    byte_offset: 32
+    bit_size: 8
+    fieldset: SWIRQ_NS
+  - name: IENMIER
+    description: Integrated Error NMI Interrupt Enable Registe for CPU.
+    byte_offset: 96
+    bit_size: 16
+    fieldset: IENMIER
+  - name: NMIER
+    description: Non-Maskable Interrupt Enable Register.
+    byte_offset: 256
+    bit_size: 16
+    fieldset: NMIER
+  - name: NMICLR
+    description: Non-Maskable Interrupt Status Clear Register.
+    byte_offset: 272
+    bit_size: 16
+    fieldset: NMICLR
+  - name: NMISR
+    description: Non-Maskable Interrupt Status Register.
+    byte_offset: 288
+    access: Read
+    bit_size: 16
+    fieldset: NMISR
+  - name: WUPEN0
+    description: Wake Up Interrupt Enable Register 0.
+    byte_offset: 416
+    fieldset: WUPEN0
+  - name: WUPEN1
+    description: Wake Up Interrupt Enable Register 1.
+    byte_offset: 420
+    fieldset: WUPEN1
+  - name: SELSR0
+    description: SYS Event Link Setting Register.
+    byte_offset: 512
+    bit_size: 16
+    fieldset: SELSR0
+  - name: IELSR
+    description: ICU Event Link Setting Register %s.
+    array:
+      len: 96
+      stride: 4
+    byte_offset: 768
+    fieldset: IELSR
+fieldset/IELSR:
+  description: ICU Event Link Setting Register %s.
+  fields:
+  - name: IELS
+    description: Event selection to NVIC.
+    bit_offset: 0
+    bit_size: 9
+    enum: IELS
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 9
+    bit_size: 7
+  - name: IR
+    description: |
+      Interrupt Status Flag.
+      0: No interrupt request is generated.
+      1: An interrupt request is generated ( "1" write to the IR bit is prohibited. ).
+    bit_offset: 16
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 17
+    bit_size: 7
+  - name: DTCE
+    description: |
+      DTC Activation Enable.
+      0: DTC activation is disabled.
+      1: DTC activation is enabled.
+    bit_offset: 24
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 25
+    bit_size: 7
+fieldset/IENMIER:
+  description: Integrated Error NMI Interrupt Enable Registe for CPU.
+  bit_size: 16
+  fields:
+  - name: CMEN
+    description: |
+      Integrated Common Memory error nmi Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: LMEN
+    description: |
+      Integrated Local Memory error nmi Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: BUSEN
+    description: |
+      Integrated BUS error nmi Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000000000. The write value should be 0000000000000.
+    bit_offset: 3
+    bit_size: 13
+fieldset/NMICLR:
+  description: Non-Maskable Interrupt Status Clear Register.
+  bit_size: 16
+  fields:
+  - name: IWDTCLR
+    description: |
+      IWDT Clear.
+      0: No effect.
+      1: Clear the NMISR.IWDTST flag.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTCLR
+    description: |
+      WDT Clear.
+      0: No effect.
+      1: Clear the NMISR.WDTST flag.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1CLR
+    description: |
+      PVD1 Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD1ST flag.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2CLR
+    description: |
+      PVD2 Clear.
+      0: No effect.
+      1: Clear the NMISR.PVD2ST flag.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00. The write value should be 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTCLR
+    description: |
+      OST Clear.
+      0: No effect.
+      1: Clear the NMISR.OSTST flag.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMICLR
+    description: |
+      NMI Clear.
+      0: No effect.
+      1: Clear the NMISR.NMIST flag.
+    bit_offset: 7
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000. The write value should be 0000.
+    bit_offset: 8
+    bit_size: 4
+  - name: BUSCLR
+    description: |
+      Bus Clear.
+      0: No effect.
+      1: Clear the NMISR.BUSST flag.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMCLR
+    description: |
+      CM Clear.
+      0: No effect.
+      1: Clear the NMISR.CMST flag.
+    bit_offset: 13
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUCLR
+    description: |
+      LU Clear.
+      0: No effect.
+      1: Clear the NMISR.LUST flag.
+    bit_offset: 15
+    bit_size: 1
+fieldset/NMIER:
+  description: Non-Maskable Interrupt Enable Register.
+  bit_size: 16
+  fields:
+  - name: IWDTEN
+    description: |
+      IWDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTEN
+    description: |
+      WDT Underflow/Refresh Error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1EN
+    description: |
+      Voltage-Monitoring 1 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2EN
+    description: |
+      Voltage-Monitoring 2 Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00. The write value should be 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTEN
+    description: |
+      Oscillation Stop Detection Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIEN
+    description: |
+      NMI Pin Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 7
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000. The write value should be 0000.
+    bit_offset: 8
+    bit_size: 4
+  - name: BUSEN
+    description: |
+      BUS error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMEN
+    description: |
+      Common Memory error Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUEN
+    description: |
+      LockUp Interrupt Enable.
+      0: Disabled.
+      1: Enabled.
+    bit_offset: 15
+    bit_size: 1
+fieldset/NMISR:
+  description: Non-Maskable Interrupt Status Register.
+  bit_size: 16
+  fields:
+  - name: IWDTST
+    description: |
+      IWDT Underflow/Refresh Error Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTST
+    description: |
+      WDT Underflow/Refresh Error Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 1
+    bit_size: 1
+  - name: PVD1ST
+    description: |
+      Voltage-Monitoring 1 Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 2
+    bit_size: 1
+  - name: PVD2ST
+    description: |
+      Voltage-Monitoring 2 Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 00.
+    bit_offset: 4
+    bit_size: 2
+  - name: OSTST
+    description: |
+      Oscillation Stop Detection Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 6
+    bit_size: 1
+  - name: NMIST
+    description: |
+      NMI Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 7
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000.
+    bit_offset: 8
+    bit_size: 4
+  - name: BUSST
+    description: |
+      BUS error Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 12
+    bit_size: 1
+  - name: CMST
+    description: |
+      Common Memory error Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 13
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0.
+    bit_offset: 14
+    bit_size: 1
+  - name: LUST
+    description: |
+      LockUp Interrupt Status Flag.
+      0: interrupt not requested.
+      1: interrupt requested.
+    bit_offset: 15
+    bit_size: 1
+fieldset/SELSR0:
+  description: SYS Event Link Setting Register.
+  bit_size: 16
+  fields:
+  - name: SELS
+    description: SYS Event Link Select.
+    bit_offset: 0
+    bit_size: 9
+    enum: SELS
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 9
+    bit_size: 7
+fieldset/SWIRQ_NS:
+  description: Software Interrupt Request Register for Non-secure Interrupt.
+  bit_size: 8
+  fields:
+  - name: SWIRQNS
+    description: |
+      Generates an interrupt for the other CPU subsystem.
+      0: (the value of the internal register automatically becomes 0). Writing 0 is ignored.
+    bit_offset: 0
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 1
+    bit_size: 7
+fieldset/SWIRQ_S:
+  description: Software Interrupt Request Register for Secure Interrupt.
+  bit_size: 8
+  fields:
+  - name: SWIRQS
+    description: |
+      Generates an interrupt for the other CPU subsystem.
+      0: (the value of the internal register automatically becomes 0). Writing 0 is ignored.
+    bit_offset: 0
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000000. The write value should be 0000000.
+    bit_offset: 1
+    bit_size: 7
+fieldset/WUPEN0:
+  description: Wake Up Interrupt Enable Register 0.
+  fields:
+  - name: IRQWUPEN
+    description: |
+      IRQ0 Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by IRQ0 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by IRQ0 interrupt is enabled.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+  - name: IWDTWUPEN
+    description: |
+      IWDT Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by IWDT interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by IWDT interrupt is enabled.
+    bit_offset: 16
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 17
+    bit_size: 1
+  - name: PVD1WUPEN
+    description: |
+      PVD1 Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by PVD1 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by PVD1 interrupt is enabled.
+    bit_offset: 18
+    bit_size: 1
+  - name: PVD2WUPEN
+    description: |
+      PVD2 Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by PVD2 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by PVD2 interrupt is enabled.
+    bit_offset: 19
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0. The write value should be 0.
+    bit_offset: 20
+    bit_size: 7
+  - name: USBFSWUPEN
+    description: |
+      USBFS0 Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by USBFS0 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by USBFS0 interrupt is enabled.
+    bit_offset: 27
+    bit_size: 1
+  - name: AGT1UDWUPEN
+    description: |
+      AGT1 Underflow Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by AGT1 underflow interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by AGT1 underflow interrupt is enabled.
+    bit_offset: 28
+    bit_size: 1
+  - name: AGT1CAWUPEN
+    description: |
+      AGT1 Compare Match A Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by AGT1 compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by AGT1 compare match A interrupt is enabled.
+    bit_offset: 29
+    bit_size: 1
+  - name: AGT1CBWUPEN
+    description: |
+      AGT1 Compare Match B Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by AGT1 compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by AGT1 compare match B interrupt is enabled.
+    bit_offset: 30
+    bit_size: 1
+  - name: RIIC0WUPEN
+    description: |
+      RIIC0 Address Match Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by RIIC0 address match interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by RIIC0 address match interrupt is enabled.
+    bit_offset: 31
+    bit_size: 1
+fieldset/WUPEN1:
+  description: Wake Up Interrupt Enable Register 1.
+  fields:
+  - name: Reserved
+    description: These bits are read as 000. The write value should be 000.
+    bit_offset: 0
+    bit_size: 3
+  - name: COMPHS0WUPEN
+    description: |
+      Comparator-HS0 Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by Comparator-HS0 interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by Comparator-HS0 interrupt is enabled.
+    bit_offset: 3
+    bit_size: 1
+  - name: Reserved
+    description: These bits are read as 0000. The write value should be 0000.
+    bit_offset: 4
+    bit_size: 4
+  - name: ULP0UWUPEN
+    description: |
+      ULPT0 Underflow Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 Underflow interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Underflow interrupt is enabled.
+    bit_offset: 8
+    bit_size: 1
+  - name: ULP0AWUPEN
+    description: |
+      ULPT0 Compare Match A Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 Compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Compare match A interrupt is enabled.
+    bit_offset: 9
+    bit_size: 1
+  - name: ULP0BWUPEN
+    description: |
+      ULPT0 Compare Match B Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT0 Compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT0 Compare match B interrupt is enabled.
+    bit_offset: 10
+    bit_size: 1
+  - name: I3CWUPEN
+    description: |
+      I3C Wakeup Condition Detection Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by I3C wake up interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by I3C wake up interrupt is enabled.
+    bit_offset: 11
+    bit_size: 1
+  - name: ULP1UWUPEN
+    description: |
+      ULPT1 Underflow Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Underflow interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Underflow interrupt is enabled.
+    bit_offset: 12
+    bit_size: 1
+  - name: ULP1AWUPEN
+    description: |
+      ULPT1 Compare Match A Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Compare match A interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Compare match A interrupt is enabled.
+    bit_offset: 13
+    bit_size: 1
+  - name: ULP1BWUPEN
+    description: |
+      ULPT1 Compare Match B Interrupt Deep Sleep/Software Standby Returns Enable bit.
+      0: Deep Sleep/Software Standby returns by ULPT1 Compare match B interrupt is disabled.
+      1: Deep Sleep/Software Standby returns by ULPT1 Compare match B interrupt is enabled.
+    bit_offset: 14
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 15
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 16
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 17
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 18
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 19
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 20
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 21
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 22
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 23
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 24
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 25
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 26
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 27
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 28
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 29
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 30
+    bit_size: 1
+  - name: Reserved
+    description: This bit is read as 0. The write value should be 0.
+    bit_offset: 31
+    bit_size: 1
+enum/IELS:
+  bit_size: 9
+  variants:
+  - name: V_0x000
+    description: Nothing is selected.
+    value: 0
+enum/SELS:
+  bit_size: 9
+  variants:
+  - name: V_000000000
+    description: Disable event output to the associated low-power mode module.
+    value: 0

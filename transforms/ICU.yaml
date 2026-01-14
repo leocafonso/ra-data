@@ -1,5 +1,44 @@
 transforms:
-  - !ModifyRegisters
-    blocks: ICU
-    registers: IELSR.*
-    fieldset: null
+  - !DeleteEnums
+    from: .*
+    bit_size: 1
+    keep_desc: true
+  - !DeleteFieldsets
+    from: .*
+    useless: true
+  # RA0 family: DTCENCLR registers have sparse CLR fields
+  - !MakeFieldArray
+    fieldsets: DTCENCLR\d
+    from: CLR\d+
+    to: CLR
+    mode: Cursed
+  # RA0 family: DTCENSET registers have sparse SET fields
+  - !MakeFieldArray
+    fieldsets: DTCENSET\d
+    from: SET\d+
+    to: SET
+    mode: Cursed
+  # RA0 family: DTCENST registers have sparse ST fields
+  - !MakeFieldArray
+    fieldsets: DTCENST\d
+    from: ST\d+
+    to: ST
+    mode: Cursed
+  # RA0 family: INTFLAG registers have IF fields
+  - !MakeFieldArray
+    fieldsets: INTFLAG\d
+    from: IF\d+
+    to: IF
+    mode: Cursed
+  # RA0 family: SBYEDCR registers have SBYEDCR fields
+  - !MakeFieldArray
+    fieldsets: SBYEDCR\d
+    from: SBYEDCR\d+
+    to: SBYEDCR
+    mode: Cursed
+  # All families: WUPEN registers have IRQWUPENx fields
+  - !MakeFieldArray
+    fieldsets: WUPEN\d?
+    from: IRQWUPEN\d+
+    to: IRQWUPEN
+    mode: Cursed
