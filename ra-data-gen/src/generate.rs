@@ -79,7 +79,9 @@ pub fn generate(
             .map(|(_, v)| v);
 
         for p in &parsed.peripherals {
-            let key = format!("{}:{}", name, p.name);
+            // Normalize peripheral name (e.g., SYSTEM -> SYSC)
+            let peri_name = if p.name == "SYSTEM" { "SYSC" } else { &p.name };
+            let key = format!("{}:{}", name, peri_name);
             if let Some(info) = PERIMAP.get(&key) {
                 let reg_key = format!("{}_{}", info.peri_type, info.version);
                 if available_registers.contains(&reg_key) {
@@ -90,7 +92,7 @@ pub fn generate(
                     let bit_width = timer_map.and_then(|m| m.get(&p.name)).cloned();
 
                     peripherals.push(Peripheral {
-                        name: p.name.clone(),
+                        name: peri_name.to_string(),
                         address: p.address,
                         peri_type: info.peri_type.to_string(),
                         version: info.version.to_string(),

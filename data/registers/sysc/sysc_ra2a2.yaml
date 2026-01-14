@@ -1,0 +1,1798 @@
+block/SYSC:
+  description: System Control.
+  items:
+  - name: SBYCR
+    description: Standby Control Register.
+    byte_offset: 12
+    bit_size: 16
+    fieldset: SBYCR
+  - name: MSTPCRA
+    description: Module Stop Control Register A.
+    byte_offset: 28
+    fieldset: MSTPCRA
+  - name: SCKDIVCR
+    description: System Clock Division Control Register.
+    byte_offset: 32
+    fieldset: SCKDIVCR
+  - name: SCKSCR
+    description: System Clock Source Control Register.
+    byte_offset: 38
+    bit_size: 8
+    fieldset: SCKSCR
+  - name: PLLCCR
+    description: PLL Clock Control Register.
+    byte_offset: 40
+    bit_size: 16
+    fieldset: PLLCCR
+  - name: PLLCR
+    description: PLL Control Register.
+    byte_offset: 42
+    bit_size: 8
+    fieldset: PLLCR
+  - name: MEMWAIT
+    description: Memory Wait Cycle Control Register for Code Flash.
+    byte_offset: 49
+    bit_size: 8
+    fieldset: MEMWAIT
+  - name: MOSCCR
+    description: Main Clock Oscillator Control Register.
+    byte_offset: 50
+    bit_size: 8
+    fieldset: MOSCCR
+  - name: HOCOCR
+    description: High-Speed On-Chip Oscillator Control Register.
+    byte_offset: 54
+    bit_size: 8
+    fieldset: HOCOCR
+  - name: MOCOCR
+    description: Middle-Speed On-Chip Oscillator Control Register.
+    byte_offset: 56
+    bit_size: 8
+    fieldset: MOCOCR
+  - name: OSCSF
+    description: Oscillation Stabilization Flag Register.
+    byte_offset: 60
+    access: Read
+    bit_size: 8
+    fieldset: OSCSF
+  - name: CKOCR
+    description: Clock Out Control Register.
+    byte_offset: 62
+    bit_size: 8
+    fieldset: CKOCR
+  - name: OSTDCR
+    description: Oscillation Stop Detection Control Register.
+    byte_offset: 64
+    bit_size: 8
+    fieldset: OSTDCR
+  - name: OSTDSR
+    description: Oscillation Stop Detection Status Register.
+    byte_offset: 65
+    bit_size: 8
+    fieldset: OSTDSR
+  - name: LPOPT
+    description: Lower Power Operation Control Register.
+    byte_offset: 76
+    bit_size: 8
+    fieldset: LPOPT
+  - name: SLCDSCKCR
+    description: Segment LCD Source Clock Control Register.
+    byte_offset: 80
+    bit_size: 8
+    fieldset: SLCDSCKCR
+  - name: MOCOUTCR
+    description: MOCO User Trimming Control Register.
+    byte_offset: 97
+    bit_size: 8
+  - name: HOCOUTCR
+    description: HOCO User Trimming Control Register.
+    byte_offset: 98
+    bit_size: 8
+  - name: SNZCR
+    description: Snooze Control Register.
+    byte_offset: 146
+    bit_size: 8
+    fieldset: SNZCR
+  - name: SNZEDCR
+    description: Snooze End Control Register 0.
+    array:
+      len: 1
+      stride: 0
+    byte_offset: 148
+    bit_size: 8
+    fieldset: SNZEDCR0
+  - name: SNZREQCR
+    description: Snooze Request Control Register 0.
+    array:
+      len: 1
+      stride: 0
+    byte_offset: 152
+    fieldset: SNZREQCR0
+  - name: PSMCR
+    description: Power Save Memory Control Register.
+    byte_offset: 159
+    bit_size: 8
+    fieldset: PSMCR
+  - name: OPCCR
+    description: Operating Power Control Register.
+    byte_offset: 160
+    bit_size: 8
+    fieldset: OPCCR
+  - name: MOSCWTCR
+    description: Main Clock Oscillator Wait Control Register.
+    byte_offset: 162
+    bit_size: 8
+    fieldset: MOSCWTCR
+  - name: HOCOWTCR
+    description: High-Speed On-Chip Oscillator Wait Control Register.
+    byte_offset: 165
+    bit_size: 8
+    fieldset: HOCOWTCR
+  - name: SOPCCR
+    description: Sub Operating Power Control Register.
+    byte_offset: 170
+    bit_size: 8
+    fieldset: SOPCCR
+  - name: RSTSR1
+    description: Reset Status Register 1.
+    byte_offset: 192
+    bit_size: 16
+    fieldset: RSTSR1
+  - name: SDADCCKCR
+    description: 24-bit Sigma-delta A/D Converter Clock Control Register.
+    byte_offset: 209
+    bit_size: 8
+    fieldset: SDADCCKCR
+  - name: SOSTD
+    description: Sub Clock Oscillation Stop Detection Control Register.
+    byte_offset: 216
+    bit_size: 16
+    fieldset: SOSTD
+  - name: MOSTD
+    description: Main Oscillation Stop Detection Control Register.
+    byte_offset: 218
+    bit_size: 16
+    fieldset: MOSTD
+  - name: LVD1CR1
+    description: Voltage Monitor 1 Circuit Control Register.
+    byte_offset: 224
+    bit_size: 8
+    fieldset: LVD1CR1
+  - name: LVD1SR
+    description: Voltage Monitor 1 Circuit Status Register.
+    byte_offset: 225
+    bit_size: 8
+    fieldset: LVD1SR
+  - name: LVD2CR1
+    description: Voltage Monitor 2 Circuit Control Register 1.
+    byte_offset: 226
+    bit_size: 8
+    fieldset: LVD2CR1
+  - name: LVD2SR
+    description: Voltage Monitor 2 Circuit Status Register.
+    byte_offset: 227
+    bit_size: 8
+    fieldset: LVD2SR
+  - name: PRCR
+    description: Protect Register.
+    byte_offset: 1022
+    bit_size: 16
+    fieldset: PRCR
+  - name: SYOCDCR
+    description: System Control OCD Control Register.
+    byte_offset: 1038
+    bit_size: 8
+    fieldset: SYOCDCR
+  - name: RSTSR0
+    description: Reset Status Register 0.
+    byte_offset: 1040
+    bit_size: 8
+    fieldset: RSTSR0
+  - name: RSTSR2
+    description: Reset Status Register 2.
+    byte_offset: 1041
+    bit_size: 8
+    fieldset: RSTSR2
+  - name: MOMCR
+    description: Main Clock Oscillator Mode Oscillation Control Register.
+    byte_offset: 1043
+    bit_size: 8
+    fieldset: MOMCR
+  - name: LVCMPCR
+    description: Voltage Monitor Circuit Control Register.
+    byte_offset: 1047
+    bit_size: 8
+    fieldset: LVCMPCR
+  - name: LVDLVLR
+    description: Voltage Detection Level Select Register.
+    byte_offset: 1048
+    bit_size: 8
+    fieldset: LVDLVLR
+  - name: LVD1CR0
+    description: Voltage Monitor 1 Circuit Control Register 0.
+    byte_offset: 1050
+    bit_size: 8
+    fieldset: LVD1CR0
+  - name: LVD2CR0
+    description: Voltage Monitor 2 Circuit Control Register 0.
+    byte_offset: 1051
+    bit_size: 8
+    fieldset: LVD2CR0
+  - name: SOSCCR
+    description: Sub-Clock Oscillator Control Register.
+    byte_offset: 1152
+    bit_size: 8
+    fieldset: SOSCCR
+  - name: SOMCR
+    description: Sub-Clock Oscillator Mode Control Register.
+    byte_offset: 1153
+    bit_size: 8
+    fieldset: SOMCR
+  - name: SOMRG
+    description: Sub-Clock Oscillator Margin Check Register.
+    byte_offset: 1154
+    bit_size: 8
+    fieldset: SOMRG
+  - name: LOCOCR
+    description: Low-Speed On-Chip Oscillator Control Register.
+    byte_offset: 1168
+    bit_size: 8
+    fieldset: LOCOCR
+  - name: LOCOUTCR
+    description: LOCO User Trimming Control Register.
+    byte_offset: 1170
+    bit_size: 8
+  - name: VBTLVDCR
+    description: EXLVDVBAT Circuit Control Register.
+    byte_offset: 1216
+    bit_size: 8
+    fieldset: VBTLVDCR
+  - name: VBTLVDSR
+    description: EXLVDVBAT Circuit Status Register.
+    byte_offset: 1217
+    bit_size: 8
+    fieldset: VBTLVDSR
+  - name: VBTCMPCR
+    description: EXLVDVBAT Comparator Control Register.
+    byte_offset: 1218
+    bit_size: 8
+    fieldset: VBTCMPCR
+  - name: VBTLVDICR
+    description: EXLVDVBAT Pin Low Voltage Detect Interrupt Control Register.
+    byte_offset: 1219
+    bit_size: 8
+    fieldset: VBTLVDICR
+  - name: VRTLVDCR
+    description: LVDVRTC Circuit Control Register.
+    byte_offset: 1220
+    bit_size: 8
+    fieldset: VRTLVDCR
+  - name: VRTSR
+    description: VRTC Status Register.
+    byte_offset: 1221
+    bit_size: 8
+    fieldset: VRTSR
+  - name: VRTCMPCR
+    description: VRTC Comparator Control Register.
+    byte_offset: 1222
+    bit_size: 8
+    fieldset: VRTCMPCR
+  - name: VRTLVDICR
+    description: VRTC Pin Low Voltage Detect Interrupt Control Register.
+    byte_offset: 1223
+    bit_size: 8
+    fieldset: VRTLVDICR
+  - name: EXLVDCR
+    description: EXLVD Circuit Control Register.
+    byte_offset: 1224
+    bit_size: 8
+    fieldset: EXLVDCR
+  - name: EXLVDSR
+    description: EXLVD Circuit Status Register.
+    byte_offset: 1225
+    bit_size: 8
+    fieldset: EXLVDSR
+  - name: EXLVDCMPCR
+    description: EXLVD Comparator Control Register.
+    byte_offset: 1226
+    bit_size: 8
+    fieldset: EXLVDCMPCR
+  - name: EXLVDICR
+    description: EXLVD Pin Low Voltage Detect Interrupt Control Register.
+    byte_offset: 1227
+    bit_size: 8
+    fieldset: EXLVDICR
+fieldset/CKOCR:
+  description: Clock Out Control Register.
+  bit_size: 8
+  fields:
+  - name: CKOSEL
+    description: Clock Out Source Select.
+    bit_offset: 0
+    bit_size: 3
+    enum: CKOSEL
+  - name: CKODIV
+    description: Clock Output Frequency Division Ratio.
+    bit_offset: 4
+    bit_size: 3
+    enum: CKODIV
+  - name: CKOEN
+    description: |
+      Clock Out Enable.
+      0: Disable clock out.
+      1: Enable clock out.
+    bit_offset: 7
+    bit_size: 1
+fieldset/EXLVDCMPCR:
+  description: EXLVD Comparator Control Register.
+  bit_size: 8
+  fields:
+  - name: CMPE
+    description: |
+      EXLVD Pin Low Voltage Detect Circuit Output Enable.
+      0: EXLVD pin low voltage detect circuit output disabled.
+      1: EXLVD pin low voltage detect circuit output enabled.
+    bit_offset: 0
+    bit_size: 1
+fieldset/EXLVDCR:
+  description: EXLVD Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: LVDE
+    description: |
+      EXLVD Pin Low Voltage Detect Enable.
+      0: EXLVD pin low voltage detection disabled.
+      1: EXLVD pin low voltage detection enabled.
+    bit_offset: 4
+    bit_size: 1
+fieldset/EXLVDICR:
+  description: EXLVD Pin Low Voltage Detect Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: IE
+    description: |
+      EXLVD Pin Low Voltage Detect Interrupt Enable.
+      0: EXLVD pin low voltage detection interrupt disabled.
+      1: EXLVD pin low voltage detection interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IDTSEL
+    description: EXLVD Pin Low Voltage Detect Interrupt Generation Condition Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: EXLVDICR_IDTSEL
+fieldset/EXLVDSR:
+  description: EXLVD Circuit Status Register.
+  bit_size: 8
+  fields:
+  - name: DET
+    description: |
+      EXLVD pin Low Voltage Detect Flag.
+      0: EXLVD pin low voltage not detected.
+      1: EXLVD pin low voltage detected.
+    bit_offset: 1
+    bit_size: 1
+  - name: MON
+    description: |
+      EXLVD pin Low Voltage Monitor Flag.
+      0: EXLVD < Vdet_exlvd.
+      1: EXLVD ≥ Vdet_exlvd or MON is disabled.
+    bit_offset: 5
+    bit_size: 1
+fieldset/HOCOCR:
+  description: High-Speed On-Chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: HCSTP
+    description: |
+      HOCO Stop.
+      0: Operate the HOCO clock.
+      1: Stop the HOCO clock.
+    bit_offset: 0
+    bit_size: 1
+fieldset/HOCOWTCR:
+  description: High-Speed On-Chip Oscillator Wait Control Register.
+  bit_size: 8
+  fields:
+  - name: HSTS
+    description: HOCO Wait Time Setting.
+    bit_offset: 0
+    bit_size: 3
+    enum: HSTS
+fieldset/LOCOCR:
+  description: Low-Speed On-Chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: LCSTP
+    description: |
+      LOCO Stop.
+      0: Operate the LOCO clock.
+      1: Stop the LOCO clock.
+    bit_offset: 0
+    bit_size: 1
+fieldset/LPOPT:
+  description: Lower Power Operation Control Register.
+  bit_size: 8
+  fields:
+  - name: MPUDIS
+    description: |
+      MPU Clock Disable Control.
+      0: MPU operates as normal.
+      1: MPU operate clock stops (MPU function disable).
+    bit_offset: 0
+    bit_size: 1
+  - name: DCLKDIS
+    description: Debug Clock Disable Control.
+    bit_offset: 1
+    bit_size: 2
+    enum: DCLKDIS
+  - name: BPFCLKDIS
+    description: |
+      BPF Clock Disable Control.
+      0: Flash register R/W clock operates as normal.
+      1: Flash register R/W clock stops.
+    bit_offset: 3
+    bit_size: 1
+  - name: LPOPTEN
+    description: |
+      Lower Power Operation Enable.
+      0: All lower power countermeasure disable.
+      1: All lower power countermeasure enable.
+    bit_offset: 7
+    bit_size: 1
+fieldset/LVCMPCR:
+  description: Voltage Monitor Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: LVD1E
+    description: |
+      Voltage Detection 1 Enable.
+      0: Voltage detection 1 circuit disabled.
+      1: Voltage detection 1 circuit enabled.
+    bit_offset: 5
+    bit_size: 1
+  - name: LVD2E
+    description: |
+      Voltage Detection 2 Enable.
+      0: Voltage detection 2 circuit disabled.
+      1: Voltage detection 2 circuit enabled.
+    bit_offset: 6
+    bit_size: 1
+fieldset/LVD1CR0:
+  description: Voltage Monitor 1 Circuit Control Register 0.
+  bit_size: 8
+  fields:
+  - name: RIE
+    description: |
+      Voltage Monitor 1 Interrupt/Reset Enable.
+      0: Disable.
+      1: Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: CMPE
+    description: |
+      Voltage Monitor 1 Circuit Comparison Result Output Enable.
+      0: Disable voltage monitor 1 circuit comparison result output.
+      1: Enable voltage monitor 1 circuit comparison result output.
+    bit_offset: 2
+    bit_size: 1
+  - name: RI
+    description: |
+      Voltage Monitor 1 Circuit Mode Select.
+      0: Generate voltage monitor 1 interrupt on Vdet1 crossing.
+      1: Enable voltage monitor 1 reset when the voltage falls to and below Vdet1.
+    bit_offset: 6
+    bit_size: 1
+  - name: RN
+    description: |
+      Voltage Monitor 1 Reset Negate Select.
+      0: Negate after a stabilization time (tLVD1) when VCC > Vdet1 is detected.
+      1: Negate after a stabilization time (tLVD1) on assertion of the LVD1 reset.
+    bit_offset: 7
+    bit_size: 1
+fieldset/LVD1CR1:
+  description: Voltage Monitor 1 Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: IDTSEL
+    description: Voltage Monitor 1 Interrupt Generation Condition Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: LVD1CR1_IDTSEL
+  - name: IRQSEL
+    description: |
+      Voltage Monitor 1 Interrupt Type Select.
+      0: Non-maskable interrupt.
+      1: Maskable interrupt.
+    bit_offset: 2
+    bit_size: 1
+fieldset/LVD1SR:
+  description: Voltage Monitor 1 Circuit Status Register.
+  bit_size: 8
+  fields:
+  - name: DET
+    description: |
+      Voltage Monitor 1 Voltage Variation Detection Flag.
+      0: Not detected.
+      1: Vdet1 crossing is detected.
+    bit_offset: 0
+    bit_size: 1
+  - name: MON
+    description: |
+      Voltage Monitor 1 Signal Monitor Flag.
+      0: VCC < Vdet1.
+      1: VCC >= Vdet1 or MON is disabled.
+    bit_offset: 1
+    bit_size: 1
+fieldset/LVD2CR0:
+  description: Voltage Monitor 2 Circuit Control Register 0.
+  bit_size: 8
+  fields:
+  - name: RIE
+    description: |
+      Voltage Monitor 2 Interrupt/Reset Enable.
+      0: Disable.
+      1: Enable.
+    bit_offset: 0
+    bit_size: 1
+  - name: CMPE
+    description: |
+      Voltage Monitor 2 Circuit Comparison Result Output Enable.
+      0: Disable voltage monitor 2 circuit comparison result output.
+      1: Enable voltage monitor 2 circuit comparison result output.
+    bit_offset: 2
+    bit_size: 1
+  - name: RI
+    description: |
+      Voltage Monitor 2 Circuit Mode Select.
+      0: Generate voltage monitor 2 interrupt on Vdet2 crossing.
+      1: Enable voltage monitor 2 reset when the voltage falls to and below Vdet2.
+    bit_offset: 6
+    bit_size: 1
+  - name: RN
+    description: |
+      Voltage Monitor 2 Reset Negate Select.
+      0: Negate after a stabilization time (tLVD2) when VCC > Vdet2 is detected.
+      1: Negate after a stabilization time (tLVD2) on assertion of the LVD2 reset.
+    bit_offset: 7
+    bit_size: 1
+fieldset/LVD2CR1:
+  description: Voltage Monitor 2 Circuit Control Register 1.
+  bit_size: 8
+  fields:
+  - name: IDTSEL
+    description: Voltage Monitor 2 Interrupt Generation Condition Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: LVD2CR1_IDTSEL
+  - name: IRQSEL
+    description: |
+      Voltage Monitor 2 Interrupt Type Select.
+      0: Non-maskable interrupt.
+      1: Maskable interrupt.
+    bit_offset: 2
+    bit_size: 1
+fieldset/LVD2SR:
+  description: Voltage Monitor 2 Circuit Status Register.
+  bit_size: 8
+  fields:
+  - name: DET
+    description: |
+      Voltage Monitor 2 Voltage Variation Detection Flag.
+      0: Not detected.
+      1: Vdet2 crossing is detected.
+    bit_offset: 0
+    bit_size: 1
+  - name: MON
+    description: |
+      Voltage Monitor 2 Signal Monitor Flag.
+      0: VCC < Vdet2.
+      1: VCC >= Vdet2 or MON is disabled.
+    bit_offset: 1
+    bit_size: 1
+fieldset/LVDLVLR:
+  description: Voltage Detection Level Select Register.
+  bit_size: 8
+  fields:
+  - name: LVD1LVL
+    description: Voltage Detection 1 Level Select (Standard voltage during fall in voltage).
+    bit_offset: 0
+    bit_size: 5
+    enum: LVD1LVL
+  - name: LVD2LVL
+    description: Voltage Detection 2 Level Select (Standard voltage during fall in voltage).
+    bit_offset: 5
+    bit_size: 3
+    enum: LVD2LVL
+fieldset/MEMWAIT:
+  description: Memory Wait Cycle Control Register for Code Flash.
+  bit_size: 8
+  fields:
+  - name: MEMWAIT
+    description: |
+      Memory Wait Cycle Select for Code Flash.
+      0: No wait.
+      1: Wait.
+    bit_offset: 0
+    bit_size: 1
+fieldset/MOCOCR:
+  description: Middle-Speed On-Chip Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: MCSTP
+    description: |
+      MOCO Stop.
+      0: MOCO clock is operating.
+      1: MOCO clock is stopped.
+    bit_offset: 0
+    bit_size: 1
+fieldset/MOMCR:
+  description: Main Clock Oscillator Mode Oscillation Control Register.
+  bit_size: 8
+  fields:
+  - name: MODRV1
+    description: |
+      Main Clock Oscillator Drive Capability 1 Switching.
+      0: 10 MHz to 20 MHz.
+      1: 1 MHz to 10 MHz.
+    bit_offset: 3
+    bit_size: 1
+  - name: MOSEL
+    description: |
+      Main Clock Oscillator Switching.
+      0: Resonator.
+      1: External clock input.
+    bit_offset: 6
+    bit_size: 1
+fieldset/MOSCCR:
+  description: Main Clock Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: MOSTP
+    description: |
+      Main Clock Oscillator Stop.
+      0: Operate the main clock oscillator.
+      1: Stop the main clock oscillator.
+    bit_offset: 0
+    bit_size: 1
+fieldset/MOSCWTCR:
+  description: Main Clock Oscillator Wait Control Register.
+  bit_size: 8
+  fields:
+  - name: MSTS
+    description: Main Clock Oscillator Wait Time Setting.
+    bit_offset: 0
+    bit_size: 4
+    enum: MSTS
+fieldset/MOSTD:
+  description: Main Oscillation Stop Detection Control Register.
+  bit_size: 16
+  fields:
+  - name: OSDCCMP
+    description: Oscillation Stop Detection Time.
+    bit_offset: 0
+    bit_size: 12
+  - name: OSDCF
+    description: |
+      Status of Oscillation Stop Detector Operation.
+      0: Stop operation of the oscillation stop detector.
+      1: Run operation of the oscillation stop detector.
+    bit_offset: 14
+    bit_size: 1
+  - name: OSDCE
+    description: |
+      Control of Oscillation Stop Detector Operation.
+      0: Stop operation of the oscillation stop detector.
+      1: Start operation of the oscillation stop detector.
+    bit_offset: 15
+    bit_size: 1
+fieldset/MSTPCRA:
+  description: Module Stop Control Register A.
+  fields:
+  - name: MSTPA
+    description: |
+      Sub Oscillation Stop Detection for SDADCCLK Module Stop.
+      0: Supply input clock. SFR used by SOSTD can be read/written.
+      1: Stop supply of input clock. SFR used by SOSTD cannot be written. SOSTD clock is stopped and error flag is in the reset status.
+    bit_offset: 16
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 6
+fieldset/OPCCR:
+  description: Operating Power Control Register.
+  bit_size: 8
+  fields:
+  - name: OPCM
+    description: Operating Power Control Mode Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: OPCM
+  - name: OPCMTSF
+    description: |
+      Operating Power Control Mode Transition Status Flag.
+      0: Transition completed.
+      1: During transition.
+    bit_offset: 4
+    bit_size: 1
+fieldset/OSCSF:
+  description: Oscillation Stabilization Flag Register.
+  bit_size: 8
+  fields:
+  - name: HOCOSF
+    description: |
+      HOCO Clock Oscillation Stabilization Flag.
+      0: The HOCO clock is stopped or is not yet stable.
+      1: The HOCO clock is stable, so is available for use as the system clock.
+    bit_offset: 0
+    bit_size: 1
+  - name: MOSCSF
+    description: |
+      Main Clock Oscillation Stabilization Flag.
+      0: The main clock oscillator is stopped (MOSTP = 1) or is not yet stable.
+      1: The main clock oscillator is stable, so is available for use as the system clock.
+    bit_offset: 3
+    bit_size: 1
+  - name: PLLSF
+    description: |
+      PLL Clock Oscillation Stabilization Flag.
+      0: The PLL clock is stopped or oscillation of the PLL clock is not yet stable.
+      1: The PLL clock is stable, so is available for use as the SDADCCLK clock.
+    bit_offset: 5
+    bit_size: 1
+fieldset/OSTDCR:
+  description: Oscillation Stop Detection Control Register.
+  bit_size: 8
+  fields:
+  - name: OSTDIE
+    description: |
+      Oscillation Stop Detection Interrupt Enable.
+      0: Disable oscillation stop detection interrupt (do not notify the POEG).
+      1: Enable oscillation stop detection interrupt (notify the POEG).
+    bit_offset: 0
+    bit_size: 1
+  - name: OSTDE
+    description: |
+      Oscillation Stop Detection Function Enable.
+      0: Disable oscillation stop detection function.
+      1: Enable oscillation stop detection function.
+    bit_offset: 7
+    bit_size: 1
+fieldset/OSTDSR:
+  description: Oscillation Stop Detection Status Register.
+  bit_size: 8
+  fields:
+  - name: OSTDF
+    description: |
+      Oscillation Stop Detection Flag.
+      0: Main clock oscillation stop not detected.
+      1: Main clock oscillation stop detected.
+    bit_offset: 0
+    bit_size: 1
+fieldset/PLLCCR:
+  description: PLL Clock Control Register.
+  bit_size: 16
+  fields:
+  - name: PLLMUL
+    description: PLL Frequency Multiplication Factor Select.
+    bit_offset: 8
+    bit_size: 8
+    enum: PLLMUL
+fieldset/PLLCR:
+  description: PLL Control Register.
+  bit_size: 8
+  fields:
+  - name: PLLSTP
+    description: |
+      PLL Stop Control.
+      0: PLL is operating.
+      1: PLL is stopped.
+    bit_offset: 0
+    bit_size: 1
+fieldset/PRCR:
+  description: Protect Register.
+  bit_size: 16
+  fields:
+  - name: PRC0
+    description: |
+      Enable writing to the registers related to the clock generation circuit.
+      0: Disable writes.
+      1: Enable writes.
+    bit_offset: 0
+    bit_size: 1
+  - name: PRC1
+    description: |
+      Enable writing to the registers related to the low power modes.
+      0: Disable writes.
+      1: Enable writes.
+    bit_offset: 1
+    bit_size: 1
+  - name: PRC3
+    description: |
+      Enable writing to the registers related to the LVD.
+      0: Disable writes.
+      1: Enable writes.
+    bit_offset: 3
+    bit_size: 1
+  - name: PRKEY
+    description: PRC Key Code.
+    bit_offset: 8
+    bit_size: 8
+fieldset/PSMCR:
+  description: Power Save Memory Control Register.
+  bit_size: 8
+  fields:
+  - name: PSMC
+    description: Power Save Memory Control.
+    bit_offset: 0
+    bit_size: 2
+    enum: PSMC
+fieldset/RSTSR0:
+  description: Reset Status Register 0.
+  bit_size: 8
+  fields:
+  - name: PORF
+    description: |
+      Power-On Reset Detect Flag.
+      0: Power-on reset not detected.
+      1: Power-on reset detected.
+    bit_offset: 0
+    bit_size: 1
+  - name: LVD0RF
+    description: |
+      Voltage Monitor 0 Reset Detect Flag.
+      0: Voltage monitor 0 reset not detected.
+      1: Voltage monitor 0 reset detected.
+    bit_offset: 1
+    bit_size: 1
+  - name: LVD1RF
+    description: |
+      Voltage Monitor 1 Reset Detect Flag.
+      0: Voltage monitor 1 reset not detected.
+      1: Voltage monitor 1 reset detected.
+    bit_offset: 2
+    bit_size: 1
+  - name: LVD2RF
+    description: |
+      Voltage Monitor 2 Reset Detect Flag.
+      0: Voltage monitor 2 reset not detected.
+      1: Voltage monitor 2 reset detected.
+    bit_offset: 3
+    bit_size: 1
+fieldset/RSTSR1:
+  description: Reset Status Register 1.
+  bit_size: 16
+  fields:
+  - name: IWDTRF
+    description: |
+      Independent Watchdog Timer Reset Detect Flag.
+      0: Independent watchdog timer reset not detected.
+      1: Independent watchdog timer reset detected.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTRF
+    description: |
+      Watchdog Timer Reset Detect Flag.
+      0: Watchdog timer reset not detected.
+      1: Watchdog timer reset detected.
+    bit_offset: 1
+    bit_size: 1
+  - name: SWRF
+    description: |
+      Software Reset Detect Flag.
+      0: Software reset not detected.
+      1: Software reset detected.
+    bit_offset: 2
+    bit_size: 1
+  - name: RPERF
+    description: |
+      SRAM Parity Error Reset Detect Flag.
+      0: SRAM parity error reset not detected.
+      1: SRAM parity error reset detected.
+    bit_offset: 8
+    bit_size: 1
+  - name: REERF
+    description: |
+      SRAM ECC Error Reset Detect Flag.
+      0: SRAM ECC error reset not detected.
+      1: SRAM ECC error reset detected.
+    bit_offset: 9
+    bit_size: 1
+  - name: BUSSRF
+    description: |
+      Bus Slave MPU Error Reset Detect Flag.
+      0: Bus slave MPU error reset not detected.
+      1: Bus slave MPU error reset detected.
+    bit_offset: 10
+    bit_size: 1
+  - name: BUSMRF
+    description: |
+      Bus Master MPU Error Reset Detect Flag.
+      0: Bus master MPU error reset not detected.
+      1: Bus master MPU error reset detected.
+    bit_offset: 11
+    bit_size: 1
+  - name: SPERF
+    description: |
+      CPU Stack Pointer Error Reset Detect Flag.
+      0: CPU stack pointer error reset not detected.
+      1: CPU stack pointer error reset detected.
+    bit_offset: 12
+    bit_size: 1
+fieldset/RSTSR2:
+  description: Reset Status Register 2.
+  bit_size: 8
+  fields:
+  - name: CWSF
+    description: |
+      Cold/Warm Start Determination Flag.
+      0: Cold start.
+      1: Warm start.
+    bit_offset: 0
+    bit_size: 1
+fieldset/SBYCR:
+  description: Standby Control Register.
+  bit_size: 16
+  fields:
+  - name: SSBY
+    description: |
+      Software Standby Mode Select.
+      0: Sleep mode.
+      1: Software Standby mode.
+    bit_offset: 15
+    bit_size: 1
+fieldset/SCKDIVCR:
+  description: System Clock Division Control Register.
+  fields:
+  - name: PCKD
+    description: Peripheral Module Clock D (PCLKD) Select.
+    bit_offset: 0
+    bit_size: 3
+    enum: PCKD
+  - name: PCKB
+    description: Peripheral Module Clock B (PCLKB) Select.
+    bit_offset: 8
+    bit_size: 3
+    enum: PCKB
+  - name: ICK
+    description: System Clock (ICLK) Select.
+    bit_offset: 24
+    bit_size: 3
+    enum: ICK
+fieldset/SCKSCR:
+  description: System Clock Source Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: Clock Source Select.
+    bit_offset: 0
+    bit_size: 3
+    enum: SCKSCR_CKSEL
+fieldset/SDADCCKCR:
+  description: 24-bit Sigma-delta A/D Converter Clock Control Register.
+  bit_size: 8
+  fields:
+  - name: CKSEL
+    description: 24-bit Sigma-delta A/D Converter Clock Select.
+    bit_offset: 0
+    bit_size: 2
+    enum: SDADCCKCR_CKSEL
+  - name: OSTDCSE
+    description: |
+      Clock Switch Enable for Oscillation Stop Detected.
+      0: Not switched to HOCO when oscillation stop detected.
+      1: Switched to HOCO, when oscillation stop detected.
+    bit_offset: 4
+    bit_size: 1
+fieldset/SLCDSCKCR:
+  description: Segment LCD Source Clock Control Register.
+  bit_size: 8
+  fields:
+  - name: LCDSCKSEL
+    description: LCD Source Clock (LCDSRCCLK) Select.
+    bit_offset: 0
+    bit_size: 3
+    enum: LCDSCKSEL
+  - name: LCDSCKEN
+    description: |
+      LCD Source Clock Out Enable.
+      0: LCD source clock out disabled.
+      1: LCD source clock out enabled.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SNZCR:
+  description: Snooze Control Register.
+  bit_size: 8
+  fields:
+  - name: RXDREQEN
+    description: |
+      RXD0 Snooze Request Enable.
+      0: Ignore RXD0 falling edge in Software Standby mode.
+      1: Detect RXD0 falling edge in Software Standby mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: SNZDTCEN
+    description: |
+      DTC Enable in Snooze mode.
+      0: Disable DTC operation.
+      1: Enable DTC operation.
+    bit_offset: 1
+    bit_size: 1
+  - name: SNZE
+    description: |
+      Snooze mode Enable.
+      0: Disable Snooze mode.
+      1: Enable Snooze mode.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SNZEDCR0:
+  description: Snooze End Control Register 0.
+  bit_size: 8
+  fields:
+  - name: AGTWUNFED
+    description: |
+      AGTW1 Underflow Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 0
+    bit_size: 1
+  - name: DTCZRED
+    description: |
+      Last DTC Transmission Completion Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 1
+    bit_size: 1
+  - name: DTCNZRED
+    description: |
+      Not Last DTC Transmission Completion Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 2
+    bit_size: 1
+  - name: AD0MATED
+    description: |
+      ADC12 Compare Match Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 3
+    bit_size: 1
+  - name: AD0UMTED
+    description: |
+      ADC12 Compare Mismatch Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 4
+    bit_size: 1
+  - name: SCI0UMTED
+    description: |
+      SCI0 Address Mismatch Snooze End Enable.
+      0: Disable the snooze end request.
+      1: Enable the snooze end request.
+    bit_offset: 7
+    bit_size: 1
+fieldset/SNZREQCR0:
+  description: Snooze Request Control Register 0.
+  fields:
+  - name: SNZREQEN
+    description: |
+      Enable IRQ0 Pin Snooze Request.
+      0: Disable the snooze request.
+      1: Enable the snooze request.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      offsets:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 23
+      - 24
+      - 25
+      - 28
+      - 29
+      - 30
+fieldset/SOMCR:
+  description: Sub-Clock Oscillator Mode Control Register.
+  bit_size: 8
+  fields:
+  - name: SODRV
+    description: Sub-Clock Oscillator Drive Capability Switching.
+    bit_offset: 0
+    bit_size: 2
+    enum: SODRV
+fieldset/SOMRG:
+  description: Sub-Clock Oscillator Margin Check Register.
+  bit_size: 8
+  fields:
+  - name: SOSCMRG
+    description: Sub Clock Oscillator Margin Check Switching.
+    bit_offset: 0
+    bit_size: 2
+    enum: SOSCMRG
+fieldset/SOPCCR:
+  description: Sub Operating Power Control Register.
+  bit_size: 8
+  fields:
+  - name: SOPCM
+    description: |
+      Sub Operating Power Control Mode Select.
+      0: Other than Subosc-speed mode.
+      1: Subosc-speed mode.
+    bit_offset: 0
+    bit_size: 1
+  - name: SOPCMTSF
+    description: |
+      Operating Power Control Mode Transition Status Flag.
+      0: Transition completed.
+      1: During transition.
+    bit_offset: 4
+    bit_size: 1
+fieldset/SOSCCR:
+  description: Sub-Clock Oscillator Control Register.
+  bit_size: 8
+  fields:
+  - name: SOSTP
+    description: |
+      Sub Clock Oscillator Stop.
+      0: Operate the sub-clock oscillator.
+      1: Stop the sub-clock oscillator.
+    bit_offset: 0
+    bit_size: 1
+fieldset/SOSTD:
+  description: Sub Clock Oscillation Stop Detection Control Register.
+  bit_size: 16
+  fields:
+  - name: OSDCCMP
+    description: Oscillation Stop Detection Time.
+    bit_offset: 0
+    bit_size: 12
+  - name: OSDCF
+    description: |
+      Status of Oscillation Stop Detector Operation.
+      0: Stop operation of the oscillation stop detector.
+      1: Run operation of the oscillation stop detector.
+    bit_offset: 14
+    bit_size: 1
+  - name: OSDCE
+    description: |
+      Control of Oscillation Stop Detector Operation.
+      0: Stop operation of the oscillation stop detector.
+      1: Start operation of the oscillation stop detector.
+    bit_offset: 15
+    bit_size: 1
+fieldset/SYOCDCR:
+  description: System Control OCD Control Register.
+  bit_size: 8
+  fields:
+  - name: DBGEN
+    description: |
+      Debugger Enable bit.
+      0: On-chip debugger is disabled.
+      1: On-chip debugger is enabled.
+    bit_offset: 7
+    bit_size: 1
+fieldset/VBTCMPCR:
+  description: EXLVDVBAT Comparator Control Register.
+  bit_size: 8
+  fields:
+  - name: CMPE
+    description: |
+      EXLVDVBAT Pin Low Voltage Detect Circuit Output Enable.
+      0: EXLVDVBAT pin low voltage detect circuit output disabled.
+      1: EXLVDVBAT pin low voltage detect circuit output enabled.
+    bit_offset: 0
+    bit_size: 1
+fieldset/VBTLVDCR:
+  description: EXLVDVBAT Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: LVDE
+    description: |
+      EXLVDVBAT Pin Low Voltage Detect Enable.
+      0: EXLVDVBAT pin low voltage detection disabled.
+      1: EXLVDVBAT pin low voltage detection enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: LVL
+    description: EXLVDVBAT Pin Low Voltage Detect Level Select.
+    bit_offset: 5
+    bit_size: 3
+    enum: VBTLVDCR_LVL
+fieldset/VBTLVDICR:
+  description: EXLVDVBAT Pin Low Voltage Detect Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: IE
+    description: |
+      EXLVDVBAT Pin Low Voltage Detect Interrupt Enable.
+      0: EXLVDVBAT pin low voltage detection interrupt disabled.
+      1: EXLVDVBAT pin low voltage detection interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IDTSEL
+    description: EXLVDVBAT Pin Low Voltage Detect Interrupt Generation Condition Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: VBTLVDICR_IDTSEL
+fieldset/VBTLVDSR:
+  description: EXLVDVBAT Circuit Status Register.
+  bit_size: 8
+  fields:
+  - name: DET
+    description: |
+      EXLVDVBAT Pin Low Voltage Detect Flag.
+      0: EXLVDVBAT pin low voltage not detected.
+      1: EXLVDVBAT pin low voltage detected.
+    bit_offset: 1
+    bit_size: 1
+  - name: MON
+    description: |
+      EXLVDVBAT Pin Low Voltage Monitor Flag.
+      0: EXLVDVBAT < Vdet_lvdvbat.
+      1: EXLVDVBAT ≥ Vdet_lvdvbat or MON is disabled.
+    bit_offset: 5
+    bit_size: 1
+fieldset/VRTCMPCR:
+  description: VRTC Comparator Control Register.
+  bit_size: 8
+  fields:
+  - name: CMPE
+    description: |
+      VRTC Pin Low Voltage Detect Circuit Output Enable.
+      0: VRTC pin low voltage detect circuit output disabled.
+      1: VRTC pin low voltage detect circuit output enabled.
+    bit_offset: 0
+    bit_size: 1
+fieldset/VRTLVDCR:
+  description: LVDVRTC Circuit Control Register.
+  bit_size: 8
+  fields:
+  - name: LVDE
+    description: |
+      VRTC Pin Low Voltage Detect Enable.
+      0: VRTC pin low voltage detection disabled.
+      1: VRTC pin low voltage detection enabled.
+    bit_offset: 4
+    bit_size: 1
+  - name: LVL
+    description: VRTC Pin Low Voltage Detect Level Select.
+    bit_offset: 6
+    bit_size: 2
+    enum: VRTLVDCR_LVL
+fieldset/VRTLVDICR:
+  description: VRTC Pin Low Voltage Detect Interrupt Control Register.
+  bit_size: 8
+  fields:
+  - name: IE
+    description: |
+      VRTC Pin Low Voltage Detect Interrupt Enable.
+      0: VRTC pin low voltage detection interrupt disabled.
+      1: VRTC pin low voltage detection interrupt enabled.
+    bit_offset: 0
+    bit_size: 1
+  - name: IDTSEL
+    description: VRTC Pin Low Voltage Detect Interrupt Generation Condition Select.
+    bit_offset: 4
+    bit_size: 2
+    enum: VRTLVDICR_IDTSEL
+fieldset/VRTSR:
+  description: VRTC Status Register.
+  bit_size: 8
+  fields:
+  - name: PORDET
+    description: |
+      VRTC-domain Power-on Reset Detect Flag.
+      0: VRTC-domain power-on reset not detected.
+      1: VRTC-domain power-on reset detected.
+    bit_offset: 0
+    bit_size: 1
+  - name: DET
+    description: |
+      VRTC Voltage Variation Detection Flag.
+      0: Vdet_vrtc crossing not detected.
+      1: Vdet_vrtc crossing detected.
+    bit_offset: 1
+    bit_size: 1
+  - name: VRTVLD
+    description: |
+      VRTC-domain Valid.
+      0: VRTC-domain area not valid.
+      1: VRTC-domain area valid.
+    bit_offset: 4
+    bit_size: 1
+  - name: MON
+    description: |
+      VRTC Signal Monitor Flag.
+      0: VRTC < Vdet_vrtc.
+      1: VRTC ≥ Vdet_vrtc or MON is disabled.
+    bit_offset: 5
+    bit_size: 1
+enum/CKODIV:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: x 1/1.
+    value: 0
+  - name: V_001
+    description: x 1/2.
+    value: 1
+  - name: V_010
+    description: x 1/4.
+    value: 2
+  - name: V_011
+    description: x 1/8.
+    value: 3
+  - name: V_100
+    description: x 1/16.
+    value: 4
+  - name: V_101
+    description: x 1/32.
+    value: 5
+  - name: V_110
+    description: x 1/64.
+    value: 6
+  - name: V_111
+    description: x 1/128.
+    value: 7
+enum/CKOSEL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: HOCO (value after reset).
+    value: 0
+  - name: V_001
+    description: MOCO.
+    value: 1
+  - name: V_010
+    description: LOCO.
+    value: 2
+  - name: V_011
+    description: MOSC.
+    value: 3
+  - name: V_100
+    description: SOSC.
+    value: 4
+  - name: V_101
+    description: PLL.
+    value: 5
+enum/DCLKDIS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Debug clock does not stop.
+    value: 0
+enum/EXLVDICR_IDTSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: When EXLVD > Vdet_exlvd (rise) is detected.
+    value: 0
+  - name: V_01
+    description: When EXLVD < Vdet_exlvd (fall) is detected.
+    value: 1
+  - name: V_10
+    description: When fall and rise are detected.
+    value: 2
+  - name: V_11
+    description: Settings prohibited.
+    value: 3
+enum/HSTS:
+  bit_size: 3
+  variants:
+  - name: V_011
+    description: Before starting high-speed on-chip oscillator by setting HOCOCR.HCSTP bit, the HSTS[2:0] bits must be set to 011b beforehand. Wait time = 46 cycles (5.75 µs) Wait time is calculated at MOCO = 8 MHz (typically 0.125 µs).
+    value: 3
+  - name: V_101
+    description: Value after reset.
+    value: 5
+enum/ICK:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: x 1/1.
+    value: 0
+  - name: V_001
+    description: x 1/2.
+    value: 1
+  - name: V_010
+    description: x 1/4.
+    value: 2
+  - name: V_011
+    description: x 1/8.
+    value: 3
+  - name: V_100
+    description: x 1/16.
+    value: 4
+  - name: V_101
+    description: x 1/32.
+    value: 5
+  - name: V_110
+    description: x 1/64.
+    value: 6
+enum/LCDSCKSEL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: LOCO.
+    value: 0
+  - name: V_001
+    description: SOSC.
+    value: 1
+  - name: V_010
+    description: MOSC.
+    value: 2
+  - name: V_011
+    description: MOCO.
+    value: 3
+  - name: V_100
+    description: HOCO.
+    value: 4
+enum/LVD1CR1_IDTSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: When VCC >= Vdet1 (rise) is detected.
+    value: 0
+  - name: V_01
+    description: When VCC < Vdet1 (fall) is detected.
+    value: 1
+  - name: V_10
+    description: When fall and rise are detected.
+    value: 2
+  - name: V_11
+    description: Settings prohibited.
+    value: 3
+enum/LVD1LVL:
+  bit_size: 5
+  variants:
+  - name: V_0x00
+    description: Vdet1_0.
+    value: 0
+  - name: V_0x01
+    description: Vdet1_1.
+    value: 1
+  - name: V_0x02
+    description: Vdet1_2.
+    value: 2
+  - name: V_0x03
+    description: Vdet1_3.
+    value: 3
+  - name: V_0x04
+    description: Vdet1_4.
+    value: 4
+  - name: V_0x05
+    description: Vdet1_5.
+    value: 5
+  - name: V_0x06
+    description: Vdet1_6.
+    value: 6
+  - name: V_0x07
+    description: Vdet1_7.
+    value: 7
+  - name: V_0x08
+    description: Vdet1_8.
+    value: 8
+  - name: V_0x09
+    description: Vdet1_9.
+    value: 9
+  - name: V_0x0A
+    description: Vdet1_A.
+    value: 10
+  - name: V_0x0B
+    description: Vdet1_B.
+    value: 11
+  - name: V_0x0C
+    description: Vdet1_C.
+    value: 12
+  - name: V_0x0D
+    description: Vdet1_D.
+    value: 13
+  - name: V_0x0E
+    description: Vdet1_E.
+    value: 14
+  - name: V_0x0F
+    description: Vdet1_F.
+    value: 15
+enum/LVD2CR1_IDTSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: When VCC >= Vdet2 (rise) is detected.
+    value: 0
+  - name: V_01
+    description: When VCC < Vdet2 (fall) is detected.
+    value: 1
+  - name: V_10
+    description: When fall and rise are detected.
+    value: 2
+  - name: V_11
+    description: Settings prohibited.
+    value: 3
+enum/LVD2LVL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Vdet2_0.
+    value: 0
+  - name: V_001
+    description: Vdet2_1.
+    value: 1
+  - name: V_010
+    description: Vdet2_2.
+    value: 2
+  - name: V_011
+    description: Vdet2_3.
+    value: 3
+enum/MSTS:
+  bit_size: 4
+  variants:
+  - name: V_0x0
+    description: Wait time = 2 cycles (0.25 us).
+    value: 0
+  - name: V_0x1
+    description: Wait time = 1024 cycles (128 us).
+    value: 1
+  - name: V_0x2
+    description: Wait time = 2048 cycles (256 us).
+    value: 2
+  - name: V_0x3
+    description: Wait time = 4096 cycles (512 us).
+    value: 3
+  - name: V_0x4
+    description: Wait time = 8192 cycles (1024 us).
+    value: 4
+  - name: V_0x5
+    description: Wait time = 16384 cycles (2048 us).
+    value: 5
+  - name: V_0x6
+    description: Wait time = 32768 cycles (4096 us).
+    value: 6
+  - name: V_0x7
+    description: Wait time = 65536 cycles (8192 us).
+    value: 7
+  - name: V_0x8
+    description: Wait time = 131072 cycles (16384 us).
+    value: 8
+  - name: V_0x9
+    description: Wait time = 262144 cycles (32768 us).
+    value: 9
+enum/OPCM:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: High-speed mode.
+    value: 0
+  - name: V_01
+    description: Middle-speed mode.
+    value: 1
+  - name: V_10
+    description: Setting prohibited.
+    value: 2
+  - name: V_11
+    description: Low-speed mode.
+    value: 3
+enum/PCKB:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: x 1/1.
+    value: 0
+  - name: V_001
+    description: x 1/2.
+    value: 1
+  - name: V_010
+    description: x 1/4.
+    value: 2
+  - name: V_011
+    description: x 1/8.
+    value: 3
+  - name: V_100
+    description: x 1/16.
+    value: 4
+  - name: V_101
+    description: x 1/32.
+    value: 5
+  - name: V_110
+    description: x 1/64.
+    value: 6
+enum/PCKD:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: x 1/1.
+    value: 0
+  - name: V_001
+    description: x 1/2.
+    value: 1
+  - name: V_010
+    description: x 1/4.
+    value: 2
+  - name: V_011
+    description: x 1/8.
+    value: 3
+  - name: V_100
+    description: x 1/16.
+    value: 4
+  - name: V_101
+    description: x 1/32.
+    value: 5
+  - name: V_110
+    description: x 1/64.
+    value: 6
+enum/PLLMUL:
+  bit_size: 8
+  variants:
+  - name: V_0x9E
+    description: × 732 (value after reset).
+    value: 158
+  - name: V_0xCF
+    description: × 781.
+    value: 207
+enum/PSMC:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: All SRAMs are on in Software Standby mode.
+    value: 0
+  - name: V_01
+    description: 8 KB SRAM (0x2000_4000 to 0x2000_5FFF) is on in Software Standby mode.
+    value: 1
+  - name: V_10
+    description: Setting prohibited.
+    value: 2
+  - name: V_11
+    description: Setting prohibited.
+    value: 3
+enum/SCKSCR_CKSEL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: HOCO.
+    value: 0
+  - name: V_001
+    description: MOCO.
+    value: 1
+  - name: V_010
+    description: LOCO.
+    value: 2
+  - name: V_011
+    description: Main clock oscillator (MOSC).
+    value: 3
+  - name: V_100
+    description: Sub-clock oscillator (SOSC).
+    value: 4
+  - name: V_101
+    description: Setting prohibited.
+    value: 5
+  - name: V_110
+    description: Setting prohibited.
+    value: 6
+  - name: V_111
+    description: Setting prohibited.
+    value: 7
+enum/SDADCCKCR_CKSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: MOSC.
+    value: 0
+  - name: V_01
+    description: HOCO.
+    value: 1
+  - name: V_10
+    description: PLL.
+    value: 2
+enum/SODRV:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Normal Mode.
+    value: 0
+  - name: V_01
+    description: Low Power Mode 1.
+    value: 1
+  - name: V_10
+    description: Low Power Mode 2.
+    value: 2
+  - name: V_11
+    description: Low Power Mode 3.
+    value: 3
+enum/SOSCMRG:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Normal current.
+    value: 0
+  - name: V_01
+    description: Lower margin check.
+    value: 1
+  - name: V_10
+    description: Upper margin check.
+    value: 2
+  - name: V_11
+    description: Setting prohibited.
+    value: 3
+enum/VBTLVDCR_LVL:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: 2.2 V.
+    value: 0
+  - name: V_001
+    description: 2.4 V.
+    value: 1
+  - name: V_010
+    description: 2.6 V.
+    value: 2
+  - name: V_011
+    description: 2.7 V.
+    value: 3
+  - name: V_100
+    description: 2.8 V.
+    value: 4
+  - name: V_101
+    description: 2.9 V.
+    value: 5
+  - name: V_110
+    description: 3.1 V.
+    value: 6
+  - name: V_111
+    description: Setting prohibited.
+    value: 7
+enum/VBTLVDICR_IDTSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: When EXLVDVBAT > Vdet_lvdvbat (rise) is detected.
+    value: 0
+  - name: V_01
+    description: When EXLVDVBAT < Vdet_lvdvbat (fall) is detected.
+    value: 1
+  - name: V_10
+    description: When fall and rise are detected.
+    value: 2
+  - name: V_11
+    description: Settings prohibited.
+    value: 3
+enum/VRTLVDCR_LVL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: 2.2 V.
+    value: 0
+  - name: V_01
+    description: 2.4 V.
+    value: 1
+  - name: V_10
+    description: 2.6 V.
+    value: 2
+  - name: V_11
+    description: 2.8 V.
+    value: 3
+enum/VRTLVDICR_IDTSEL:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: When VRTC > Vdet_vrtc (rise) is detected.
+    value: 0
+  - name: V_01
+    description: When VRTC < Vdet_vrtc (fall) is detected.
+    value: 1
+  - name: V_10
+    description: When fall and rise are detected.
+    value: 2
+  - name: V_11
+    description: Settings prohibited.
+    value: 3

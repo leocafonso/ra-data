@@ -6,3 +6,103 @@ transforms:
   - !DeleteFieldsets
     from: .*
     useless: true
+  # Rename SYSTEM block to SYSC for consistency (some chips use SYSTEM, others SYSC)
+  - !Rename
+    from: "block/SYSTEM"
+    to: "block/SYSC"
+  # Array candidates - DPSIER/DPSIFR/DPSIEGR are consecutive registers in many chips
+  # But their strides vary (1 or 4 bytes), so we use Cursed mode
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: DPSIER\d+
+    to: DPSIER
+    mode: Cursed
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: DPSIFR\d+
+    to: DPSIFR
+    mode: Cursed
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: DPSIEGR\d+
+    to: DPSIEGR
+    mode: Cursed
+  # SNZEDCR and SNZREQCR arrays
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: SNZEDCR\d+
+    to: SNZEDCR
+    mode: Cursed
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: SNZREQCR\d+
+    to: SNZREQCR
+    mode: Cursed
+  # VBTBKR battery backup registers
+  - !MakeRegisterArray
+    blocks: SYSC
+    from: VBTBKR\d+
+    to: VBTBKR
+    mode: Cursed
+  # Field arrays for SNZREQEN bits (IRQ snooze request enables)
+  - !MakeFieldArray
+    fieldsets: SNZREQCR.*
+    from: SNZREQEN\d+
+    to: SNZREQEN
+    mode: Cursed
+  # Field arrays for SNZEDCR bits (snooze end detect)
+  - !MakeFieldArray
+    fieldsets: SNZEDCR.*
+    from: SNZEDEN\d+
+    to: SNZEDEN
+    mode: Cursed
+  - !MakeFieldArray
+    fieldsets: SNZEDCR.*
+    from: AGT\d+UNFED
+    to: AGTUNFED
+    mode: Cursed
+  # Field arrays for DPSIER bits (deep standby interrupt enable)
+  - !MakeFieldArray
+    fieldsets: DPSIER.*
+    from: DIRQ\d+E
+    to: DIRQE
+    mode: Cursed
+  # Field arrays for DPSIFR bits (deep standby interrupt flag)
+  - !MakeFieldArray
+    fieldsets: DPSIFR.*
+    from: DIRQ\d+F
+    to: DIRQF
+    mode: Cursed
+  # Field arrays for DPSIEGR bits (deep standby edge)
+  - !MakeFieldArray
+    fieldsets: DPSIEGR.*
+    from: DIRQ\d+EG
+    to: DIRQEG
+    mode: Cursed
+  # Non-secure attribute bits in various SAR registers
+  - !MakeFieldArray
+    fieldsets: .*SAR
+    from: NONSEC\d+
+    to: NONSEC
+    mode: Cursed
+  # Module stop bits
+  - !MakeFieldArray
+    fieldsets: MSTPCR.*
+    from: MSTPD\d+
+    to: MSTPD
+    mode: Cursed
+  - !MakeFieldArray
+    fieldsets: MSTPCR.*
+    from: MSTPC\d+
+    to: MSTPC
+    mode: Cursed
+  - !MakeFieldArray
+    fieldsets: MSTPCR.*
+    from: MSTPB\d+
+    to: MSTPB
+    mode: Cursed
+  - !MakeFieldArray
+    fieldsets: MSTPCR.*
+    from: MSTPA\d+
+    to: MSTPA
+    mode: Cursed
