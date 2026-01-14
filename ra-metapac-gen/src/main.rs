@@ -364,6 +364,7 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
     writeln!(file, "pub const NAME: &str = \"{}\";", chip.name)?;
     writeln!(file, "pub const FAMILY: &str = \"{}\";", chip.family)?;
     writeln!(file, "pub const CORE: &str = \"{}\";", chip.core)?;
+    writeln!(file, "pub const INTERRUPT_COUNT: usize = {};", interrupt_count)?;
 
     writeln!(file, "pub const MEMORY: &[MemoryRegion] = &[")?;
     for mem in &chip.memory {
@@ -396,6 +397,22 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, block_map: &BTreeMap<String, 
         } else {
             writeln!(file, "        bit_width: None,")?;
         }
+        writeln!(file, "    }},")?;
+    }
+    writeln!(file, "];")?;
+
+    // Generate EVENTS metadata
+    writeln!(file, "pub const EVENTS: &[Event] = &[")?;
+    for irq in &chip.interrupts {
+        let name = heck::AsSnakeCase(&irq.name).to_string().to_uppercase();
+        let irq_slots = match &irq.irq_number {
+            Some(nums) => format!("&[{}]", nums.iter().map(|n| n.to_string()).collect::<Vec<_>>().join(", ")),
+            None => "&[]".to_string(),
+        };
+        writeln!(file, "    Event {{")?;
+        writeln!(file, "        name: \"{}\",", name)?;
+        writeln!(file, "        id: {},", irq.value)?;
+        writeln!(file, "        irq_slots: {},", irq_slots)?;
         writeln!(file, "    }},")?;
     }
     writeln!(file, "];")?;

@@ -22,6 +22,17 @@ pub struct Mstp {
     pub bit: u32,
 }
 
+/// Event that can be mapped to an ICU IELSR slot.
+/// For devices with grouped interrupts (RA2 family), `irq_slots` contains
+/// the allowed IELSR indices. For other devices, it's empty (any slot allowed).
+#[derive(Copy, Clone)]
+pub struct Event {
+    pub name: &'static str,
+    pub id: u16,
+    /// Allowed IELSR slot indices. Empty means any slot is allowed.
+    pub irq_slots: &'static [u8],
+}
+
 #[derive(Copy, Clone)]
 pub struct Pin {
     pub position: &'static str,
