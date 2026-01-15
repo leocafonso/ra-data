@@ -1,0 +1,218 @@
+block/PORT:
+  description: Port 0 Control Registers.
+  items:
+  - name: PCNTR1
+    description: Port Control Register 1.
+    byte_offset: 0
+    fieldset: PCNTR1
+  - name: PODR
+    description: Output data register.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: PODR
+  - name: PDR
+    description: Data direction register.
+    byte_offset: 2
+    bit_size: 16
+    fieldset: PDR
+  - name: PCNTR2
+    description: Port Control Register 2.
+    byte_offset: 4
+    access: Read
+    fieldset: PCNTR2
+  - name: PIDR
+    description: Input data register.
+    byte_offset: 6
+    access: Read
+    bit_size: 16
+    fieldset: PIDR
+  - name: PCNTR3
+    description: Port Control Register 3.
+    byte_offset: 8
+    access: Write
+    fieldset: PCNTR3
+  - name: PORR
+    description: Output reset register.
+    byte_offset: 8
+    access: Write
+    bit_size: 16
+    fieldset: PORR
+  - name: POSR
+    description: Output set register.
+    byte_offset: 10
+    access: Write
+    bit_size: 16
+    fieldset: POSR
+fieldset/PCNTR1:
+  description: Port Control Register 1.
+  fields:
+  - name: PDR
+    description: Pmn Direction.
+    bit_offset: 0
+    bit_size: 16
+    enum: PCNTR1_PDR
+  - name: PODR
+    description: Pmn Output Data.
+    bit_offset: 16
+    bit_size: 16
+    enum: PCNTR1_PODR
+fieldset/PCNTR2:
+  description: Port Control Register 2.
+  fields:
+  - name: PIDR
+    description: Pmn Input Data.
+    bit_offset: 0
+    bit_size: 16
+    enum: PCNTR2_PIDR
+  - name: Reserved
+    description: These bits are read as 0000000000000000.
+    bit_offset: 16
+    bit_size: 16
+fieldset/PCNTR3:
+  description: Port Control Register 3.
+  fields:
+  - name: POSR
+    description: Pmn Output Set.
+    bit_offset: 0
+    bit_size: 16
+    enum: PCNTR3_POSR
+  - name: PORR
+    description: Pmn Output Reset.
+    bit_offset: 16
+    bit_size: 16
+    enum: PCNTR3_PORR
+fieldset/PDR:
+  description: Data direction register.
+  bit_size: 16
+  fields:
+  - name: PDR
+    description: Pmn Direction.
+    bit_offset: 0
+    bit_size: 16
+    enum: PDR_PDR
+fieldset/PIDR:
+  description: Input data register.
+  bit_size: 16
+  fields:
+  - name: PIDR
+    description: Pmn Input Data.
+    bit_offset: 0
+    bit_size: 16
+    enum: PIDR_PIDR
+fieldset/PODR:
+  description: Output data register.
+  bit_size: 16
+  fields:
+  - name: PODR
+    description: Pmn Output Data.
+    bit_offset: 0
+    bit_size: 16
+    enum: PODR_PODR
+fieldset/PORR:
+  description: Output reset register.
+  bit_size: 16
+  fields:
+  - name: PORR
+    description: Pmn Output Reset.
+    bit_offset: 0
+    bit_size: 16
+    enum: PORR_PORR
+fieldset/POSR:
+  description: Output set register.
+  bit_size: 16
+  fields:
+  - name: POSR
+    description: Pmn Output Set.
+    bit_offset: 0
+    bit_size: 16
+    enum: POSR_POSR
+enum/PCNTR1_PDR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Input (functions as an input pin).
+    value: 0
+  - name: V_1
+    description: Output (functions as an output pin).
+    value: 1
+enum/PCNTR1_PODR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Low output.
+    value: 0
+  - name: V_1
+    description: High output.
+    value: 1
+enum/PCNTR2_PIDR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Low input.
+    value: 0
+  - name: V_1
+    description: High input.
+    value: 1
+enum/PCNTR3_PORR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: No affect to output.
+    value: 0
+  - name: V_1
+    description: Low output.
+    value: 1
+enum/PCNTR3_POSR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: No affect to output.
+    value: 0
+  - name: V_1
+    description: High output.
+    value: 1
+enum/PDR_PDR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Input (functions as an input pin).
+    value: 0
+  - name: V_1
+    description: Output (functions as an output pin).
+    value: 1
+enum/PIDR_PIDR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Low input.
+    value: 0
+  - name: V_1
+    description: High input.
+    value: 1
+enum/PODR_PODR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: Low output.
+    value: 0
+  - name: V_1
+    description: High output.
+    value: 1
+enum/PORR_PORR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: No affect to output.
+    value: 0
+  - name: V_1
+    description: Low output.
+    value: 1
+enum/POSR_POSR:
+  bit_size: 16
+  variants:
+  - name: V_0
+    description: No affect to output.
+    value: 0
+  - name: V_1
+    description: High output.
+    value: 1

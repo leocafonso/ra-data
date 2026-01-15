@@ -79,8 +79,12 @@ pub fn generate(
             .map(|(_, v)| v);
 
         for p in &parsed.peripherals {
-            // Normalize peripheral name (e.g., SYSTEM -> SYSC)
-            let peri_name = if p.name == "SYSTEM" { "SYSC" } else { &p.name };
+            // Normalize peripheral name (e.g., SYSTEM -> SYSC, PFS_A/PFS_B/PFS_NS -> PFS)
+            let peri_name = match p.name.as_str() {
+                "SYSTEM" => "SYSC",
+                "PFS_A" | "PFS_B" | "PFS_NS" => "PFS",
+                _ => &p.name,
+            };
             let key = format!("{}:{}", name, peri_name);
             if let Some(info) = PERIMAP.get(&key) {
                 let reg_key = format!("{}_{}", info.peri_type, info.version);

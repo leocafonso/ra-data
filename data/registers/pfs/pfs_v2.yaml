@@ -1,0 +1,65 @@
+# PFS version for RA0 (RA0E1, RA0L1, RA0E2) - 16-bit Pin Function Select registers
+# These chips have a simpler 16-bit PFS_A peripheral
+
+enum/PSEL_A:
+  bit_size: 3
+  variants:
+  - name: NONE
+    value: 0
+  - name: AGT
+    value: 1
+  - name: SCI
+    value: 7
+
+fieldset/PmnPFS_A:
+  bit_size: 16
+  fields:
+  - name: PODR
+    bit_offset: 0
+    bit_size: 1
+    description: Port Output Data
+  - name: PIDR
+    bit_offset: 1
+    bit_size: 1
+    description: Pin State Monitor
+  - name: PDR
+    bit_offset: 2
+    bit_size: 1
+    description: Pin Direction (0:Input, 1:Output)
+  - name: PSEL
+    bit_offset: 8
+    bit_size: 3
+    description: Peripheral Select
+    enum: PSEL_A
+  - name: PMC
+    bit_offset: 15
+    bit_size: 1
+    description: Pin Mode Control (0:GPIO, 1:Peripheral)
+
+block/PFS:
+  items:
+  - name: PmnPFS
+    description: Pin Function Select Register
+    byte_offset: 16  # RA0 PFS starts at offset 0x10
+    bit_size: 16
+    array:
+      len: 160  # Port 0-9, 16 pins each
+      stride: 2
+    fieldset: PmnPFS_A
+  - name: PWPR
+    description: Write-Protect Register
+    byte_offset: 320  # 0x140
+    bit_size: 8
+    fieldset: PWPR
+
+fieldset/PWPR:
+  bit_size: 8
+  fields:
+  - name: PFSWE
+    bit_offset: 6
+    bit_size: 1
+    description: PFS Register Write Enable
+  - name: B0WI
+    bit_offset: 7
+    bit_size: 1
+    description: PFSWE Bit Write Disable

@@ -6,11 +6,35 @@ pub struct PeriInfo {
 }
 
 pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
-    // GPIO mappings
-    ("R7FA0.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v3" }),
-    ("R7FA8.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
-    ("R7FA6T2.*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v2" }),
-    (".*:PORT\\d+", PeriInfo { peri_type: "gpio", version: "v1" }),
+    // PORT (GPIO) mappings
+    // RA0 family - each subfamily has different pin configs
+    ("R7FA0E1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra0e1" }),
+    ("R7FA0E2.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra0e2" }),
+    ("R7FA0L1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra0l1" }),
+    // RA2 family
+    ("R7FA2A1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra2a1" }),
+    ("R7FA2A2.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra2a2" }),
+    ("R7FA2[ELT].*:PORT\\d+", PeriInfo { peri_type: "port", version: "v1" }),
+    // RA4 family
+    ("R7FA4M1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra4m1" }),
+    ("R7FA4W1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra4w1" }),
+    ("R7FA4[CELT].*:PORT\\d+", PeriInfo { peri_type: "port", version: "v1" }),
+    // RA6 family
+    ("R7FA6[MT]1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra4w1" }), // same as RA4W1
+    ("R7FA6T2.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra6t2" }),
+    ("R7FA6[EM].*:PORT\\d+", PeriInfo { peri_type: "port", version: "v1" }),
+    ("R7FA6T3.*:PORT\\d+", PeriInfo { peri_type: "port", version: "v1" }),
+    // RA8 family
+    ("R7FA8D1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra8d1" }),
+    ("R7FA8E.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra8e1" }),
+    ("R7FA8[MT]1.*:PORT\\d+", PeriInfo { peri_type: "port", version: "ra8m1" }),
+    // RKA8 family
+    ("R7KA8.*:PORT\\d+", PeriInfo { peri_type: "port", version: "rka8" }),
+
+    // PFS (Pin Function Select)
+    // RA0 family uses 16-bit PFS_A (normalized to PFS in generate.rs)
+    ("R7FA0.*:PFS", PeriInfo { peri_type: "pfs", version: "v2" }),
+    // All other chips use 32-bit PFS
     (".*:PFS", PeriInfo { peri_type: "pfs", version: "v1" }),
 
     // Timer mappings (General PWM Timer)

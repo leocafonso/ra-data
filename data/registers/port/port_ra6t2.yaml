@@ -1,0 +1,174 @@
+block/PORT:
+  description: Port 0 Control Registers.
+  items:
+  - name: PCNTR1
+    description: Port Control Register 1.
+    byte_offset: 0
+    fieldset: PCNTR1
+  - name: PDR
+    description: Port Control Register 1.
+    byte_offset: 0
+    bit_size: 16
+    fieldset: PDR
+  - name: PODR
+    description: Port Control Register 1.
+    byte_offset: 2
+    bit_size: 16
+    fieldset: PODR
+  - name: PCNTR2
+    description: Port Control Register 2.
+    byte_offset: 4
+    access: Read
+    fieldset: PCNTR2
+  - name: PIDR
+    description: Port Control Register 2.
+    byte_offset: 4
+    access: Read
+    bit_size: 16
+    fieldset: PIDR
+  - name: PCNTR3
+    description: Port Control Register 3.
+    byte_offset: 8
+    access: Write
+    fieldset: PCNTR3
+  - name: POSR
+    description: Port Control Register 3.
+    byte_offset: 8
+    access: Write
+    bit_size: 16
+    fieldset: POSR
+  - name: PORR
+    description: Port Control Register 3.
+    byte_offset: 10
+    access: Write
+    bit_size: 16
+    fieldset: PORR
+fieldset/PCNTR1:
+  description: Port Control Register 1.
+  fields:
+  - name: PDR
+    description: |
+      Pmn Direction.
+      0: Input (functions as an input pin).
+      1: Output (functions as an output pin).
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+  - name: PODR
+    description: |
+      Pmn Output Data.
+      0: Low output.
+      1: High output.
+    bit_offset: 16
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PCNTR2:
+  description: Port Control Register 2.
+  fields:
+  - name: PIDR
+    description: |
+      Pmn State.
+      0: Low level.
+      1: High level.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PCNTR3:
+  description: Port Control Register 3.
+  fields:
+  - name: POSR
+    description: |
+      Pmn Output Set.
+      0: No effect on output.
+      1: High output.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+  - name: PORR
+    description: |
+      Pmn Output Reset.
+      0: No effect on output.
+      1: Low output.
+    bit_offset: 16
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PDR:
+  description: Port Control Register 1.
+  bit_size: 16
+  fields:
+  - name: PDR
+    description: |
+      Pmn Direction.
+      0: Input (functions as an input pin).
+      1: Output (functions as an output pin).
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PIDR:
+  description: Port Control Register 2.
+  bit_size: 16
+  fields:
+  - name: PIDR
+    description: |
+      Pmn State.
+      0: Low level.
+      1: High level.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PODR:
+  description: Port Control Register 1.
+  bit_size: 16
+  fields:
+  - name: PODR
+    description: |
+      Pmn Output Data.
+      0: Low output.
+      1: High output.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/PORR:
+  description: Port Control Register 3.
+  bit_size: 16
+  fields:
+  - name: PORR
+    description: |
+      Pmn Output Reset.
+      0: No effect on output.
+      1: Low output.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1
+fieldset/POSR:
+  description: Port Control Register 3.
+  bit_size: 16
+  fields:
+  - name: POSR
+    description: |
+      Pmn Output Set.
+      0: No effect on output.
+      1: High output.
+    bit_offset: 0
+    bit_size: 1
+    array:
+      len: 16
+      stride: 1

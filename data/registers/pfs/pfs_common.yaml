@@ -1,0 +1,136 @@
+# Generic PFS - Pin Function Select Register
+# This is a simplified template for PFS registers.
+# Each chip has different available pins, but the register structure is similar.
+#
+# PFS registers are 32-bit with 3 access modes:
+# - Full 32-bit access (PFS)
+# - 16-bit half access (PFS_HA) at offset +2
+# - 8-bit byte access (PFS_BY) at offset +3
+#
+# The actual pin registers are defined per-chip since available pins vary.
+
+block/PFS:
+  description: Pin Function Select Register block.
+  items: []  # Registers are per-pin and defined by chip data
+
+fieldset/PFS:
+  description: Pin Function Select Register (32-bit).
+  fields:
+  - name: PODR
+    description: Port Output Data
+    bit_offset: 0
+    bit_size: 1
+  - name: PIDR
+    description: Port Input Data (read-only)
+    bit_offset: 1
+    bit_size: 1
+  - name: PDR
+    description: Port Direction (0=input, 1=output)
+    bit_offset: 2
+    bit_size: 1
+  - name: PCR
+    description: Pull-up Control
+    bit_offset: 4
+    bit_size: 1
+  - name: NCODR
+    description: N-Channel Open Drain Control
+    bit_offset: 6
+    bit_size: 1
+  - name: DSCR
+    description: Drive Strength Control
+    bit_offset: 10
+    bit_size: 2
+  - name: EOR
+    description: Event on Rising
+    bit_offset: 12
+    bit_size: 1
+  - name: EOF
+    description: Event on Falling
+    bit_offset: 13
+    bit_size: 1
+  - name: ISEL
+    description: IRQ Input Enable
+    bit_offset: 14
+    bit_size: 1
+  - name: ASEL
+    description: Analog Input Enable
+    bit_offset: 15
+    bit_size: 1
+  - name: PMR
+    description: Port Mode Control (0=GPIO, 1=peripheral)
+    bit_offset: 16
+    bit_size: 1
+  - name: PSEL
+    description: Peripheral Function Select
+    bit_offset: 24
+    bit_size: 5
+
+fieldset/PFS_HA:
+  description: Pin Function Select Register (16-bit half access).
+  bit_size: 16
+  fields:
+  - name: PODR
+    description: Port Output Data
+    bit_offset: 0
+    bit_size: 1
+  - name: PIDR
+    description: Port Input Data (read-only)
+    bit_offset: 1
+    bit_size: 1
+  - name: PDR
+    description: Port Direction (0=input, 1=output)
+    bit_offset: 2
+    bit_size: 1
+  - name: PCR
+    description: Pull-up Control
+    bit_offset: 4
+    bit_size: 1
+  - name: NCODR
+    description: N-Channel Open Drain Control
+    bit_offset: 6
+    bit_size: 1
+  - name: DSCR
+    description: Drive Strength Control
+    bit_offset: 10
+    bit_size: 2
+  - name: EOR
+    description: Event on Rising
+    bit_offset: 12
+    bit_size: 1
+  - name: EOF
+    description: Event on Falling
+    bit_offset: 13
+    bit_size: 1
+  - name: ISEL
+    description: IRQ Input Enable
+    bit_offset: 14
+    bit_size: 1
+  - name: ASEL
+    description: Analog Input Enable
+    bit_offset: 15
+    bit_size: 1
+
+fieldset/PFS_BY:
+  description: Pin Function Select Register (8-bit byte access).
+  bit_size: 8
+  fields:
+  - name: PODR
+    description: Port Output Data
+    bit_offset: 0
+    bit_size: 1
+  - name: PIDR
+    description: Port Input Data (read-only)
+    bit_offset: 1
+    bit_size: 1
+  - name: PDR
+    description: Port Direction (0=input, 1=output)
+    bit_offset: 2
+    bit_size: 1
+  - name: PCR
+    description: Pull-up Control
+    bit_offset: 4
+    bit_size: 1
+  - name: NCODR
+    description: N-Channel Open Drain Control
+    bit_offset: 6
+    bit_size: 1

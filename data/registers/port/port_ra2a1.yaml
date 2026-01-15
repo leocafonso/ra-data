@@ -1,0 +1,37 @@
+block/PORT:
+  description: Port 0 Control Registers.
+  items:
+  - name: PCNTR1
+    description: Port Control Register 1.
+    byte_offset: 0
+  - name: PODR
+    description: Output data register.
+    byte_offset: 0
+    bit_size: 16
+  - name: PDR
+    description: Direction register.
+    byte_offset: 2
+    bit_size: 16
+  - name: PCNTR2
+    description: Port Control Register 2.
+    byte_offset: 4
+    access: Read
+  - name: PIDR
+    description: Input data register.
+    byte_offset: 6
+    access: Read
+    bit_size: 16
+  - name: PCNTR3
+    description: Port Control Register 3.
+    byte_offset: 8
+    access: Write
+  - name: PORR
+    description: Output reset register.
+    byte_offset: 8
+    access: Write
+    bit_size: 16
+  - name: POSR
+    description: Output set register.
+    byte_offset: 10
+    access: Write
+    bit_size: 16
