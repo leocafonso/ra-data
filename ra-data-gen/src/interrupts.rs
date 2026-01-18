@@ -25,6 +25,47 @@ pub fn parse_all() -> anyhow::Result<BTreeMap<String, Vec<Interrupt>>> {
     Ok(family_interrupts)
 }
 
+/// Parses an interrupt name like "GPT0_COUNTER_OVERFLOW" or "SCI1_RXI" into
+/// (peripheral, channel, signal) components.
+/// Returns (Some("GPT"), Some(0), Some("COUNTER_OVERFLOW")) for "GPT0_COUNTER_OVERFLOW"
+/// Returns (Some("SCI"), Some(1), Some("RXI")) for "SCI1_RXI"
+/// Returns (Some("DTC"), None, Some("COMPLETE")) for "DTC_COMPLETE"
+/// Returns (Some("ICU"), Some(0), Some("IRQ")) for "ICU_IRQ0"
+fn parse_interrupt_name(name: &str) -> (Option<String>, Option<u32>, Option<String>) {
+    // First try: pattern with channel number in peripheral name
+    // Patterns like: GPT0_xxx, SCI1_xxx, IIC0_xxx, SPI0_xxx, AGT1_xxx, ADC0_xxx
+    let re_with_channel = regex!(r"^([A-Z]+)(\d+)_(.+)$");
+    
+    if let Some(caps) = re_with_channel.captures(name) {
+        let peripheral = caps.get(1).map(|m| m.as_str().to_string());
+        let channel = caps.get(2).and_then(|m| m.as_str().parse::<u32>().ok());
+        let signal = caps.get(3).map(|m| m.as_str().to_string());
+        return (peripheral, channel, signal);
+    }
+    
+    // Second try: pattern with channel in signal name (e.g., ICU_IRQ0, LVD_LVD1)
+    // Handles: ICU_IRQ0 -> (ICU, 0, IRQ), LVD_LVD1 -> (LVD, 1, LVD)
+    let re_signal_channel = regex!(r"^([A-Z]+)_([A-Z]+)(\d+)$");
+    
+    if let Some(caps) = re_signal_channel.captures(name) {
+        let peripheral = caps.get(1).map(|m| m.as_str().to_string());
+        let signal = caps.get(2).map(|m| m.as_str().to_string());
+        let channel = caps.get(3).and_then(|m| m.as_str().parse::<u32>().ok());
+        return (peripheral, channel, signal);
+    }
+    
+    // Third try: simple pattern without channel (e.g., DTC_COMPLETE, GPT_UVWEDGE)
+    let re_no_channel = regex!(r"^([A-Z]+)_(.+)$");
+    
+    if let Some(caps) = re_no_channel.captures(name) {
+        let peripheral = caps.get(1).map(|m| m.as_str().to_string());
+        let signal = caps.get(2).map(|m| m.as_str().to_string());
+        return (peripheral, None, signal);
+    }
+    
+    (None, None, None)
+}
+
 fn parse_elc_h(path: &Path) -> anyhow::Result<Vec<Interrupt>> {
     let content = fs::read_to_string(path)?;
     let mut interrupts: BTreeMap<String, Interrupt> = BTreeMap::new();
@@ -58,6 +99,9 @@ fn parse_elc_h(path: &Path) -> anyhow::Result<Vec<Interrupt>> {
             (raw_name, None)
         };
 
+        // Parse peripheral, channel, and signal from the name
+        let (peripheral, channel, signal) = parse_interrupt_name(&name);
+
         if let Some(existing) = interrupts.get_mut(&name) {
             match (&mut existing.irq_number, irq_number) {
                 (Some(existing_irqs), Some(new_irqs)) => {
@@ -82,6 +126,9 @@ fn parse_elc_h(path: &Path) -> anyhow::Result<Vec<Interrupt>> {
                 value,
                 description: Some(description),
                 irq_number,
+                peripheral,
+                channel,
+                signal,
             });
         }
     }
@@ -104,11 +151,17 @@ fn parse_elc_h(path: &Path) -> anyhow::Result<Vec<Interrupt>> {
             value_str.parse()?
         };
 
+        // Parse peripheral, channel, and signal from the name
+        let (peripheral, channel, signal) = parse_interrupt_name(&name);
+
         interrupts.insert(name.clone(), Interrupt {
             name,
             value,
             description: Some(description),
             irq_number: None,
+            peripheral,
+            channel,
+            signal,
         });
     }
 

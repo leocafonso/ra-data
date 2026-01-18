@@ -14,7 +14,12 @@ pub struct Peripheral {
     pub version: &'static str,
     pub mstp: Option<Mstp>,
     pub bit_width: Option<u32>,
+    pub interrupts: &'static [PeripheralInterrupt],
 }
+
+/// Signal name for a peripheral interrupt (e.g., "COUNTER_OVERFLOW")
+/// The full event name can be constructed as "{peripheral_name}_{signal}"
+pub type PeripheralInterrupt = &'static str;
 
 #[derive(Copy, Clone)]
 pub struct Mstp {
@@ -31,6 +36,12 @@ pub struct Event {
     pub id: u16,
     /// Allowed IELSR slot indices. Empty means any slot is allowed.
     pub irq_slots: &'static [u8],
+    /// The peripheral this event belongs to (e.g., "GPT", "SCI", "IIC").
+    pub peripheral: Option<&'static str>,
+    /// The channel/instance number of the peripheral (e.g., 0 for GPT0).
+    pub channel: Option<u8>,
+    /// The specific event signal (e.g., "COUNTER_OVERFLOW", "RXI", "TXI").
+    pub signal: Option<&'static str>,
 }
 
 #[derive(Copy, Clone)]

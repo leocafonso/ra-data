@@ -19,6 +19,15 @@ pub struct Interrupt {
     pub description: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub irq_number: Option<Vec<u32>>,
+    /// The peripheral this interrupt belongs to (e.g., "GPT", "SCI", "IIC")
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub peripheral: Option<String>,
+    /// The channel/instance number of the peripheral (e.g., 0 for GPT0)
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub channel: Option<u32>,
+    /// The specific event signal (e.g., "COUNTER_OVERFLOW", "RXI", "TXI")
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub signal: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -38,6 +47,10 @@ pub struct Peripheral {
     pub version: String,
     pub mstp: Option<Mstp>,
     pub bit_width: Option<u32>,
+    /// Interrupts/events associated with this peripheral (signal names only)
+    /// The full event name can be constructed as "{peripheral_name}_{signal}"
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub interrupts: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

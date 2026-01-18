@@ -7,6 +7,38 @@ use crate::pinmapping::PinMappings;
 use crate::perimap::PERIMAP;
 use ra_data_types::*;
 
+/// Extract peripheral name and channel from a peripheral instance name
+/// e.g., "GPT0" -> ("GPT", Some(0)), "SCI1" -> ("SCI", Some(1)), "DTC" -> ("DTC", None)
+fn parse_peripheral_name(name: &str) -> (&str, Option<u32>) {
+    // Find where the digits start at the end
+    let digit_start = name.bytes().rposition(|b| !b.is_ascii_digit());
+    match digit_start {
+        Some(pos) if pos + 1 < name.len() => {
+            let (base, num_str) = name.split_at(pos + 1);
+            if let Ok(num) = num_str.parse::<u32>() {
+                return (base, Some(num));
+            }
+        }
+        _ => {}
+    }
+    (name, None)
+}
+
+/// Find interrupt signals that belong to a peripheral instance
+fn find_interrupts_for_peripheral(
+    interrupts: &[Interrupt],
+    peri_type: &str,
+    channel: Option<u32>,
+) -> Vec<String> {
+    interrupts
+        .iter()
+        .filter(|irq| {
+            irq.peripheral.as_deref() == Some(peri_type) && irq.channel == channel
+        })
+        .filter_map(|irq| irq.signal.clone())
+        .collect()
+}
+
 pub fn generate(
     rzones: &Rzones,
     pin_mappings: &PinMappings,
@@ -102,6 +134,7 @@ pub fn generate(
                         version: info.version.to_string(),
                         mstp,
                         bit_width,
+                        interrupts: Vec::new(),
                     });
                 }
             }
@@ -117,6 +150,13 @@ pub fn generate(
         };
 
         let interrupts = family_interrupts.get(&family_dir).cloned().unwrap_or_default();
+
+        // Link interrupts to peripherals
+        let peripherals = peripherals.into_iter().map(|mut peri| {
+            let (peri_type, channel) = parse_peripheral_name(&peri.name);
+            peri.interrupts = find_interrupts_for_peripheral(&interrupts, peri_type, channel);
+            peri
+        }).collect();
 
         let chip = Chip {
             name: name.clone(),
