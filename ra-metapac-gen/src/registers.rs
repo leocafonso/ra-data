@@ -21,7 +21,7 @@ pub fn generate(out_dir: &Path) -> anyhow::Result<BTreeMap<String, String>> {
     let common = out_dir.join("src/common.rs");
 
     // Must create `src` directory which common is eventually written to.
-    let peripherals_dir = out_dir.join("src/_peripherals");
+    let peripherals_dir = out_dir.join("src/peripherals");
     fs::create_dir_all(&peripherals_dir).unwrap();
 
     // Common module

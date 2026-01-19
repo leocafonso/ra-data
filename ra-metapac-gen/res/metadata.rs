@@ -1,4 +1,16 @@
 #[derive(Copy, Clone)]
+pub struct Metadata {
+    pub name: &'static str,
+    pub family: &'static str,
+    pub core: &'static str,
+    pub memory: &'static [MemoryRegion],
+    pub peripherals: &'static [Peripheral],
+    pub events: &'static [Event],
+    pub packages: &'static [Package],
+    pub interrupt_count: usize,
+}
+
+#[derive(Copy, Clone)]
 pub struct MemoryRegion {
     pub name: &'static str,
     pub kind: &'static str,

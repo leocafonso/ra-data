@@ -1,7 +1,11 @@
 #![no_std]
 
 pub mod common;
-pub mod _peripherals;
+
+/// Register definitions for peripherals.
+/// These are re-exported by the chip-specific pac module.
+#[cfg(feature = "pac")]
+pub mod peripherals;
 
 #[cfg(feature = "pac")]
 pub mod pac {
