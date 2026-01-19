@@ -5,23 +5,14 @@ use anyhow::Context;
 use crate::rzone::Rzones;
 use crate::pinmapping::PinMappings;
 use crate::perimap::PERIMAP;
+use crate::mstp;
 use ra_data_types::*;
 
 /// Extract peripheral name and channel from a peripheral instance name
 /// e.g., "GPT0" -> ("GPT", Some(0)), "SCI1" -> ("SCI", Some(1)), "DTC" -> ("DTC", None)
 fn parse_peripheral_name(name: &str) -> (&str, Option<u32>) {
-    // Find where the digits start at the end
-    let digit_start = name.bytes().rposition(|b| !b.is_ascii_digit());
-    match digit_start {
-        Some(pos) if pos + 1 < name.len() => {
-            let (base, num_str) = name.split_at(pos + 1);
-            if let Ok(num) = num_str.parse::<u32>() {
-                return (base, Some(num));
-            }
-        }
-        _ => {}
-    }
-    (name, None)
+    // Use the mstp module's parsing which handles complex naming like GPT320, ADC140, etc.
+    mstp::parse_peripheral_name(name)
 }
 
 /// Find interrupt signals that belong to a peripheral instance
@@ -43,7 +34,6 @@ pub fn generate(
     rzones: &Rzones,
     pin_mappings: &PinMappings,
     family_interrupts: &BTreeMap<String, Vec<Interrupt>>,
-    chip_mstp: &BTreeMap<String, BTreeMap<String, crate::mstp::MstpInfo>>,
     chip_timers: &BTreeMap<String, BTreeMap<String, u32>>,
 ) -> anyhow::Result<()> {
     let chips_dir = Path::new("./build/data/chips/");
@@ -101,10 +91,6 @@ pub fn generate(
         }
 
         let mut peripherals = Vec::new();
-        let mstp_map = chip_mstp.iter()
-            .find(|(k, _)| name.starts_with(*k) || 
-                 (name.len() >= 7 && k.len() >= 7 && name[..7] == k[..7]))
-            .map(|(_, v)| v);
         let timer_map = chip_timers.iter()
             .find(|(k, _)| name.starts_with(*k) ||
                  (name.len() >= 7 && k.len() >= 7 && name[..7] == k[..7]))
@@ -121,8 +107,9 @@ pub fn generate(
             if let Some(info) = PERIMAP.get(&key) {
                 let reg_key = format!("{}_{}", info.peri_type, info.version);
                 if available_registers.contains(&reg_key) {
-                    let mstp = mstp_map.and_then(|m| m.get(&p.name)).map(|m| Mstp {
-                        register: m.register.clone(),
+                    // Use the new MSTP computation based on bsp_module_stop.h rules
+                    let mstp = mstp::get_mstp_for_peripheral(&p.name, name).map(|m| Mstp {
+                        register: m.register,
                         bit: m.bit,
                     });
                     let bit_width = timer_map.and_then(|m| m.get(&p.name)).cloned();
