@@ -1,5 +1,72 @@
-block/GPT:
-  description: General PWM 32-bit Timer 0.
+block/GPT16E:
+  description: General PWM 16-bit Timer 0.
+  extends: GPT16
+  items:
+  - name: GTITC
+    description: General PWM Timer Interrupt and A/D Conversion Start Request Skipping Setting Register.
+    byte_offset: 68
+    fieldset: GTITC
+  - name: GTPDBR
+    description: General PWM Timer Period Setting Double-Buffer Register.
+    byte_offset: 108
+  - name: GTADTRA
+    description: A/D Conversion Start Request Timing Register A.
+    byte_offset: 112
+  - name: GTADTBRA
+    description: A/D Conversion Start Request Timing Buffer Register A.
+    byte_offset: 116
+  - name: GTADTDBRA
+    description: A/D Conversion Start Request Timing Double-Buffer Register A.
+    byte_offset: 120
+  - name: GTADTRB
+    description: A/D Conversion Start Request Timing Register B.
+    byte_offset: 124
+  - name: GTADTBRB
+    description: A/D Conversion Start Request Timing Buffer Register B.
+    byte_offset: 128
+  - name: GTADTDBRB
+    description: A/D Conversion Start Request Timing Double-Buffer Register B.
+    byte_offset: 132
+  - name: GTDVD
+    description: General PWM Timer Dead Time Value Register D.
+    byte_offset: 144
+  - name: GTDBU
+    description: General PWM Timer Dead Time Buffer Register U.
+    byte_offset: 148
+  - name: GTDBD
+    description: General PWM Timer Dead Time Buffer Register D.
+    byte_offset: 152
+  - name: GTSOS
+    description: General PWM Timer Output Protection Function Status Register.
+    byte_offset: 156
+    access: Read
+    fieldset: GTSOS
+  - name: GTSOTR
+    description: General PWM Timer Output Protection Function Temporary Release Register.
+    byte_offset: 160
+    fieldset: GTSOTR
+  - name: GTADSMR
+    description: General PWM Timer A/D Conversion Start Request Signal Monitoring Register.
+    byte_offset: 164
+    fieldset: GTADSMR
+  - name: GTICLF
+    description: General PWM Timer Inter Channel Logical Operation Function Setting Register.
+    byte_offset: 184
+    fieldset: GTICLF
+  - name: GTPC
+    description: General PWM Timer Period Count Register.
+    byte_offset: 188
+    fieldset: GTPC
+  - name: GTSECSR
+    description: General PWM Timer Operation Enable Bit Simultaneous Control Channel Select Register.
+    byte_offset: 208
+    fieldset: GTSECSR
+  - name: GTSECR
+    description: General PWM Timer Operation Enable Bit Simultaneous Control Register.
+    byte_offset: 212
+    fieldset: GTSECR
+block/GPT16:
+  description: General PWM 16-bit Timer.
   items:
   - name: GTWP
     description: General PWM Timer Write-Protection Register.
@@ -104,38 +171,81 @@ block/GPT:
   - name: GTDVU
     description: General PWM Timer Dead Time Value Register U.
     byte_offset: 140
-  - name: GTICLF
-    description: General PWM Timer Inter Channel Logical Operation Function Setting Register.
-    byte_offset: 184
-    fieldset: GTICLF
-  - name: GTPC
-    description: General PWM Timer Period Count Register.
-    byte_offset: 188
-    fieldset: GTPC
-  - name: GTSECSR
-    description: General PWM Timer Operation Enable Bit Simultaneous Control Channel Select Register.
-    byte_offset: 208
-    fieldset: GTSECSR
-  - name: GTSECR
-    description: General PWM Timer Operation Enable Bit Simultaneous Control Register.
-    byte_offset: 212
-    fieldset: GTSECR
+fieldset/GTADSMR:
+  description: General PWM Timer A/D Conversion Start Request Signal Monitoring Register.
+  fields:
+  - name: ADSMS0
+    description: A/D Conversion Start Request Signal Monitor 0 Selection.
+    bit_offset: 0
+    bit_size: 2
+    enum: ADSMS0
+  - name: ADSMEN0
+    description: 'A/D Conversion Start Request Signal Monitor 0 Output Enabling.
+
+      0: Output of A/D conversion start request signal monitor 0 is disabled.
+
+      1: Output of A/D conversion start request signal monitor 0 is enabled.
+
+      '
+    bit_offset: 8
+    bit_size: 1
+  - name: ADSMS1
+    description: A/D Conversion Start Request Signal Monitor 1 Selection.
+    bit_offset: 16
+    bit_size: 2
+    enum: ADSMS1
+  - name: ADSMEN1
+    description: 'A/D Conversion Start Request Signal Monitor 1 Output Enabling.
+
+      0: Output of A/D conversion start request signal monitor 1 is disabled.
+
+      1: Output of A/D conversion start request signal monitor 1 is enabled.
+
+      '
+    bit_offset: 24
+    bit_size: 1
 fieldset/GTBER:
   description: General PWM Timer Buffer Enable Register.
   fields:
   - name: BD0
-    description: |
-      GTCCR Buffer Operation Disable.
+    description: 'GTCCR Buffer Operation Disable.
+
       0: Buffer operation is enabled.
+
       1: Buffer operation is disabled.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: BD1
-    description: |
-      GTPR Buffer Operation Disable.
+    description: 'GTPR Buffer Operation Disable.
+
       0: Buffer operation is enabled.
+
       1: Buffer operation is disabled.
+
+      '
     bit_offset: 1
+    bit_size: 1
+  - name: BD2
+    description: 'GTADTRA/GTADTRB Registers Buffer Operation Disable.
+
+      0: Buffer operation is enabled.
+
+      1: Buffer operation is disabled.
+
+      '
+    bit_offset: 2
+    bit_size: 1
+  - name: BD3
+    description: 'GTDVU/GTDVD Registers Buffer Operation Disable.
+
+      0: Buffer operation is enabled.
+
+      1: Buffer operation is disabled.
+
+      '
+    bit_offset: 3
     bit_size: 1
   - name: CCRA
     description: GTCCRA Buffer Operation.
@@ -156,87 +266,80 @@ fieldset/GTBER:
     description: GTCCRA and GTCCRB Forcible Buffer Operation.
     bit_offset: 22
     bit_size: 1
+  - name: ADTTA
+    description: GTADTRA Register Buffer Transfer Timing Select.
+    bit_offset: 24
+    bit_size: 2
+    enum: ADTTA
+  - name: ADTDA
+    description: "GTADTRA Register Double Buffer Operation.\n0: Single buffer operation (GTADTBRA \u2192 GTADTRA).\n1: Double\
+      \ buffer operation (GTADTDBRA \u2192 GTADTBRA \u2192 GTADTRA).\n"
+    bit_offset: 26
+    bit_size: 1
+  - name: ADTTB
+    description: GTADTRB Register Buffer Transfer Timing Select.
+    bit_offset: 28
+    bit_size: 2
+    enum: ADTTB
+  - name: ADTDB
+    description: "GTADTRB Register Double Buffer Operation.\n0: Single buffer operation (GTADTBRB \u2192 GTADTRB).\n1: Double\
+      \ buffer operation (GTADTDBRB \u2192 GTADTRB).\n"
+    bit_offset: 30
+    bit_size: 1
 fieldset/GTCLR:
   description: General PWM Timer Software Clear Register.
   fields:
   - name: CCLR0
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Clear (n : the same as bit position value).
+
       0: GTCNT counter is not cleared.
+
       1: GTCNT counter is cleared.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: CCLR1
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Clear (n : the same as bit position value).
+
       0: GTCNT counter is not cleared.
+
       1: GTCNT counter is cleared.
+
+      '
     bit_offset: 1
     bit_size: 1
-  - name: CCLR2
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 2
-    bit_size: 1
-  - name: CCLR3
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 3
-    bit_size: 1
   - name: CCLR4
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Clear (n : the same as bit position value).
+
       0: GTCNT counter is not cleared.
+
       1: GTCNT counter is cleared.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: CCLR5
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Clear (n : the same as bit position value).
+
       0: GTCNT counter is not cleared.
+
       1: GTCNT counter is cleared.
+
+      '
     bit_offset: 5
-    bit_size: 1
-  - name: CCLR6
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 6
-    bit_size: 1
-  - name: CCLR7
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 7
-    bit_size: 1
-  - name: CCLR8
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 8
-    bit_size: 1
-  - name: CCLR9
-    description: |
-      Channel n GTCNT Count Clear (n : the same as bit position value).
-      0: GTCNT counter is not cleared.
-      1: GTCNT counter is cleared.
-    bit_offset: 9
     bit_size: 1
 fieldset/GTCR:
   description: General PWM Timer Control Register.
   fields:
   - name: CST
-    description: |
-      Count Start.
+    description: 'Count Start.
+
       0: Count operation is stopped.
+
       1: Count operation is performed.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: MD
@@ -253,701 +356,1026 @@ fieldset/GTCSR:
   description: General PWM Timer Clear Source Select Register.
   fields:
   - name: CSGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source Counter Clear Enable.
+    description: 'GTETRGA Pin Rising Input Source Counter Clear Enable.
+
       0: Counter clear disabled on the rising edge of GTETRGA input.
+
       1: Counter clear enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: CSGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source Counter Clear Enable.
+    description: 'GTETRGA Pin Falling Input Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTETRGA input.
+
       1: Counter clear enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: CSGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source Counter Clear Enable.
+    description: 'GTETRGB Pin Rising Input Source Counter Clear Enable.
+
       0: Disable counter clear on the rising edge of GTETRGB input.
+
       1: Enable counter clear on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: CSGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source Counter Clear Enable.
+    description: 'GTETRGB Pin Falling Input Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTETRGB input.
+
       1: Counter clear enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: CSGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source Counter Clear Enable.
+    description: 'GTETRGC Pin Rising Input Source Counter Clear Enable.
+
       0: Disable counter clear on the rising edge of GTETRGC input.
+
       1: Enable counter clear on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: CSGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source Counter Clear Enable.
+    description: 'GTETRGC Pin Falling Input Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTETRGC input.
+
       1: Counter clear enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: CSGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source Counter Clear Enable.
+    description: 'GTETRGD Pin Rising Input Source Counter Clear Enable.
+
       0: Disable counter clear on the rising edge of GTETRGD input.
+
       1: Enable counter clear on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: CSGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source Counter Clear Enable.
+    description: 'GTETRGD Pin Falling Input Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTETRGD input.
+
       1: Counter clear enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: CSCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Clear Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Clear Enable.
+
       0: Counter clear disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter clear enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: CSCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Clear Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Clear Enable.
+
       0: Counter clear disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter clear enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: CSCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Clear Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter clear enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: CSCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Clear Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter clear enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: CSCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Clear Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Clear Enable.
+
       0: Counter clear disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter clear enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: CSCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Clear Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Clear Enable.
+
       0: Counter clear disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter clear enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: CSCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Clear Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter clear enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: CSCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Clear Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Clear Enable.
+
       0: Counter clear disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter clear enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: CSELCA
-    description: |
-      ELC_GPTA Event Source Counter Clear Enable.
+    description: 'ELC_GPTA Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTA input.
+
       1: Counter clear enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: CSELCB
-    description: |
-      ELC_GPTB Event Source Counter Clear Enable.
+    description: 'ELC_GPTB Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTB input.
+
       1: Counter clear enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: CSELCC
-    description: |
-      ELC_GPTC Event Source Counter Clear Enable.
+    description: 'ELC_GPTC Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTC input.
+
       1: Counter clear enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: CSELCD
-    description: |
-      ELC_GPTD Event Source Counter Clear Enable.
+    description: 'ELC_GPTD Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTD input.
+
       1: Counter clear enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: CSELCE
-    description: |
-      ELC_GPTE Event Source Counter Clear Enable.
+    description: 'ELC_GPTE Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTE input.
+
       1: Counter clear enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: CSELCF
-    description: |
-      ELC_GPTF Event Source Counter Clear Enable.
+    description: 'ELC_GPTF Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTF input.
+
       1: Counter clear enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: CSELCG
-    description: |
-      ELC_GPTG Event Source Counter Clear Enable.
+    description: 'ELC_GPTG Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTG input.
+
       1: Counter clear enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: CSELCH
-    description: |
-      ELC_GPTH Event Source Counter Clear Enable.
+    description: 'ELC_GPTH Event Source Counter Clear Enable.
+
       0: Counter clear disabled at the ELC_GPTH input.
+
       1: Counter clear enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
   - name: CCLR
-    description: |
-      Software Source Counter Clear Enable.
+    description: 'Software Source Counter Clear Enable.
+
       0: Counter clear disabled by the GTCLR register.
+
       1: Counter clear enabled by the GTCLR register.
+
+      '
     bit_offset: 31
     bit_size: 1
 fieldset/GTDNSR:
   description: General PWM Timer Down Count Source Select Register.
   fields:
   - name: DSGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source Counter Count Down Enable.
+    description: 'GTETRGA Pin Rising Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTETRGA input.
+
       1: Counter count down enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: DSGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source Counter Count Down Enable.
+    description: 'GTETRGA Pin Falling Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTETRGA input.
+
       1: Counter count down enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: DSGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source Counter Count Down Enable.
+    description: 'GTETRGB Pin Rising Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTETRGB input.
+
       1: Counter count down enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: DSGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source Counter Count Down Enable.
+    description: 'GTETRGB Pin Falling Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTETRGB input.
+
       1: Counter count down enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: DSGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source Counter Count Down Enable.
+    description: 'GTETRGC Pin Rising Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTETRGC input.
+
       1: Counter count down enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: DSGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source Counter Count Down Enable.
+    description: 'GTETRGC Pin Falling Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTETRGC input.
+
       1: Counter count down enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: DSGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source Counter Count Down Enable.
+    description: 'GTETRGD Pin Rising Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTETRGD input.
+
       1: Counter count down enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: DSGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source Counter Count Down Enable.
+    description: 'GTETRGD Pin Falling Input Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTETRGD input.
+
       1: Counter count down enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: DSCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Count Down Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter count down enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: DSCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Count Down Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter count down enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: DSCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Count Down Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter count down enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: DSCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Count Down Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter count down enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: DSCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Count Down Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter count down enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: DSCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Count Down Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Count Down Enable.
+
       0: Counter count down disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter count down enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: DSCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Count Down Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter count down enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: DSCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Count Down Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Count Down Enable.
+
       0: Counter count down disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter count down enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: DSELCA
-    description: |
-      ELC_GPTA Event Source Counter Count Down Enable.
+    description: 'ELC_GPTA Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTA input.
+
       1: Counter count down enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: DSELCB
-    description: |
-      ELC_GPTB Event Source Counter Count Down Enable.
+    description: 'ELC_GPTB Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTB input.
+
       1: Counter count down enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: DSELCC
-    description: |
-      ELC_GPTC Event Source Counter Count Down Enable.
+    description: 'ELC_GPTC Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTC input.
+
       1: Counter count down enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: DSELCD
-    description: |
-      ELC_GPTD Event Source Counter Count Down Enable.
+    description: 'ELC_GPTD Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTD input.
+
       1: Counter count down enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: DSELCE
-    description: |
-      ELC_GPTE Event Source Counter Count Down Enable.
+    description: 'ELC_GPTE Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTE input.
+
       1: Counter count down enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: DSELCF
-    description: |
-      ELC_GPTF Event Source Counter Count Down Enable.
+    description: 'ELC_GPTF Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTF input.
+
       1: Counter count down enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: DSELCG
-    description: |
-      ELC_GPTG Event Source Counter Count Down Enable.
+    description: 'ELC_GPTG Event Source Counter Count Down Enable.
+
       0: Counter count down disabled at the ELC_GPTG input.
+
       1: Counter count down enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: DSELCH
-    description: |
-      ELC_GPTF Event Source Counter Count Down Enable.
-      0: Counter count down disabled at the ELC_GPTF input.
-      1: Counter count down enabled at the ELC_GPTF input.
+    description: 'ELC_GPTH Event Source Counter Count Down Enable.
+
+      0: Counter count down disabled at the ELC_GPTH input.
+
+      1: Counter count down enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
 fieldset/GTDTCR:
   description: General PWM Timer Dead Time Control Register.
   fields:
   - name: TDE
-    description: |
-      Negative-Phase Waveform Setting.
-      0: GTCCRB is set without using GTDVU.
-      1: GTDVU is used to set the compare match value for negative-phase waveform with dead time automatically in GTCCRB.
+    description: 'Negative-Phase Waveform Setting.
+
+      0: GTCCRB is set without using DTDVU and GTDVD.
+
+      1: DTDVU and GTDVD are used to set the compare match value for negative-phase waveform with dead time automatically
+      in GTCCRB.
+
+      '
     bit_offset: 0
+    bit_size: 1
+  - name: TDBUE
+    description: 'GTDVU Register Buffer Operation Enable.
+
+      0: GTDVU register buffer operation is disabled.
+
+      1: GTDVU register buffer operation is enabled.
+
+      '
+    bit_offset: 4
+    bit_size: 1
+  - name: TDBDE
+    description: 'GTDVD Register Buffer Operation Enable.
+
+      0: GTDVD register buffer operation is disabled.
+
+      1: GTDVD register buffer operation is enabled.
+
+      '
+    bit_offset: 5
+    bit_size: 1
+  - name: TDFER
+    description: 'GTDVD Register Setting.
+
+      0: GTDVU and GTDVD registers are set separately.
+
+      1: The value written to GTDVU register is automatically set to GTDVD register.
+
+      '
+    bit_offset: 8
     bit_size: 1
 fieldset/GTICASR:
   description: General PWM Timer Input Capture Source Select Register A.
   fields:
   - name: ASGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGA Pin Rising Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTETRGA input.
+
       1: GTCCRA input capture enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: ASGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGA Pin Falling Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTETRGA input.
+
       1: GTCCRA input capture enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: ASGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGB Pin Rising Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTETRGB input.
+
       1: GTCCRA input capture enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: ASGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGB Pin Falling Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTETRGB input.
+
       1: GTCCRA input capture enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: ASGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGC Pin Rising Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTETRGC input.
+
       1: GTCCRA input capture enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: ASGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGC Pin Falling Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTETRGC input.
+
       1: GTCCRA input capture enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: ASGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGD Pin Rising Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTETRGD input.
+
       1: GTCCRA input capture enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: ASGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source GTCCRA Input Capture Enable.
+    description: 'GTETRGD Pin Falling Input Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTETRGD input.
+
       1: GTCCRA input capture enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: ASCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: GTCCRA input capture enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: ASCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: GTCCRA input capture enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: ASCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: GTCCRA input capture enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: ASCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: GTCCRA input capture enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: ASCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: GTCCRA input capture enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: ASCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: GTCCRA input capture enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: ASCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: GTCCRA input capture enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: ASCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source GTCCRA Input Capture Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: GTCCRA input capture enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: ASELCA
-    description: |
-      ELC_GPTA Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTA Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTA input.
+
       1: GTCCRA input capture enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: ASELCB
-    description: |
-      ELC_GPTB Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTB Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTB input.
+
       1: GTCCRA input capture enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: ASELCC
-    description: |
-      ELC_GPTC Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTC Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTC input.
+
       1: GTCCRA input capture enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: ASELCD
-    description: |
-      ELC_GPTD Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTD Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTD input.
+
       1: GTCCRA input capture enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: ASELCE
-    description: |
-      ELC_GPTE Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTE Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTE input.
+
       1: GTCCRA input capture enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: ASELCF
-    description: |
-      ELC_GPTF Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTF Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTF input.
+
       1: GTCCRA input capture enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: ASELCG
-    description: |
-      ELC_GPTG Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTG Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTG input.
+
       1: GTCCRA input capture enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: ASELCH
-    description: |
-      ELC_GPTH Event Source GTCCRA Input Capture Enable.
+    description: 'ELC_GPTH Event Source GTCCRA Input Capture Enable.
+
       0: GTCCRA input capture disabled at the ELC_GPTH input.
+
       1: GTCCRA input capture enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
 fieldset/GTICBSR:
   description: General PWM Timer Input Capture Source Select Register B.
   fields:
   - name: BSGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGA Pin Rising Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTETRGA input.
+
       1: GTCCRB input capture enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: BSGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGA Pin Falling Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTETRGA input.
+
       1: GTCCRB input capture enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: BSGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGB Pin Rising Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTETRGB input.
+
       1: GTCCRB input capture enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: BSGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGB Pin Falling Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTETRGB input.
+
       1: GTCCRB input capture enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: BSGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGC Pin Rising Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTETRGC input.
+
       1: GTCCRB input capture enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: BSGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGC Pin Falling Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTETRGC input.
+
       1: GTCCRB input capture enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: BSGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGD Pin Rising Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTETRGD input.
+
       1: GTCCRB input capture enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: BSGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source GTCCRB Input Capture Enable.
+    description: 'GTETRGD Pin Falling Input Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTETRGD input.
+
       1: GTCCRB input capture enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: BSCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: GTCCRB input capture enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: BSCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: GTCCRB input capture enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: BSCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: GTCCRB input capture enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: BSCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: GTCCRB input capture enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: BSCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: GTCCRB input capture enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: BSCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: GTCCRB input capture enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: BSCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: GTCCRB input capture enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: BSCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source GTCCRB Input Capture Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: GTCCRB input capture enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: BSELCA
-    description: |
-      ELC_GPTA Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTA Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTA input.
+
       1: GTCCRB input capture enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: BSELCB
-    description: |
-      ELC_GPTB Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTB Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTB input.
+
       1: GTCCRB input capture enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: BSELCC
-    description: |
-      ELC_GPTC Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTC Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTC input.
+
       1: GTCCRB input capture enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: BSELCD
-    description: |
-      ELC_GPTD Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTD Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTD input.
+
       1: GTCCRB input capture enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: BSELCE
-    description: |
-      ELC_GPTE Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTE Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTE input.
+
       1: GTCCRB input capture enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: BSELCF
-    description: |
-      ELC_GPTF Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTF Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTF input.
+
       1: GTCCRB input capture enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: BSELCG
-    description: |
-      ELC_GPTG Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTG Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTG input.
+
       1: GTCCRB input capture enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: BSELCH
-    description: |
-      ELC_GPTH Event Source GTCCRB Input Capture Enable.
+    description: 'ELC_GPTH Event Source GTCCRB Input Capture Enable.
+
       0: GTCCRB input capture disabled at the ELC_GPTH input.
+
       1: GTCCRB input capture enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
 fieldset/GTICLF:
@@ -976,55 +1404,29 @@ fieldset/GTICLF:
 fieldset/GTINTAD:
   description: General PWM Timer Interrupt Output Setting Register.
   fields:
-  - name: GTINTA
-    description: Compare Match A Interrupt Enable.
-    bit_offset: 0
-    bit_size: 1
-  - name: GTINTB
-    description: Compare Match B Interrupt Enable.
-    bit_offset: 1
-    bit_size: 1
-  - name: GTINTC
-    description: Compare Match C Interrupt Enable.
-    bit_offset: 2
-    bit_size: 1
-  - name: GTINTD
-    description: Compare Match D Interrupt Enable.
-    bit_offset: 3
-    bit_size: 1
-  - name: GTINTE
-    description: Compare Match E Interrupt Enable.
-    bit_offset: 4
-    bit_size: 1
-  - name: GTINTF
-    description: Compare Match F Interrupt Enable.
-    bit_offset: 5
-    bit_size: 1
-  - name: GTINTV
-    description: Overflow Interrupt Enable.
-    bit_offset: 6
-    bit_size: 1
-  - name: GTINTU
-    description: Underflow Interrupt Enable.
-    bit_offset: 7
-    bit_size: 1
   - name: GRP
     description: Output Disable Source Select.
     bit_offset: 24
     bit_size: 2
     enum: GRP
   - name: GRPABH
-    description: |
-      Same Time Output Level High Disable Request Enable.
+    description: 'Same Time Output Level High Disable Request Enable.
+
       0: Same time output level high disable request disabled.
+
       1: Same time output level high disable request enabled.
+
+      '
     bit_offset: 29
     bit_size: 1
   - name: GRPABL
-    description: |
-      Same Time Output Level Low Disable Request Enable.
+    description: 'Same Time Output Level Low Disable Request Enable.
+
       0: Same time output level low disable request disabled.
+
       1: Same time output level low disable request enabled.
+
+      '
     bit_offset: 30
     bit_size: 1
 fieldset/GTIOR:
@@ -1035,24 +1437,33 @@ fieldset/GTIOR:
     bit_offset: 0
     bit_size: 5
   - name: OADFLT
-    description: |
-      GTIOCnA Pin Output Value Setting at the Count Stop.
+    description: 'GTIOCnA Pin Output Value Setting at the Count Stop.
+
       0: The GTIOCnA pin outputs low when counting stops.
+
       1: The GTIOCnA pin outputs high when counting stops.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: OAHLD
-    description: |
-      GTIOCnA Pin Output Setting at the Start/Stop Count.
+    description: 'GTIOCnA Pin Output Setting at the Start/Stop Count.
+
       0: The GTIOCnA pin output level at the start or stop of counting depends on the register setting.
+
       1: The GTIOCnA pin output level is retained at the start or stop of counting.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: OAE
-    description: |
-      GTIOCnA Pin Output Enable.
+    description: 'GTIOCnA Pin Output Enable.
+
       0: Output is disabled.
+
       1: Output is enabled.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: OADF
@@ -1061,10 +1472,13 @@ fieldset/GTIOR:
     bit_size: 2
     enum: OADF
   - name: NFAEN
-    description: |
-      Noise Filter A Enable.
+    description: 'Noise Filter A Enable.
+
       0: The noise filter for the GTIOCnA pin is disabled.
+
       1: The noise filter for the GTIOCnA pin is enabled.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: NFCSA
@@ -1077,24 +1491,33 @@ fieldset/GTIOR:
     bit_offset: 16
     bit_size: 5
   - name: OBDFLT
-    description: |
-      GTIOCnB Pin Output Value Setting at the Count Stop.
+    description: 'GTIOCnB Pin Output Value Setting at the Count Stop.
+
       0: The GTIOCnB pin outputs low when counting stops.
+
       1: The GTIOCnB pin outputs high when counting stops.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: OBHLD
-    description: |
-      GTIOCnB Pin Output Setting at the Start/Stop Count.
+    description: 'GTIOCnB Pin Output Setting at the Start/Stop Count.
+
       0: The GTIOCnB pin output level at the start/stop of counting depends on the register setting.
+
       1: The GTIOCnB pin output level is retained at the start/stop of counting.
+
+      '
     bit_offset: 23
     bit_size: 1
   - name: OBE
-    description: |
-      GTIOCnB Pin Output Enable.
+    description: 'GTIOCnB Pin Output Enable.
+
       0: Output is disabled.
+
       1: Output is enabled.
+
+      '
     bit_offset: 24
     bit_size: 1
   - name: OBDF
@@ -1103,10 +1526,13 @@ fieldset/GTIOR:
     bit_size: 2
     enum: OBDF
   - name: NFBEN
-    description: |
-      Noise Filter B Enable.
+    description: 'Noise Filter B Enable.
+
       0: The noise filter for the GTIOCnB pin is disabled.
+
       1: The noise filter for the GTIOCnB pin is enabled.
+
+      '
     bit_offset: 29
     bit_size: 1
   - name: NFCSB
@@ -1114,21 +1540,120 @@ fieldset/GTIOR:
     bit_offset: 30
     bit_size: 2
     enum: NFCSB
+fieldset/GTITC:
+  description: General PWM Timer Interrupt and A/D Conversion Start Request Skipping Setting Register.
+  fields:
+  - name: ITLA
+    description: 'GTCCRA Register Compare Match/Input Capture Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 0
+    bit_size: 1
+  - name: ITLB
+    description: 'GTCCRB Register Compare Match/Input Capture Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 1
+    bit_size: 1
+  - name: ITLC
+    description: 'GTCCRC Register Compare Match Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 2
+    bit_size: 1
+  - name: ITLD
+    description: 'GTCCRD Register Compare Match Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 3
+    bit_size: 1
+  - name: ITLE
+    description: 'GTCCRE Register Compare Match Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 4
+    bit_size: 1
+  - name: ITLF
+    description: 'GTCCRF Register Compare Match Interrupt Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 5
+    bit_size: 1
+  - name: IVTC
+    description: GPTn_OVF/GPTn_UDF Interrupt Skipping Function Select.
+    bit_offset: 6
+    bit_size: 2
+    enum: IVTC
+  - name: IVTT
+    description: GPTn_OVF/GPTn_UDF Interrupt Skipping Count Select.
+    bit_offset: 8
+    bit_size: 3
+    enum: IVTT
+  - name: ADTAL
+    description: 'GTADTRA Register A/D Conversion Start Request Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 12
+    bit_size: 1
+  - name: ADTBL
+    description: 'GTADTRB Register A/D Conversion Start Request Link.
+
+      0: Not linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      1: Linked with GPTn_OVF/GPTn_UDF interrupt skipping function.
+
+      '
+    bit_offset: 14
+    bit_size: 1
 fieldset/GTPC:
   description: General PWM Timer Period Count Register.
   fields:
   - name: PCEN
-    description: |
-      Period Count Function Enable.
+    description: 'Period Count Function Enable.
+
       0: Period count function is disabled.
+
       1: Period count function is enabled.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: ASTP
-    description: |
-      Automatic Stop Function Enable.
+    description: 'Automatic Stop Function Enable.
+
       0: Automatic stop function is disabled.
+
       1: Automatic stop function is enabled.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: PCNT
@@ -1139,731 +1664,969 @@ fieldset/GTPSR:
   description: General PWM Timer Stop Source Select Register.
   fields:
   - name: PSGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source Counter Stop Enable.
+    description: 'GTETRGA Pin Rising Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTETRGA input.
+
       1: Counter stop enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: PSGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source Counter Stop Enable.
+    description: 'GTETRGA Pin Falling Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTETRGA input.
+
       1: Counter stop enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: PSGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source Counter Stop Enable.
+    description: 'GTETRGB Pin Rising Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTETRGB input.
+
       1: Counter stop enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: PSGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source Counter Stop Enable.
+    description: 'GTETRGB Pin Falling Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTETRGB input.
+
       1: Counter stop enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: PSGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source Counter Stop Enable.
+    description: 'GTETRGC Pin Rising Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTETRGC input.
+
       1: Counter stop enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: PSGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source Counter Stop Enable.
+    description: 'GTETRGC Pin Falling Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTETRGC input.
+
       1: Counter stop enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: PSGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source Counter Stop Enable.
+    description: 'GTETRGD Pin Rising Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTETRGD input.
+
       1: Counter stop enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: PSGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source Counter Stop Enable.
+    description: 'GTETRGD Pin Falling Input Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTETRGD input.
+
       1: Counter stop enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: PSCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Stop Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter stop enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: PSCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Stop Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter stop enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: PSCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Stop Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter stop enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: PSCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Stop Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter stop enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: PSCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Stop Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter stop enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: PSCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Stop Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Stop Enable.
+
       0: Counter stop disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter stop enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: PSCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Stop Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter stop enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: PSCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Stop Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Stop Enable.
+
       0: Counter stop disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter stop enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: PSELCA
-    description: |
-      ELC_GPTA Event Source Counter Stop Enable.
+    description: 'ELC_GPTA Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTA input.
+
       1: Counter stop enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: PSELCB
-    description: |
-      ELC_GPTB Event Source Counter Stop Enable.
+    description: 'ELC_GPTB Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTB input.
+
       1: Counter stop enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: PSELCC
-    description: |
-      ELC_GPTC Event Source Counter Stop Enable.
+    description: 'ELC_GPTC Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTC input.
+
       1: Counter stop enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: PSELCD
-    description: |
-      ELC_GPTD Event Source Counter Stop Enable.
+    description: 'ELC_GPTD Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTD input.
+
       1: Counter stop enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: PSELCE
-    description: |
-      ELC_GPTE Event Source Counter Stop Enable.
+    description: 'ELC_GPTE Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTE input.
+
       1: Counter stop enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: PSELCF
-    description: |
-      ELC_GPTF Event Source Counter Stop Enable.
+    description: 'ELC_GPTF Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTF input.
+
       1: Counter stop enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: PSELCG
-    description: |
-      ELC_GPTG Event Source Counter Stop Enable.
+    description: 'ELC_GPTG Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTG input.
+
       1: Counter stop enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: PSELCH
-    description: |
-      ELC_GPTH Event Source Counter Stop Enable.
+    description: 'ELC_GPTH Event Source Counter Stop Enable.
+
       0: Counter stop disabled at the ELC_GPTH input.
+
       1: Counter stop enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
   - name: CSTOP
-    description: |
-      Software Source Counter Stop Enable.
+    description: 'Software Source Counter Stop Enable.
+
       0: Counter stop disabled by the GTSTP register.
+
       1: Counter stop enabled by the GTSTP register.
+
+      '
     bit_offset: 31
     bit_size: 1
 fieldset/GTSECR:
   description: General PWM Timer Operation Enable Bit Simultaneous Control Register.
   fields:
   - name: SBDCE
-    description: |
-      GTCCR Register Buffer Operation Simultaneous Enable.
+    description: 'GTCCR Register Buffer Operation Simultaneous Enable.
+
       0: Disable simultaneous enabling GTCCR buffer operations.
+
       1: Enable GTCCR register buffer operations simultaneously.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: SBDPE
-    description: |
-      GTPR Register Buffer Operation Simultaneous Enable.
+    description: 'GTPR Register Buffer Operation Simultaneous Enable.
+
       0: Disable simultaneous enabling GTPR buffer operations.
+
       1: Enable GTPR register buffer operations simultaneously.
+
+      '
     bit_offset: 1
     bit_size: 1
+  - name: SBDAE
+    description: 'GTADTR Register Buffer Operation Simultaneous Enable.
+
+      0: Disable simultaneous enabling GTADTR buffer operations.
+
+      1: Enable GTADTR register buffer operations simultaneously.
+
+      '
+    bit_offset: 2
+    bit_size: 1
+  - name: SBDDE
+    description: 'GTDV Register Buffer Operation Simultaneous Enable.
+
+      0: Disable simultaneous enabling GTDV buffer operations.
+
+      1: Enable GTDV register buffer operations simultaneously.
+
+      '
+    bit_offset: 3
+    bit_size: 1
   - name: SBDCD
-    description: |
-      GTCCR Register Buffer Operation Simultaneous Disable.
+    description: 'GTCCR Register Buffer Operation Simultaneous Disable.
+
       0: Disable simultaneous disabling GTCCR buffer operations.
+
       1: Disable GTCCR register buffer operations simultaneously.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: SBDPD
-    description: |
-      GTPR Register Buffer Operation Simultaneous Disable.
+    description: 'GTPR Register Buffer Operation Simultaneous Disable.
+
       0: Disable simultaneous disabling GTPR buffer operations.
+
       1: Disable GTPR register buffer operations simultaneously.
+
+      '
     bit_offset: 9
     bit_size: 1
+  - name: SBDAD
+    description: 'GTADTR Register Buffer Operation Simultaneous Disable.
+
+      0: Disable simultaneous disabling GTADTR buffer operations.
+
+      1: Disable GTADTR register buffer operations simultaneously.
+
+      '
+    bit_offset: 10
+    bit_size: 1
+  - name: SBDDD
+    description: 'GTDV Register Buffer Operation Simultaneous Disable.
+
+      0: Disable simultaneous disabling GTDV buffer operations.
+
+      1: Disable GTDV register buffer operations simultaneously.
+
+      '
+    bit_offset: 11
+    bit_size: 1
   - name: SPCE
-    description: |
-      Period Count Function Simultaneous Enable.
+    description: 'Period Count Function Simultaneous Enable.
+
       0: Disable simultaneous enabling period count function.
+
       1: Enable period count function simultaneously.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: SPCD
-    description: |
-      Period Count Function Simultaneous Disable.
+    description: 'Period Count Function Simultaneous Disable.
+
       0: Disable simultaneous disabling period count function.
+
       1: Disable period count function simultaneously.
+
+      '
     bit_offset: 24
     bit_size: 1
 fieldset/GTSECSR:
   description: General PWM Timer Operation Enable Bit Simultaneous Control Channel Select Register.
   fields:
   - name: SECSEL0
-    description: |
-      Channel 0 Operation Enable Bit Simultaneous Control Channel Select.
+    description: 'Channel 0 Operation Enable Bit Simultaneous Control Channel Select.
+
       0: Disable simultaneous control.
+
       1: Enable simultaneous control.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: SECSEL1
-    description: |
-      Channel 1 Operation Enable Bit Simultaneous Control Channel Select.
+    description: 'Channel 1 Operation Enable Bit Simultaneous Control Channel Select.
+
       0: Disable simultaneous control.
+
       1: Enable simultaneous control.
+
+      '
     bit_offset: 1
     bit_size: 1
-  - name: SECSEL2
-    description: |
-      Channel 2 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 2
-    bit_size: 1
-  - name: SECSEL3
-    description: |
-      Channel 3 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 3
-    bit_size: 1
   - name: SECSEL4
-    description: |
-      Channel 4 Operation Enable Bit Simultaneous Control Channel Select.
+    description: 'Channel 4 Operation Enable Bit Simultaneous Control Channel Select.
+
       0: Disable simultaneous control.
+
       1: Enable simultaneous control.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: SECSEL5
-    description: |
-      Channel 5 Operation Enable Bit Simultaneous Control Channel Select.
+    description: 'Channel 5 Operation Enable Bit Simultaneous Control Channel Select.
+
       0: Disable simultaneous control.
+
       1: Enable simultaneous control.
+
+      '
     bit_offset: 5
     bit_size: 1
-  - name: SECSEL6
-    description: |
-      Channel 6 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 6
-    bit_size: 1
-  - name: SECSEL7
-    description: |
-      Channel 7 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 7
-    bit_size: 1
-  - name: SECSEL8
-    description: |
-      Channel 8 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 8
-    bit_size: 1
-  - name: SECSEL9
-    description: |
-      Channel 9 Operation Enable Bit Simultaneous Control Channel Select.
-      0: Disable simultaneous control.
-      1: Enable simultaneous control.
-    bit_offset: 9
+fieldset/GTSOS:
+  description: General PWM Timer Output Protection Function Status Register.
+  fields:
+  - name: SOS
+    description: Output Protection Function Status.
+    bit_offset: 0
+    bit_size: 2
+    enum: SOS
+fieldset/GTSOTR:
+  description: General PWM Timer Output Protection Function Temporary Release Register.
+  fields:
+  - name: SOTR
+    description: 'Output Protection Function Temporary Release.
+
+      0: Protected state is not released.
+
+      1: Protected state is released.
+
+      '
+    bit_offset: 0
     bit_size: 1
 fieldset/GTSSR:
   description: General PWM Timer Start Source Select Register.
   fields:
   - name: SSGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source Counter Start Enable.
+    description: 'GTETRGA Pin Rising Input Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTETRGA input.
+
       1: Counter start enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: SSGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source Counter Start Enable.
+    description: 'GTETRGA Pin Falling Input Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTETRGA input.
+
       1: Counter start enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: SSGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source Counter Start Enable.
+    description: 'GTETRGB Pin Rising Input Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTETRGB input.
+
       1: Counter start enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: SSGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source Counter Start Enable.
+    description: 'GTETRGB Pin Falling Input Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTETRGB input.
+
       1: Counter start enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: SSGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source Counter Start Enable.
+    description: 'GTETRGC Pin Rising Input Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTETRGC input.
+
       1: Counter start enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: SSGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source Counter Start Enable.
+    description: 'GTETRGC Pin Falling Input Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTETRGC input.
+
       1: Counter start enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: SSGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source Counter Start Enable.
+    description: 'GTETRGD Pin Rising Input Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTETRGD input.
+
       1: Counter start enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: SSGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source Counter Start Enable.
+    description: 'GTETRGD Pin Falling Input Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTETRGD input.
+
       1: Counter start enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: SSCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Start Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter start enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: SSCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Start Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter start enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: SSCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Start Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter start enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: SSCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Start Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter start enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: SSCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Start Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter start enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: SSCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Start Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Start Enable.
+
       0: Counter start disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter start enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: SSCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Start Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter start enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: SSCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Start Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Start Enable.
+
       0: Counter start disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter start enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: SSELCA
-    description: |
-      ELC_GPTA Event Source Counter Start Enable.
+    description: 'ELC_GPTA Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTA input.
+
       1: Counter start enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: SSELCB
-    description: |
-      ELC_GPTB Event Source Counter Start Enable.
+    description: 'ELC_GPTB Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTB input.
+
       1: Counter start enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: SSELCC
-    description: |
-      ELC_GPTC Event Source Counter Start Enable.
+    description: 'ELC_GPTC Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTC input.
+
       1: Counter start enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: SSELCD
-    description: |
-      ELC_GPTD Event Source Counter Start Enable.
+    description: 'ELC_GPTD Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTD input.
+
       1: Counter start enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: SSELCE
-    description: |
-      ELC_GPTE Event Source Counter Start Enable.
+    description: 'ELC_GPTE Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTE input.
+
       1: Counter start enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: SSELCF
-    description: |
-      ELC_GPTF Event Source Counter Start Enable.
+    description: 'ELC_GPTF Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTF input.
+
       1: Counter start enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: SSELCG
-    description: |
-      ELC_GPTG Event Source Counter Start Enable.
+    description: 'ELC_GPTG Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTG input.
+
       1: Counter start enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: SSELCH
-    description: |
-      ELC_GPTH Event Source Counter Start Enable.
+    description: 'ELC_GPTH Event Source Counter Start Enable.
+
       0: Counter start disabled at the ELC_GPTH input.
+
       1: Counter start enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
   - name: CSTRT
-    description: |
-      Software Source Counter Start Enable.
+    description: 'Software Source Counter Start Enable.
+
       0: Counter start disabled by the GTSTR register.
+
       1: Counter start enabled by the GTSTR register.
+
+      '
     bit_offset: 31
     bit_size: 1
 fieldset/GTST:
   description: General PWM Timer Status Register.
   fields:
   - name: TCFA
-    description: |
-      Input Capture/Compare Match Flag A.
+    description: 'Input Capture/Compare Match Flag A.
+
       0: No input capture/compare match of GTCCRA is generated.
+
       1: An input capture/compare match of GTCCRA is generated.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: TCFB
-    description: |
-      Input Capture/Compare Match Flag B.
+    description: 'Input Capture/Compare Match Flag B.
+
       0: No input capture/compare match of GTCCRB is generated.
+
       1: An input capture/compare match of GTCCRB is generated.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: TCFC
-    description: |
-      Input Compare Match Flag C.
+    description: 'Input Compare Match Flag C.
+
       0: No compare match of GTCCRC is generated.
+
       1: A compare match of GTCCRC is generated.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: TCFD
-    description: |
-      Input Compare Match Flag D.
+    description: 'Input Compare Match Flag D.
+
       0: No compare match of GTCCRD is generated.
+
       1: A compare match of GTCCRD is generated.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: TCFE
-    description: |
-      Input Compare Match Flag E.
+    description: 'Input Compare Match Flag E.
+
       0: No compare match of GTCCRE is generated.
+
       1: A compare match of GTCCRE is generated.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: TCFF
-    description: |
-      Input Compare Match Flag F.
+    description: 'Input Compare Match Flag F.
+
       0: No compare match of GTCCRF is generated.
+
       1: A compare match of GTCCRF is generated.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: TCFPO
-    description: |
-      Overflow Flag.
+    description: 'Overflow Flag.
+
       0: No overflow (crest) occurred.
+
       1: An overflow (crest) occurred.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: TCFPU
-    description: |
-      Underflow Flag.
+    description: 'Underflow Flag.
+
       0: No underflow (trough) occurred.
+
       1: An underflow (trough) occurred.
+
+      '
     bit_offset: 7
     bit_size: 1
+  - name: ITCNT
+    description: GPTn_OVF/GPTn_UDF Interrupt Skipping Count Counter.
+    bit_offset: 8
+    bit_size: 3
   - name: TUCF
-    description: |
-      Count Direction Flag.
+    description: 'Count Direction Flag.
+
       0: GTCNT counter counts downward.
+
       1: GTCNT counter counts upward.
+
+      '
     bit_offset: 15
     bit_size: 1
+  - name: ADTRAUF
+    description: 'GTADTRA Register Compare Match (Up-Counting) A/D Conversion Start Request Flag.
+
+      0: No GTADTRA register compare match has occurred in up-counting.
+
+      1: A GTADTRA register compare match has occurred in up-counting.
+
+      '
+    bit_offset: 16
+    bit_size: 1
+  - name: ADTRADF
+    description: 'GTADTRA Register Compare Match (Down-Counting) A/D Conversion Start Request Flag.
+
+      0: No GTADTRA register compare match has occurred in down-counting.
+
+      1: A GTADTRA register compare match has occurred in down-counting.
+
+      '
+    bit_offset: 17
+    bit_size: 1
+  - name: ADTRBUF
+    description: 'GTADTRB Register Compare Match (Up-Counting) A/D Conversion Start Request Flag.
+
+      0: No GTADTRB register compare match has occurred in up-counting.
+
+      1: A GTADTRB register compare match has occurred in up-counting.
+
+      '
+    bit_offset: 18
+    bit_size: 1
+  - name: ADTRBDF
+    description: 'GTADTRB Register Compare Match (Down-Counting) A/D Conversion Start Request Flag.
+
+      0: No GTADTRB register compare match has occurred in down-counting.
+
+      1: A GTADTRB register compare match has occurred in down-counting.
+
+      '
+    bit_offset: 19
+    bit_size: 1
   - name: ODF
-    description: |
-      Output Disable Flag.
+    description: 'Output Disable Flag.
+
       0: No output disable request is generated.
+
       1: An output disable request is generated.
+
+      '
     bit_offset: 24
     bit_size: 1
+  - name: DTEF
+    description: 'Dead Time Error Flag.
+
+      0: No dead time error has occurred.
+
+      1: A dead time error has occurred.
+
+      '
+    bit_offset: 28
+    bit_size: 1
   - name: OABHF
-    description: |
-      Same Time Output Level High Flag.
+    description: 'Same Time Output Level High Flag.
+
       0: No simultaneous generation of 1 both for the GTIOCA and GTIOCB pins has occurred.
+
       1: A simultaneous generation of 1 both for the GTIOCA and GTIOCB pins has occurred.
+
+      '
     bit_offset: 29
     bit_size: 1
   - name: OABLF
-    description: |
-      Same Time Output Level Low Flag.
+    description: 'Same Time Output Level Low Flag.
+
       0: No simultaneous generation of 0 both for the GTIOCA and GTIOCB pins has occurred.
+
       1: A simultaneous generation of 0 both for the GTIOCA and GTIOCB pins has occurred.
+
+      '
     bit_offset: 30
     bit_size: 1
   - name: PCF
-    description: |
-      Period Count Function Finish Flag.
+    description: 'Period Count Function Finish Flag.
+
       0: No period count function finish has occurred.
+
       1: A period count function finish has occurred.
+
+      '
     bit_offset: 31
     bit_size: 1
 fieldset/GTSTP:
   description: General PWM Timer Software Stop Register.
   fields:
   - name: CSTOP0
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Stop (n : the same as bit position value).
+
       0: GTCNT counter not stop.
+
       1: GTCNT counter stop.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: CSTOP1
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Stop (n : the same as bit position value).
+
       0: GTCNT counter not stop.
+
       1: GTCNT counter stop.
+
+      '
     bit_offset: 1
     bit_size: 1
-  - name: CSTOP2
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 2
-    bit_size: 1
-  - name: CSTOP3
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 3
-    bit_size: 1
   - name: CSTOP4
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Stop (n : the same as bit position value).
+
       0: GTCNT counter not stop.
+
       1: GTCNT counter stop.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: CSTOP5
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Stop (n : the same as bit position value).
+
       0: GTCNT counter not stop.
+
       1: GTCNT counter stop.
+
+      '
     bit_offset: 5
-    bit_size: 1
-  - name: CSTOP6
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 6
-    bit_size: 1
-  - name: CSTOP7
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 7
-    bit_size: 1
-  - name: CSTOP8
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 8
-    bit_size: 1
-  - name: CSTOP9
-    description: |
-      Channel n GTCNT Count Stop (n : the same as bit position value).
-      0: GTCNT counter not stop.
-      1: GTCNT counter stop.
-    bit_offset: 9
     bit_size: 1
 fieldset/GTSTR:
   description: General PWM Timer Software Start Register.
   fields:
   - name: CSTRT0
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Start (n : the same as bit position value).
+
       0: GTCNT counter not start.
+
       1: GTCNT counter start.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: CSTRT1
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Start (n : the same as bit position value).
+
       0: GTCNT counter not start.
+
       1: GTCNT counter start.
+
+      '
     bit_offset: 1
     bit_size: 1
-  - name: CSTRT2
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 2
-    bit_size: 1
-  - name: CSTRT3
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 3
-    bit_size: 1
   - name: CSTRT4
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Start (n : the same as bit position value).
+
       0: GTCNT counter not start.
+
       1: GTCNT counter start.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: CSTRT5
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
+    description: 'Channel n GTCNT Count Start (n : the same as bit position value).
+
       0: GTCNT counter not start.
+
       1: GTCNT counter start.
+
+      '
     bit_offset: 5
-    bit_size: 1
-  - name: CSTRT6
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 6
-    bit_size: 1
-  - name: CSTRT7
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 7
-    bit_size: 1
-  - name: CSTRT8
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 8
-    bit_size: 1
-  - name: CSTRT9
-    description: |
-      Channel n GTCNT Count Start (n : the same as bit position value).
-      0: GTCNT counter not start.
-      1: GTCNT counter start.
-    bit_offset: 9
     bit_size: 1
 fieldset/GTUDDTYC:
   description: General PWM Timer Count Direction and Duty Setting Register.
   fields:
   - name: UD
-    description: |
-      Count Direction Setting.
+    description: 'Count Direction Setting.
+
       0: GTCNT counts down.
+
       1: GTCNT counts up.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: UDF
-    description: |
-      Forcible Count Direction Setting.
+    description: 'Forcible Count Direction Setting.
+
       0: Not forcibly set.
+
       1: Forcibly set.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: OADTY
@@ -1872,17 +2635,25 @@ fieldset/GTUDDTYC:
     bit_size: 2
     enum: OADTY
   - name: OADTYF
-    description: |
-      Forcible GTIOCnA Output Duty Setting.
+    description: 'Forcible GTIOCnA Output Duty Setting.
+
       0: Not forcibly set.
+
       1: Forcibly set.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: OADTYR
-    description: |
-      GTIOCnA Output Value Selecting after Releasing 0%/100% Duty Setting.
-      0: The function selected by the GTIOA[3:2] bits is applied to the output value when the duty cycle is set after release from the 0 or 100% duty-cycle setting.
-      1: The function selected by the GTIOA[3:2] bits is applied to the compare match output value which is masked after release from the 0 or 100% duty-cycle setting.
+    description: 'GTIOCnA Output Value Selecting after Releasing 0%/100% Duty Setting.
+
+      0: The function selected by the GTIOA[3:2] bits is applied to the output value when the duty cycle is set after release
+      from the 0 or 100% duty-cycle setting.
+
+      1: The function selected by the GTIOA[3:2] bits is applied to the compare match output value which is masked after release
+      from the 0 or 100% duty-cycle setting.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: OBDTY
@@ -1891,232 +2662,393 @@ fieldset/GTUDDTYC:
     bit_size: 2
     enum: OBDTY
   - name: OBDTYF
-    description: |
-      Forcible GTIOCnB Output Duty Setting.
+    description: 'Forcible GTIOCnB Output Duty Setting.
+
       0: Not forcibly set.
+
       1: Forcibly set.
+
+      '
     bit_offset: 26
     bit_size: 1
   - name: OBDTYR
-    description: |
-      GTIOCnB Output Value Selecting after Releasing 0%/100% Duty Setting.
-      0: The function selected by the GTIOB[3:2] bits is applied to the output value when the duty cycle is set after release from the 0 or 100% duty-cycle setting.
-      1: The function selected by the GTIOB[3:2] bits is applied to the compare match output value which is masked after release from the 0 or 100% duty-cycle setting.
+    description: 'GTIOCnB Output Value Selecting after Releasing 0%/100% Duty Setting.
+
+      0: The function selected by the GTIOB[3:2] bits is applied to the output value when the duty cycle is set after release
+      from the 0 or 100% duty-cycle setting.
+
+      1: The function selected by the GTIOB[3:2] bits is applied to the compare match output value which is masked after release
+      from the 0 or 100% duty-cycle setting.
+
+      '
     bit_offset: 27
     bit_size: 1
 fieldset/GTUPSR:
   description: General PWM Timer Up Count Source Select Register.
   fields:
   - name: USGTRGAR
-    description: |
-      GTETRGA Pin Rising Input Source Counter Count Up Enable.
+    description: 'GTETRGA Pin Rising Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTETRGA input.
+
       1: Counter count up enabled on the rising edge of GTETRGA input.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: USGTRGAF
-    description: |
-      GTETRGA Pin Falling Input Source Counter Count Up Enable.
+    description: 'GTETRGA Pin Falling Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTETRGA input.
+
       1: Counter count up enabled on the falling edge of GTETRGA input.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: USGTRGBR
-    description: |
-      GTETRGB Pin Rising Input Source Counter Count Up Enable.
+    description: 'GTETRGB Pin Rising Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTETRGB input.
+
       1: Counter count up enabled on the rising edge of GTETRGB input.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: USGTRGBF
-    description: |
-      GTETRGB Pin Falling Input Source Counter Count Up Enable.
+    description: 'GTETRGB Pin Falling Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTETRGB input.
+
       1: Counter count up enabled on the falling edge of GTETRGB input.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: USGTRGCR
-    description: |
-      GTETRGC Pin Rising Input Source Counter Count Up Enable.
+    description: 'GTETRGC Pin Rising Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTETRGC input.
+
       1: Counter count up enabled on the rising edge of GTETRGC input.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: USGTRGCF
-    description: |
-      GTETRGC Pin Falling Input Source Counter Count Up Enable.
+    description: 'GTETRGC Pin Falling Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTETRGC input.
+
       1: Counter count up enabled on the falling edge of GTETRGC input.
+
+      '
     bit_offset: 5
     bit_size: 1
   - name: USGTRGDR
-    description: |
-      GTETRGD Pin Rising Input Source Counter Count Up Enable.
+    description: 'GTETRGD Pin Rising Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTETRGD input.
+
       1: Counter count up enabled on the rising edge of GTETRGD input.
+
+      '
     bit_offset: 6
     bit_size: 1
   - name: USGTRGDF
-    description: |
-      GTETRGD Pin Falling Input Source Counter Count Up Enable.
+    description: 'GTETRGD Pin Falling Input Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTETRGD input.
+
       1: Counter count up enabled on the falling edge of GTETRGD input.
+
+      '
     bit_offset: 7
     bit_size: 1
   - name: USCARBL
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Count Up Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value Low Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter count up enabled on the rising edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 8
     bit_size: 1
   - name: USCARBH
-    description: |
-      GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Count Up Enable.
+    description: 'GTIOCnA Pin Rising Input during GTIOCnB Value High Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter count up enabled on the rising edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 9
     bit_size: 1
   - name: USCAFBL
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Count Up Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value Low Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
       1: Counter count up enabled on the falling edge of GTIOCnA input when GTIOCnB input is 0.
+
+      '
     bit_offset: 10
     bit_size: 1
   - name: USCAFBH
-    description: |
-      GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Count Up Enable.
+    description: 'GTIOCnA Pin Falling Input during GTIOCnB Value High Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
       1: Counter count up enabled on the falling edge of GTIOCnA input when GTIOCnB input is 1.
+
+      '
     bit_offset: 11
     bit_size: 1
   - name: USCBRAL
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Count Up Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value Low Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter count up enabled on the rising edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 12
     bit_size: 1
   - name: USCBRAH
-    description: |
-      GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Count Up Enable.
+    description: 'GTIOCnB Pin Rising Input during GTIOCnA Value High Source Counter Count Up Enable.
+
       0: Counter count up disabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter count up enabled on the rising edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 13
     bit_size: 1
   - name: USCBFAL
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Count Up Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value Low Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
       1: Counter count up enabled on the falling edge of GTIOCnB input when GTIOCnA input is 0.
+
+      '
     bit_offset: 14
     bit_size: 1
   - name: USCBFAH
-    description: |
-      GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Count Up Enable.
+    description: 'GTIOCnB Pin Falling Input during GTIOCnA Value High Source Counter Count Up Enable.
+
       0: Counter count up disabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
       1: Counter count up enabled on the falling edge of GTIOCnB input when GTIOCnA input is 1.
+
+      '
     bit_offset: 15
     bit_size: 1
   - name: USELCA
-    description: |
-      ELC_GPTA Event Source Counter Count Up Enable.
+    description: 'ELC_GPTA Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTA input.
+
       1: Counter count up enabled at the ELC_GPTA input.
+
+      '
     bit_offset: 16
     bit_size: 1
   - name: USELCB
-    description: |
-      ELC_GPTB Event Source Counter Count Up Enable.
+    description: 'ELC_GPTB Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTB input.
+
       1: Counter count up enabled at the ELC_GPTB input.
+
+      '
     bit_offset: 17
     bit_size: 1
   - name: USELCC
-    description: |
-      ELC_GPTC Event Source Counter Count Up Enable.
+    description: 'ELC_GPTC Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTC input.
+
       1: Counter count up enabled at the ELC_GPTC input.
+
+      '
     bit_offset: 18
     bit_size: 1
   - name: USELCD
-    description: |
-      ELC_GPTD Event Source Counter Count Up Enable.
+    description: 'ELC_GPTD Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTD input.
+
       1: Counter count up enabled at the ELC_GPTD input.
+
+      '
     bit_offset: 19
     bit_size: 1
   - name: USELCE
-    description: |
-      ELC_GPTE Event Source Counter Count Up Enable.
+    description: 'ELC_GPTE Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTE input.
+
       1: Counter count up enabled at the ELC_GPTE input.
+
+      '
     bit_offset: 20
     bit_size: 1
   - name: USELCF
-    description: |
-      ELC_GPTF Event Source Counter Count Up Enable.
+    description: 'ELC_GPTF Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTF input.
+
       1: Counter count up enabled at the ELC_GPTF input.
+
+      '
     bit_offset: 21
     bit_size: 1
   - name: USELCG
-    description: |
-      ELC_GPTG Event Source Counter Count Up Enable.
+    description: 'ELC_GPTG Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTG input.
+
       1: Counter count up enabled at the ELC_GPTG input.
+
+      '
     bit_offset: 22
     bit_size: 1
   - name: USELCH
-    description: |
-      ELC_GPTH Event Source Counter Count Up Enable.
+    description: 'ELC_GPTH Event Source Counter Count Up Enable.
+
       0: Counter count up disabled at the ELC_GPTH input.
+
       1: Counter count up enabled at the ELC_GPTH input.
+
+      '
     bit_offset: 23
     bit_size: 1
 fieldset/GTWP:
   description: General PWM Timer Write-Protection Register.
   fields:
   - name: WP
-    description: |
-      Register Write Disable.
+    description: 'Register Write Disable.
+
       0: Write to the register enabled.
+
       1: Write to the register disabled.
+
+      '
     bit_offset: 0
     bit_size: 1
   - name: STRWP
-    description: |
-      GTSTR.CSTRT Bit Write Disable.
+    description: 'GTSTR.CSTRT Bit Write Disable.
+
       0: Write to the bit is enabled.
+
       1: Write to the bit is disabled.
+
+      '
     bit_offset: 1
     bit_size: 1
   - name: STPWP
-    description: |
-      GTSTP.CSTOP Bit Write Disable.
+    description: 'GTSTP.CSTOP Bit Write Disable.
+
       0: Write to the bit is enabled.
+
       1: Write to the bit is disabled.
+
+      '
     bit_offset: 2
     bit_size: 1
   - name: CLRWP
-    description: |
-      GTCLR.CCLR Bit Write Disable.
+    description: 'GTCLR.CCLR Bit Write Disable.
+
       0: Write to the bit is enabled.
+
       1: Write to the bit is disabled.
+
+      '
     bit_offset: 3
     bit_size: 1
   - name: CMNWP
-    description: |
-      Common Register Write Disabled.
+    description: 'Common Register Write Disabled.
+
       0: Write to the register is enabled.
+
       1: Write to the register is disabled.
+
+      '
     bit_offset: 4
     bit_size: 1
   - name: PRKEY
     description: GTWP Key Code.
     bit_offset: 8
     bit_size: 8
+enum/ADSMS0:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: A/D conversion start request signal generated by the GTADTRA register during up-counting.
+    value: 0
+  - name: V_01
+    description: A/D conversion start request signal generated by the GTADTRA register during down-counting.
+    value: 1
+  - name: V_10
+    description: A/D conversion start request signal generated by the GTADTRB register during up-counting.
+    value: 2
+  - name: V_11
+    description: A/D conversion start request signal generated by the GTADTRB register during down-counting.
+    value: 3
+enum/ADSMS1:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: A/D conversion start request signal generated by the GTADTRA register during up-counting.
+    value: 0
+  - name: V_01
+    description: A/D conversion start request signal generated by the GTADTRA register during down-counting.
+    value: 1
+  - name: V_10
+    description: A/D conversion start request signal generated by the GTADTRB register during up-counting.
+    value: 2
+  - name: V_11
+    description: A/D conversion start request signal generated by the GTADTRB register during down-counting.
+    value: 3
+enum/ADTTA:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: In triangle wave, no transfer. In saw-wave mode, no transfer.
+    value: 0
+  - name: V_01
+    description: In triangle wave, transfer at crest. In saw-wave mode, transfer at underflow (in down-counting), overflow
+      (in up-counting), or counter clearing.
+    value: 1
+  - name: V_10
+    description: In triangle wave, transfer at trough. In saw-wave mode, transfer at underflow (in down-counting), overflow
+      (in up-counting), or counter clearing.
+    value: 2
+  - name: V_11
+    description: In triangle wave, transfer at both crest and trough. In saw-wave mode, transfer at underflow (in down-counting),
+      overflow (in up-counting), or counter clearing.
+    value: 3
+enum/ADTTB:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: In triangle wave, no transfer. In saw-wave mode, no transfer.
+    value: 0
+  - name: V_01
+    description: In triangle wave, transfer at crest. In saw-wave mode, transfer at underflow (in down-counting), overflow
+      (in up-counting), or counter clearing.
+    value: 1
+  - name: V_10
+    description: In triangle wave, transfer at trough. In saw-wave mode, transfer at underflow (in down-counting), overflow
+      (in up-counting), or counter clearing.
+    value: 2
+  - name: V_11
+    description: In triangle wave, transfer at both crest and trough. In saw-wave mode, transfer at underflow (in down-counting),
+      overflow (in up-counting), or counter clearing.
+    value: 3
 enum/CCRA:
   bit_size: 2
   variants:
@@ -2124,7 +3056,7 @@ enum/CCRA:
     description: No buffer operation.
     value: 0
   - name: V_01
-    description: Single buffer operation (GTCCRA <---->GTCCRC).
+    description: "Single buffer operation (GTCCRA \u2194 GTCCRC)."
     value: 1
 enum/CCRB:
   bit_size: 2
@@ -2133,7 +3065,7 @@ enum/CCRB:
     description: No buffer operation.
     value: 0
   - name: V_01
-    description: Single buffer operation (GTCCRB <----> GTCCRE).
+    description: "Single buffer operation (GTCCRB \u2194 GTCCRE)."
     value: 1
 enum/GRP:
   bit_size: 2
@@ -2196,7 +3128,7 @@ enum/ICLFB:
     description: B AND D (1PCLKD delay).
     value: 4
   - name: V_101
-    description: B OR D (1PCLKDn delay).
+    description: B OR D (1PCLKD delay).
     value: 5
   - name: V_110
     description: B EXOR D (1PCLKD delay).
@@ -2219,18 +3151,6 @@ enum/ICLFSELC:
   - name: V_0x03
     description: GTIOC1B.
     value: 3
-  - name: V_0x04
-    description: GTIOC2A.
-    value: 4
-  - name: V_0x05
-    description: GTIOC2B.
-    value: 5
-  - name: V_0x06
-    description: GTIOC3A.
-    value: 6
-  - name: V_0x07
-    description: GTIOC3B.
-    value: 7
   - name: V_0x08
     description: GTIOC4A.
     value: 8
@@ -2243,30 +3163,6 @@ enum/ICLFSELC:
   - name: V_0x0B
     description: GTIOC5B.
     value: 11
-  - name: V_0x0C
-    description: GTIOC6A.
-    value: 12
-  - name: V_0x0D
-    description: GTIOC6B.
-    value: 13
-  - name: V_0x0E
-    description: GTIOC7A.
-    value: 14
-  - name: V_0x0F
-    description: GTIOC7B.
-    value: 15
-  - name: V_0x10
-    description: GTIOC8A.
-    value: 16
-  - name: V_0x11
-    description: GTIOC8B.
-    value: 17
-  - name: V_0x12
-    description: GTIOC9A.
-    value: 18
-  - name: V_0x13
-    description: GTIOC9B.
-    value: 19
 enum/ICLFSELD:
   bit_size: 6
   variants:
@@ -2282,18 +3178,6 @@ enum/ICLFSELD:
   - name: V_0x03
     description: GTIOC1B.
     value: 3
-  - name: V_0x04
-    description: GTIOC2A.
-    value: 4
-  - name: V_0x05
-    description: GTIOC2B.
-    value: 5
-  - name: V_0x06
-    description: GTIOC3A.
-    value: 6
-  - name: V_0x07
-    description: GTIOC3B.
-    value: 7
   - name: V_0x08
     description: GTIOC4A.
     value: 8
@@ -2306,30 +3190,48 @@ enum/ICLFSELD:
   - name: V_0x0B
     description: GTIOC5B.
     value: 11
-  - name: V_0x0C
-    description: GTIOC6A.
-    value: 12
-  - name: V_0x0D
-    description: GTIOC6B.
-    value: 13
-  - name: V_0x0E
-    description: GTIOC7A.
-    value: 14
-  - name: V_0x0F
-    description: GTIOC7B.
-    value: 15
-  - name: V_0x10
-    description: GTIOC8A.
-    value: 16
-  - name: V_0x11
-    description: GTIOC8B.
-    value: 17
-  - name: V_0x12
-    description: GTIOC9A.
-    value: 18
-  - name: V_0x13
-    description: GTIOC9B.
-    value: 19
+enum/IVTC:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Skipping is not performed.
+    value: 0
+  - name: V_01
+    description: Both overflow and underflow for saw waves and crest for triangle waves are counted and skipped.
+    value: 1
+  - name: V_10
+    description: Both overflow and underflow for saw waves and trough for triangle waves are counted and skipped.
+    value: 2
+  - name: V_10
+    description: Both overflow and underflow for saw waves and both crest and trough for triangle waves are counted and skipped.
+    value: 2
+enum/IVTT:
+  bit_size: 3
+  variants:
+  - name: V_000
+    description: Skipping is not performed.
+    value: 0
+  - name: V_001
+    description: Skipping count of 1.
+    value: 1
+  - name: V_010
+    description: Skipping count of 2.
+    value: 2
+  - name: V_011
+    description: Skipping count of 3.
+    value: 3
+  - name: V_100
+    description: Skipping count of 4.
+    value: 4
+  - name: V_101
+    description: Skipping count of 5.
+    value: 5
+  - name: V_110
+    description: Skipping count of 6.
+    value: 6
+  - name: V_111
+    description: Skipping count of 7.
+    value: 7
 enum/MD:
   bit_size: 3
   variants:
@@ -2454,8 +3356,23 @@ enum/PR:
     description: No buffer operation.
     value: 0
   - name: V_01
-    description: Single buffer operation (GTPBR --> GTPR).
+    description: "Single buffer operation (GTPBR \u2192 GTPR)."
     value: 1
+enum/SOS:
+  bit_size: 2
+  variants:
+  - name: V_00
+    description: Normal operation.
+    value: 0
+  - name: V_01
+    description: Protected state (GTCCRA = 0 is set during transfer at trough or crest).
+    value: 1
+  - name: V_10
+    description: "Protected state (GTCCRA \u2265 GTPR is set during transfer at trough)."
+    value: 2
+  - name: V_11
+    description: "Protected state (GTCCRA \u2265 GTPR is set during transfer at crest)."
+    value: 3
 enum/TPCS:
   bit_size: 4
   variants:

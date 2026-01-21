@@ -44,7 +44,18 @@ pub fn generate(out_dir: &Path) -> anyhow::Result<BTreeMap<String, String>> {
             .context(ctx.clone())
             .expect("Error reading registers");
 
-        let block_name = ir.blocks.keys().next().unwrap().clone();
+        let name = f
+            .file_name()
+            .unwrap()
+            .to_string_lossy()
+            .replace(".json", "");
+
+        let mut block_name = ir.blocks.keys().next().unwrap().clone();
+        if ir.blocks.len() > 1 {
+            if let Some(preferred) = preferred_block_name(&name, &ir.blocks) {
+                block_name = preferred;
+            }
+        }
         let block_name_pascal = heck::AsPascalCase(&block_name).to_string();
 
         transform::expand_extends::ExpandExtends {}
@@ -79,11 +90,6 @@ pub fn generate(out_dir: &Path) -> anyhow::Result<BTreeMap<String, String>> {
             .context(ctx)
             .expect("Failed to generate code for peripheral");
 
-        let name = f
-            .file_name()
-            .unwrap()
-            .to_string_lossy()
-            .replace(".json", "");
         
         block_map.insert(name.clone(), block_name_pascal);
 
@@ -127,4 +133,17 @@ pub fn generate(out_dir: &Path) -> anyhow::Result<BTreeMap<String, String>> {
     }
 
     Ok(block_map)
+}
+
+fn preferred_block_name(module_name: &str, blocks: &BTreeMap<String, ir::Block>) -> Option<String> {
+    let mut parts = module_name.splitn(2, '_');
+    let _kind = parts.next()?;
+    let suffix = parts.next()?;
+
+    let candidate = suffix.to_ascii_uppercase();
+    if blocks.contains_key(&candidate) {
+        return Some(candidate);
+    }
+
+    None
 }

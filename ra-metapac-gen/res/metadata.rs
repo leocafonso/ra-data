@@ -25,7 +25,6 @@ pub struct Peripheral {
     pub kind: &'static str,
     pub version: &'static str,
     pub mstp: Option<Mstp>,
-    pub bit_width: Option<u32>,
     pub interrupts: &'static [PeripheralInterrupt],
 }
 

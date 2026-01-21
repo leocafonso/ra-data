@@ -45,8 +45,8 @@ pub struct Peripheral {
     #[serde(rename = "type")]
     pub peri_type: String,
     pub version: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub mstp: Option<Mstp>,
-    pub bit_width: Option<u32>,
     /// Interrupts/events associated with this peripheral (signal names only)
     /// The full event name can be constructed as "{peripheral_name}_{signal}"
     #[serde(default, skip_serializing_if = "Vec::is_empty")]

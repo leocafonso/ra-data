@@ -4,7 +4,7 @@ use std::path::Path;
 use anyhow::Context;
 use crate::rzone::Rzones;
 use crate::pinmapping::PinMappings;
-use crate::perimap::PERIMAP;
+use crate::perimap::{PERIMAP};
 use crate::mstp;
 use ra_data_types::*;
 
@@ -34,7 +34,6 @@ pub fn generate(
     rzones: &Rzones,
     pin_mappings: &PinMappings,
     family_interrupts: &BTreeMap<String, Vec<Interrupt>>,
-    chip_timers: &BTreeMap<String, BTreeMap<String, u32>>,
 ) -> anyhow::Result<()> {
     let chips_dir = Path::new("./build/data/chips/");
     let regs_out_dir = Path::new("./build/data/registers/");
@@ -90,11 +89,7 @@ pub fn generate(
             });
         }
 
-        let mut peripherals = Vec::new();
-        let timer_map = chip_timers.iter()
-            .find(|(k, _)| name.starts_with(*k) ||
-                 (name.len() >= 7 && k.len() >= 7 && name[..7] == k[..7]))
-            .map(|(_, v)| v);
+           let mut peripherals = Vec::new();
 
         for p in &parsed.peripherals {
             // Normalize peripheral name (e.g., SYSTEM -> SYSC, PFS_A/PFS_B/PFS_NS -> PFS)
@@ -107,12 +102,10 @@ pub fn generate(
             if let Some(info) = PERIMAP.get(&key) {
                 let reg_key = format!("{}_{}", info.peri_type, info.version);
                 if available_registers.contains(&reg_key) {
-                    // Use the new MSTP computation based on bsp_module_stop.h rules
                     let mstp = mstp::get_mstp_for_peripheral(&p.name, name).map(|m| Mstp {
                         register: m.register,
                         bit: m.bit,
                     });
-                    let bit_width = timer_map.and_then(|m| m.get(&p.name)).cloned();
 
                     peripherals.push(Peripheral {
                         name: peri_name.to_string(),
@@ -120,7 +113,6 @@ pub fn generate(
                         peri_type: info.peri_type.to_string(),
                         version: info.version.to_string(),
                         mstp,
-                        bit_width,
                         interrupts: Vec::new(),
                     });
                 }

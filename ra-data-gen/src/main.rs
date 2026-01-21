@@ -5,7 +5,6 @@ mod util;
 mod perimap;
 mod interrupts;
 mod mstp;
-mod timer;
 
 #[macro_export]
 macro_rules! regex {
@@ -70,12 +69,9 @@ fn main() -> anyhow::Result<()> {
     stopwatch.section("Parsing interrupts");
     let family_interrupts = interrupts::parse_all()?;
 
-    stopwatch.section("Parsing Timers");
-    let chip_timers = timer::parse_all()?;
-
     stopwatch.section("Generating data");
     // MSTP is now computed on-the-fly using rules from bsp_module_stop.h
-    generate::generate(&rzones, &pin_mappings, &family_interrupts, &chip_timers)?;
+    generate::generate(&rzones, &pin_mappings, &family_interrupts)?;
 
     stopwatch.section("Parsing other stuff");
 
