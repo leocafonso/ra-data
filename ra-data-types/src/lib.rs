@@ -10,7 +10,17 @@ pub struct Chip {
     pub peripherals: Vec<Peripheral>,
     pub interrupts: Vec<Interrupt>,
     pub packages: Vec<Package>,
+    /// List of unique GPIO pin names available on this chip (e.g., "P100", "P104")
+    /// Extracted from package pin mappings, uppercase format
+    pub pins: Vec<ChipPin>,
 }
+
+/// A unique pin on the chip (for singleton generation)
+#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq, PartialOrd, Ord)]
+pub struct ChipPin {
+    pub name: String,
+}
+
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Interrupt {
@@ -45,6 +55,8 @@ pub struct Peripheral {
     #[serde(rename = "type")]
     pub peri_type: String,
     pub version: String,
+    /// The register block to use from the register file (e.g., "GPT16E", "GPT32")
+    pub block: String,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub mstp: Option<Mstp>,
     /// Interrupts/events associated with this peripheral (signal names only)

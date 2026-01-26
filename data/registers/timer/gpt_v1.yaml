@@ -1,6 +1,6 @@
 block/GPT16E:
   description: General PWM 16-bit Timer 0.
-  extends: GPT16
+  extends: GPT
   items:
   - name: GTITC
     description: General PWM Timer Interrupt and A/D Conversion Start Request Skipping Setting Register.
@@ -65,7 +65,7 @@ block/GPT16E:
     description: General PWM Timer Operation Enable Bit Simultaneous Control Register.
     byte_offset: 212
     fieldset: GTSECR
-block/GPT16:
+block/GPT:
   description: General PWM 16-bit Timer.
   items:
   - name: GTWP

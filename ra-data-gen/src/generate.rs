@@ -112,6 +112,7 @@ pub fn generate(
                         address: p.address,
                         peri_type: info.peri_type.to_string(),
                         version: info.version.to_string(),
+                        block: info.block.to_string(),
                         mstp,
                         interrupts: Vec::new(),
                     });
@@ -137,6 +138,22 @@ pub fn generate(
             peri
         }).collect();
 
+        // Extract unique GPIO pins from packages
+        // Filter to only include GPIO pins (starting with 'p' like p100, p104)
+        let mut pin_set = std::collections::BTreeSet::new();
+        for pkg in &packages {
+            for pin in &pkg.pins {
+                for signal in &pin.signals {
+                    // Include only GPIO pins (start with 'p' followed by digits)
+                    if signal.starts_with('p') && signal.len() > 1 && signal[1..].chars().next().map_or(false, |c| c.is_ascii_digit()) {
+                        // Convert to uppercase P100 format
+                        pin_set.insert(signal.to_uppercase());
+                    }
+                }
+            }
+        }
+        let pins: Vec<ChipPin> = pin_set.into_iter().map(|name| ChipPin { name }).collect();
+
         let chip = Chip {
             name: name.clone(),
             family: parsed.family.clone(),
@@ -151,7 +168,9 @@ pub fn generate(
             peripherals,
             interrupts,
             packages,
+            pins,
         };
+
 
         let file_path = chips_dir.join(format!("{}.json", name));
         let file = fs::File::create(file_path)?;

@@ -7,8 +7,16 @@ pub struct Metadata {
     pub peripherals: &'static [Peripheral],
     pub events: &'static [Event],
     pub packages: &'static [Package],
+    pub pins: &'static [ChipPin],
     pub interrupt_count: usize,
 }
+
+/// A unique GPIO pin on the chip (e.g., "P100", "P104")
+#[derive(Copy, Clone)]
+pub struct ChipPin {
+    pub name: &'static str,
+}
+
 
 #[derive(Copy, Clone)]
 pub struct MemoryRegion {

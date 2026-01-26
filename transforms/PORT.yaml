@@ -1,96 +1,96 @@
 transforms:
-  - !DeleteEnums
-    from: .*
-    bit_size: 1
-    keep_desc: true
-  - !DeleteFieldsets
-    from: .*
-    useless: true
-  # Rename individual bit registers to array form
-  - !RenameRegisters
-    block: .*
-    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
-    to: $1
-  # Merge PORT blocks
-  - !MergeBlocks
-    from: ^PORT[0-9]+$
-    to: PORT
-  # Merge fieldsets
-  - !MergeFieldsets
-    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
-    to: $1
-  - !MergeEnums
-    from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
-    to: $1
-  # Convert individual PDRxx, PODRxx, etc. fields to arrays
-  - !MakeFieldArray
-    fieldsets: PCNTR1
-    from: PDR\d+
-    to: PDR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR1
-    from: PODR\d+
-    to: PODR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR2
-    from: PIDR\d+
-    to: PIDR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR2
-    from: EIDR\d+
-    to: EIDR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR3
-    from: PORR\d+
-    to: PORR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR3
-    from: POSR\d+
-    to: POSR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR3
-    from: EORR\d+
-    to: EORR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR3
-    from: EOSR\d+
-    to: EOSR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PCNTR4
-    from: EIPDR\d+
-    to: EIPDR
-    mode: Cursed
-  # Also handle standalone PDR/PODR/PIDR/PORR/POSR fieldsets
-  - !MakeFieldArray
-    fieldsets: PDR
-    from: PDR\d+
-    to: PDR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PODR
-    from: PODR\d+
-    to: PODR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PIDR
-    from: PIDR\d+
-    to: PIDR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: PORR
-    from: PORR\d+
-    to: PORR
-    mode: Cursed
-  - !MakeFieldArray
-    fieldsets: POSR
-    from: POSR\d+
-    to: POSR
-    mode: Cursed
+  # - !DeleteEnums
+  #   from: .*
+  #   bit_size: 1
+  #   keep_desc: true
+  # - !DeleteFieldsets
+  #   from: .*
+  #   useless: true
+  # # Rename individual bit registers to array form
+  # - !RenameRegisters
+  #   block: .*
+  #   from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
+  #   to: $1
+  # # Merge PORT blocks
+  # - !MergeBlocks
+  #   from: ^PORT[0-9]+$
+  #   to: PORT
+  # # Merge fieldsets
+  # - !MergeFieldsets
+  #   from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
+  #   to: $1
+  # - !MergeEnums
+  #   from: ^(PDR|PODR|PIDR|PORR|POSR|EORR|EOSR|EIDR|EIPDR|IESR|IELSR)[0-9]+$
+  #   to: $1
+  # # Convert individual PDRxx, PODRxx, etc. fields to arrays
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR1
+  #   from: PDR\d+
+  #   to: PDR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR1
+  #   from: PODR\d+
+  #   to: PODR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR2
+  #   from: PIDR\d+
+  #   to: PIDR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR2
+  #   from: EIDR\d+
+  #   to: EIDR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR3
+  #   from: PORR\d+
+  #   to: PORR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR3
+  #   from: POSR\d+
+  #   to: POSR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR3
+  #   from: EORR\d+
+  #   to: EORR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR3
+  #   from: EOSR\d+
+  #   to: EOSR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PCNTR4
+  #   from: EIPDR\d+
+  #   to: EIPDR
+  #   mode: Cursed
+  # # Also handle standalone PDR/PODR/PIDR/PORR/POSR fieldsets
+  # - !MakeFieldArray
+  #   fieldsets: PDR
+  #   from: PDR\d+
+  #   to: PDR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PODR
+  #   from: PODR\d+
+  #   to: PODR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PIDR
+  #   from: PIDR\d+
+  #   to: PIDR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: PORR
+  #   from: PORR\d+
+  #   to: PORR
+  #   mode: Cursed
+  # - !MakeFieldArray
+  #   fieldsets: POSR
+  #   from: POSR\d+
+  #   to: POSR
+  #   mode: Cursed
