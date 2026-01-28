@@ -176,7 +176,7 @@ pub fn compute_mstp(peri_type: &str, channel: u32, chip_name: &str) -> Option<Ms
     
     // Handle family-specific GPT rules
     if peri_type == "GPT" {
-        return compute_gpt_mstp(channel, family);
+        return compute_gpt_mstp(channel, family, chip_name);
     }
     
     // Handle family-specific AGT rules
@@ -212,39 +212,121 @@ pub fn compute_mstp(peri_type: &str, channel: u32, chip_name: &str) -> Option<Ms
 
 /// Compute GPT MSTP info based on family
 /// GPT has complex family-dependent rules from bsp_module_stop.h
-fn compute_gpt_mstp(channel: u32, family: RaFamily) -> Option<MstpInfo> {
-    match family {
-        RaFamily::Ra6t2 => {
-            // RA6T2: MSTPCRE bit 31 for all channels
-            Some(MstpInfo {
-                register: "MSTPCRE".to_string(),
-                bit: 31,
-            })
+/// 
+/// Logic from bsp_module_stop.h:
+/// - If HAS_MSTPCRE=1: Use MSTPCRE with bit 31-channel (or special cases)
+/// - If HAS_MSTPCRE=0: Use MSTPCRD
+///   - If MSTPD5=0: All channels use bit 6
+///   - If MSTPD5=1: Channels <= MSTPD5_MAX_CH use bit 5, others use bit 6
+fn compute_gpt_mstp(channel: u32, family: RaFamily, chip_name: &str) -> Option<MstpInfo> {
+    // Get GPT MSTP features for this specific chip
+    let (has_mstpcre, mstpd5, mstpd5_max_ch) = get_gpt_mstp_features(chip_name);
+    
+    if has_mstpcre {
+        // Device has MSTPCRE - use it for GPT
+        match family {
+            RaFamily::Ra6t2 => {
+                // RA6T2: MSTPCRE bit 31 for all channels
+                Some(MstpInfo {
+                    register: "MSTPCRE".to_string(),
+                    bit: 31,
+                })
+            }
+            RaFamily::Ra8Gen2 => {
+                // RA8 Gen2: MSTPCRE, channels 4-9 share bit with channel 4
+                let effective_channel = if channel >= 4 && channel <= 9 { 4 } else { channel };
+                Some(MstpInfo {
+                    register: "MSTPCRE".to_string(),
+                    bit: 31 - effective_channel,
+                })
+            }
+            _ => {
+                // Default MSTPCRE: bit 31-channel
+                Some(MstpInfo {
+                    register: "MSTPCRE".to_string(),
+                    bit: 31 - channel,
+                })
+            }
         }
-        RaFamily::Ra8Gen2 => {
-            // RA8 Gen2: MSTPCRE, channels 4-9 share bit with channel 4
-            let effective_channel = if channel >= 4 && channel <= 9 { 4 } else { channel };
+    } else {
+        // Device uses MSTPCRD for GPT
+        if mstpd5 {
+            // MSTPD5 feature enabled: channels <= max_ch use bit 5, others use bit 6
+            let bit = if channel <= mstpd5_max_ch { 5 } else { 6 };
             Some(MstpInfo {
-                register: "MSTPCRE".to_string(),
-                bit: 31 - effective_channel,
+                register: "MSTPCRD".to_string(),
+                bit,
             })
-        }
-        RaFamily::Ra6 | RaFamily::Ra8 => {
-            // RA6/RA8 with MSTPCRE: bit 31-channel
-            Some(MstpInfo {
-                register: "MSTPCRE".to_string(),
-                bit: 31 - channel,
-            })
-        }
-        _ => {
-            // Devices without MSTPCRE: MSTPCRD bit 6 (or 5 for some)
-            // Default to bit 6 for GPT
+        } else {
+            // No MSTPD5: all channels use bit 6
             Some(MstpInfo {
                 register: "MSTPCRD".to_string(),
                 bit: 6,
             })
         }
     }
+}
+
+/// Get GPT MSTP feature flags for a specific chip
+/// Returns (has_mstpcre, mstpd5, mstpd5_max_ch)
+/// Based on bsp_feature.h for each MCU family
+fn get_gpt_mstp_features(chip_name: &str) -> (bool, bool, u32) {
+    let name = chip_name.to_uppercase();
+    
+    // Check specific chip families based on bsp_feature.h values
+    // Format: (BSP_FEATURE_GPT_MSTP_HAS_MSTPCRE, BSP_FEATURE_GPT_MSTP_MSTPD5, BSP_FEATURE_GPT_MSTP_MSTPD5_MAX_CH)
+    
+    // RA0 family - no MSTPCRE, no MSTPD5
+    if name.starts_with("R7FA0E1") { return (false, false, 0); }  // RA0E1
+    if name.starts_with("R7FA0E2") { return (false, false, 0); }  // RA0E2
+    if name.starts_with("R7FA0L1") { return (false, false, 0); }  // RA0L1
+    
+    // RA2 family - mostly no MSTPCRE, some have MSTPD5
+    if name.starts_with("R7FA2A1") { return (false, false, 0); }  // RA2A1
+    if name.starts_with("R7FA2A2") { return (false, false, 0); }  // RA2A2 (MSTPD5=0, MAX_CH=3 but MSTPD5 disabled)
+    if name.starts_with("R7FA2E1") { return (false, true, 0); }   // RA2E1: MSTPD5=1, MAX_CH=0
+    if name.starts_with("R7FA2E2") { return (false, false, 0); }  // RA2E2
+    if name.starts_with("R7FA2E3") { return (false, false, 0); }  // RA2E3
+    if name.starts_with("R7FA2L1") { return (false, true, 3); }   // RA2L1: MSTPD5=1, MAX_CH=3
+    if name.starts_with("R7FA2L2") { return (false, false, 0); }  // RA2L2
+    if name.starts_with("R7FA2T1") { return (false, false, 0); }  // RA2T1
+    
+    // RA4 family - mixed
+    if name.starts_with("R7FA4C1") { return (false, false, 0); }  // RA4C1 (assume no MSTPCRE)
+    if name.starts_with("R7FA4E1") { return (false, false, 0); }  // RA4E1
+    if name.starts_with("R7FA4E2") { return (true, false, 0); }   // RA4E2: HAS_MSTPCRE=1
+    if name.starts_with("R7FA4L1") { return (true, false, 0); }   // RA4L1: HAS_MSTPCRE=1
+    if name.starts_with("R7FA4M1") { return (false, false, 0); }  // RA4M1
+    if name.starts_with("R7FA4M2") { return (true, false, 0); }   // RA4M2: HAS_MSTPCRE=1
+    if name.starts_with("R7FA4M3") { return (true, false, 0); }   // RA4M3: HAS_MSTPCRE=1
+    if name.starts_with("R7FA4T1") { return (true, false, 0); }   // RA4T1: HAS_MSTPCRE=1
+    if name.starts_with("R7FA4W1") { return (false, false, 0); }  // RA4W1
+    
+    // RA6 family - mixed
+    if name.starts_with("R7FA6E1") { return (true, false, 0); }   // RA6E1: HAS_MSTPCRE=1
+    if name.starts_with("R7FA6E2") { return (true, false, 0); }   // RA6E2: HAS_MSTPCRE=1
+    if name.starts_with("R7FA6M1") { return (false, true, 7); }   // RA6M1: MSTPD5=1, MAX_CH=7 (assumed)
+    if name.starts_with("R7FA6M2") { return (false, true, 7); }   // RA6M2: MSTPD5=1, MAX_CH=7 (assumed)
+    if name.starts_with("R7FA6M3") { return (false, true, 7); }   // RA6M3: MSTPD5=1, MAX_CH=7
+    if name.starts_with("R7FA6M4") { return (true, false, 0); }   // RA6M4: HAS_MSTPCRE=1
+    if name.starts_with("R7FA6M5") { return (true, false, 0); }   // RA6M5: HAS_MSTPCRE=1
+    if name.starts_with("R7FA6T1") { return (false, true, 7); }   // RA6T1: MSTPD5=1, MAX_CH=7 (assumed)
+    if name.starts_with("R7FA6T2") { return (true, false, 0); }   // RA6T2: HAS_MSTPCRE=1 (special bit 31)
+    if name.starts_with("R7FA6T3") { return (true, false, 0); }   // RA6T3: HAS_MSTPCRE=1
+    
+    // RA8 family - all have MSTPCRE
+    if name.starts_with("R7FA8D1") { return (true, false, 0); }   // RA8D1
+    if name.starts_with("R7FA8D2") { return (true, false, 0); }   // RA8D2
+    if name.starts_with("R7FA8E1") { return (true, false, 0); }   // RA8E1
+    if name.starts_with("R7FA8E2") { return (true, false, 0); }   // RA8E2
+    if name.starts_with("R7FA8M1") { return (true, false, 0); }   // RA8M1
+    if name.starts_with("R7FA8M2") { return (true, false, 0); }   // RA8M2
+    if name.starts_with("R7FA8T1") { return (true, false, 0); }   // RA8T1
+    if name.starts_with("R7FA8T2") { return (true, false, 0); }   // RA8T2
+    if name.starts_with("R7KA8")   { return (true, false, 0); }   // RKA8 family
+    
+    // Default: no MSTPCRE, all channels use bit 6
+    (false, false, 0)
 }
 
 /// Compute AGT MSTP info based on family
