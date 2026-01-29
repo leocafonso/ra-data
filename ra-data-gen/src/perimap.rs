@@ -157,51 +157,25 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA[46][ELMT].*:MSTP", PeriInfo { peri_type: "mstp", version: "v2", block: "MSTP" }),
     ("R7FA8.*:MSTP", PeriInfo { peri_type: "mstp", version: "v2", block: "MSTP" }),
     ("R7KA8.*:MSTP", PeriInfo { peri_type: "mstp", version: "v2", block: "MSTP" }),
-    ("R7FA2.*:MSTP", PeriInfo { peri_type: "mstp", version: "v3", block: "MSTP" }),
+    ("R7FA2.*:MSTP", PeriInfo { peri_type: "mstp", version: "v1", block: "MSTP" }),
     (".*:MSTP", PeriInfo { peri_type: "mstp", version: "v1", block: "MSTP" }),
 
     // SYSC mappings (System Control)
-    // RA0 family - all share same structure
+    // Consolidated into 2 files:
+    // - sysc_v1.yaml: block/SYSC (RA2/4/6) + block/SYSC_RA8 (RA8 extended)
+    // - sysc_ra0.yaml: RA0 (completely different layout at 0x800+)
+    
+    // RA0 family - completely different register layout at 0x800+
     ("R7FA0.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra0", block: "SYSC" }),
-    // RA2 family
-    ("R7FA2A1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2a1", block: "SYSC" }),
-    ("R7FA2A2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2a2", block: "SYSC" }),
-    ("R7FA2E1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2e1", block: "SYSC" }),
-    ("R7FA2E2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2e2", block: "SYSC" }),
-    ("R7FA2E3.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2e1", block: "SYSC" }), // same as RA2E1
-    ("R7FA2L1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2l1", block: "SYSC" }),
-    ("R7FA2L2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2e1", block: "SYSC" }), // same as RA2E1
-    ("R7FA2T1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra2t1", block: "SYSC" }),
-    // RA4 family
-    ("R7FA4C1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4c1", block: "SYSC" }),
-    ("R7FA4E1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4e1", block: "SYSC" }),
-    ("R7FA4E2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4e2", block: "SYSC" }),
-    ("R7FA4L1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4l1", block: "SYSC" }),
-    ("R7FA4M1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4m1", block: "SYSC" }),
-    ("R7FA4M2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4m2", block: "SYSC" }),
-    ("R7FA4M3.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4m3", block: "SYSC" }),
-    ("R7FA4T1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4t1", block: "SYSC" }),
-    ("R7FA4W1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4w1", block: "SYSC" }),
-    // RA6 family
-    ("R7FA6E1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6e1", block: "SYSC" }),
-    ("R7FA6E2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra4e2", block: "SYSC" }), // same as RA4E2
-    ("R7FA6M1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6m1", block: "SYSC" }),
-    ("R7FA6M2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6m2", block: "SYSC" }),
-    ("R7FA6M3.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6m2", block: "SYSC" }), // same as RA6M2
-    ("R7FA6M4.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6m4", block: "SYSC" }),
-    ("R7FA6M5.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6m5", block: "SYSC" }),
-    ("R7FA6T1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6t1", block: "SYSC" }),
-    ("R7FA6T2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6t2", block: "SYSC" }),
-    ("R7FA6T3.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra6t3", block: "SYSC" }),
-    // RA8 family
-    ("R7FA8D1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8d1", block: "SYSC" }),
-    ("R7FA8E1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8e1", block: "SYSC" }),
-    ("R7FA8E2.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8e2", block: "SYSC" }),
-    ("R7FA8M1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8m1", block: "SYSC" }),
-    ("R7FA8T1.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8t1", block: "SYSC" }),
-    // RKA8 family
-    ("R7KA8D2.*:SYSC", PeriInfo { peri_type: "sysc", version: "rka8d2", block: "SYSC" }),
-    ("R7KA8M2.*:SYSC", PeriInfo { peri_type: "sysc", version: "rka8m2", block: "SYSC" }),
-    ("R7KA8P1.*:SYSC", PeriInfo { peri_type: "sysc", version: "rka8p1", block: "SYSC" }),
-    ("R7KA8T2.*:SYSC", PeriInfo { peri_type: "sysc", version: "rka8t2", block: "SYSC" }),
+    
+    // RA2/4/6 families - use common SYSC block
+    ("R7FA2.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
+    ("R7FA4.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
+    ("R7FA6.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
+    
+    // RA8 family - use extended SYSC_RA8 block (extends SYSC)
+    ("R7FA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC_RA8" }),
+    
+    // RKA8 family - use extended SYSC_RA8 block
+    ("R7KA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC_RA8" }),
 ]);

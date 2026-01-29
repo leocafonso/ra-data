@@ -13,6 +13,11 @@ block/MSTP:
     description: Module Stop Control Register D.
     byte_offset: 8
     fieldset: MSTPCRD
+  - name: LSMRWDIS
+    description: Low Speed Module R/W Disable Control Register.
+    byte_offset: 12
+    bit_size: 16
+    fieldset: LSMRWDIS
 fieldset/MSTPCRB:
   description: Module Stop Control Register B.
   fields:
@@ -406,3 +411,27 @@ fieldset/MSTPCRD:
     description: Module Stop bit 31.
     bit_offset: 31
     bit_size: 1
+fieldset/LSMRWDIS:
+  description: Low Speed Module R/W Disable Control Register.
+  bit_size: 16
+  fields:
+  - name: RTCRWDIS
+    description: RTC Register R/W Enable Control.
+    bit_offset: 0
+    bit_size: 1
+  - name: WDTDIS
+    description: WDT Operate Clock Control.
+    bit_offset: 1
+    bit_size: 1
+  - name: IWDTIDS
+    description: IWDT Register Clock Control.
+    bit_offset: 2
+    bit_size: 1
+  - name: WREN
+    description: Write Enable for bits [2:0].
+    bit_offset: 7
+    bit_size: 1
+  - name: PRKEY
+    description: LSMRWDIS Key Code.
+    bit_offset: 8
+    bit_size: 8
