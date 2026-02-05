@@ -174,8 +174,8 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA6.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
     
     // RA8 family - use extended SYSC_RA8 block (extends SYSC)
-    ("R7FA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC_RA8" }),
+    ("R7FA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8", block: "SYSC" }),
     
     // RKA8 family - use extended SYSC_RA8 block
-    ("R7KA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC_RA8" }),
+    ("R7KA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8", block: "SYSC" }),
 ]);
