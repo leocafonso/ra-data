@@ -109,6 +109,48 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     // RKA8 family
     ("R7KA8P1.*:GPT\\d+", PeriInfo { peri_type: "gpt", version: "v1", block: "GPT" }), // gpt32
 
+    // AGT mappings (Asynchronous General Purpose Timer)
+    // 16-bit AGT (from tmp/AGT0)
+    ("R7FA2A1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA2A2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA2E1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA2E3.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA2L1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA4E1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA4M1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA4M2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA4M3.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA4W1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6E1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6M1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6M2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6M3.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6M4.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6M5.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA6T1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA8D1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA8E1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA8E2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA8M1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7FA8T1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7KA8D2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7KA8M2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7KA8P1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+    ("R7KA8T2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "16bits", block: "AGT" }),
+
+    // 32-bit AGTW / AGTW_B0 (from tmp/AGTW0 and tmp/AGTW_B0)
+    ("R7FA2A2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA2E2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA2L2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA2T1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA4C1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA4E2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA4L1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA4T1.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA6E2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA6T3.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+    ("R7FA6T2.*:AGT\\d+", PeriInfo { peri_type: "agt", version: "32bits", block: "AGT" }),
+
     // ICU mappings (Interrupt Controller Unit)
     // RA0 family
     ("R7FA0E1.*:ICU", PeriInfo { peri_type: "icu", version: "ra0e1", block: "ICU" }),
