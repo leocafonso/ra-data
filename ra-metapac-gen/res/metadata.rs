@@ -32,6 +32,9 @@ pub struct Peripheral {
     pub address: u64,
     pub kind: &'static str,
     pub version: &'static str,
+    /// Register block name (e.g., "GPT16E", "AGT", "ICU_RA4E2").
+    /// Identifies which register struct from ra-metapac to use for this instance.
+    pub block: &'static str,
     pub mstp: Option<Mstp>,
     pub interrupts: &'static [PeripheralInterrupt],
 }

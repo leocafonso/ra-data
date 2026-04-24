@@ -355,6 +355,7 @@ fn generate_chip_pac(chip: &Chip, chip_dir: &Path, generator: &mut Generator) ->
         writeln!(shared_content, "        address: {},", peri.address)?;
         writeln!(shared_content, "        kind: \"{}\",", peri.peri_type.to_lowercase())?;
         writeln!(shared_content, "        version: \"{}\",", peri.version)?;
+        writeln!(shared_content, "        block: \"{}\",", peri.block)?;
         if let Some(mstp) = &peri.mstp {
             writeln!(shared_content, "        mstp: Some(Mstp {{")?;
             writeln!(shared_content, "            register: \"{}\",", mstp.register)?;
