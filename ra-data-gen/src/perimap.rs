@@ -202,22 +202,40 @@ pub static PERIMAP: RegexMap<PeriInfo> = RegexMap::new(&[
     ("R7FA2.*:MSTP", PeriInfo { peri_type: "mstp", version: "v1", block: "MSTP" }),
     (".*:MSTP", PeriInfo { peri_type: "mstp", version: "v1", block: "MSTP" }),
 
-    // SYSC mappings (System Control)
-    // Consolidated into 2 files:
-    // - sysc_v1.yaml: block/SYSC (RA2/4/6) + block/SYSC_RA8 (RA8 extended)
-    // - sysc_ra0.yaml: RA0 (completely different layout at 0x800+)
-    
-    // RA0 family - completely different register layout at 0x800+
-    ("R7FA0.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra0", block: "SYSC" }),
-    
-    // RA2/4/6 families - use common SYSC block
+    // SYSC mappings (System Control) — grouped by IP-block layout, NOT by family.
+    // Renesas reuses SYSC IP across families (e.g., RA4M2 shares with RA6E2, NOT RA4M1).
+    // See data/registers/sysc/README.md for the chip→version table and distinguishing
+    // signatures for each version. Order: most-specific patterns first.
+    //
+    //   v1 = RA2 class (no PLL hardware, 1-bit MEMWAIT, MODRV1[3])
+    //   v2 = RA4M1/W1 legacy (PLLCCR2 only, MEMWAIT, MODRV1[3])
+    //   v3 = RA6M1/M2/M3 + RA6T1 (16b PLLCCR, MOMCR with AUTODRVEN, MODRV0[4:5])
+    //   v4 = "modern" RA4M2/M3/E1/E2/T1 + RA6E1/E2/M4/M5/T2/T3 (16b PLLCCR, MODRV[4:5])
+    //   v5 = RA4L1/C1 (5-bit PLLMUL, 2-bit MEMWAIT, MODRV1[3])
+    //   v6 = RA8 (PLLCCR + PLLCCR2 with PLODIVP/Q/R)
+    //   v7 = RA0 (different register layout at 0x800+)
+
+    // RA0 family
+    ("R7FA0.*:SYSC", PeriInfo { peri_type: "sysc", version: "v7", block: "SYSC" }),
+
+    // RA2 family — no PLL hardware
     ("R7FA2.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
-    ("R7FA4.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
-    ("R7FA6.*:SYSC", PeriInfo { peri_type: "sysc", version: "v1", block: "SYSC" }),
-    
-    // RA8 family - use extended SYSC_RA8 block (extends SYSC)
-    ("R7FA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8", block: "SYSC" }),
-    
-    // RKA8 family - use extended SYSC_RA8 block
-    ("R7KA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "ra8", block: "SYSC" }),
+
+    // RA4 — split by IP version
+    ("R7FA4M1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v2", block: "SYSC" }),
+    ("R7FA4W1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v2", block: "SYSC" }),
+    ("R7FA4L1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v5", block: "SYSC" }),
+    ("R7FA4C1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v5", block: "SYSC" }),
+    ("R7FA4.*:SYSC",   PeriInfo { peri_type: "sysc", version: "v4", block: "SYSC" }), // M2/M3/E1/E2/T1
+
+    // RA6 — split by IP version
+    ("R7FA6M1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v3", block: "SYSC" }),
+    ("R7FA6M2.*:SYSC", PeriInfo { peri_type: "sysc", version: "v3", block: "SYSC" }),
+    ("R7FA6M3.*:SYSC", PeriInfo { peri_type: "sysc", version: "v3", block: "SYSC" }),
+    ("R7FA6T1.*:SYSC", PeriInfo { peri_type: "sysc", version: "v3", block: "SYSC" }),
+    ("R7FA6.*:SYSC",   PeriInfo { peri_type: "sysc", version: "v4", block: "SYSC" }), // E1/E2/M4/M5/T2/T3
+
+    // RA8 family
+    ("R7FA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v6", block: "SYSC" }),
+    ("R7KA8.*:SYSC", PeriInfo { peri_type: "sysc", version: "v6", block: "SYSC" }),
 ]);
