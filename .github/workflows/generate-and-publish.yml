@@ -1,0 +1,80 @@
+name: Generate and Publish ra-metapac
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout ra-data
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv6m-none-eabi,thumbv7em-none-eabi,thumbv8m.main-none-eabihf
+
+      - name: Cache Rust build artifacts
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install chiptool
+        run: cargo install chiptool
+
+      - name: Download SVD sources
+        run: ./d download-all
+
+      - name: Generate data and PAC
+        run: ./d gen-all
+
+      - name: Smoke-test generated PAC (RA6E2)
+        run: cargo check --manifest-path build/ra-metapac/Cargo.toml --target thumbv8m.main-none-eabihf --features r7fa6e2bb3cfm,metadata,embassy
+
+      - name: Smoke-test generated PAC (RA2E1)
+        run: cargo check --manifest-path build/ra-metapac/Cargo.toml --target thumbv6m-none-eabi --features r7fa2e1a92dfm,metadata
+
+      - name: Publish to ra-data-generated
+        env:
+          DEPLOY_KEY: ${{ secrets.RA_DATA_GENERATED_DEPLOY_KEY }}
+          GIT_SHA: ${{ github.sha }}
+        run: |
+          # Configure SSH
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+
+          # Clone the target repo
+          git clone git@github.com:leocafonso/ra-data-generated.git /tmp/ra-data-generated
+
+          # Wipe content (preserve .git)
+          find /tmp/ra-data-generated -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+
+          # Copy generated output
+          cp -r build/ra-metapac /tmp/ra-data-generated/ra-metapac
+          cp -r build/data       /tmp/ra-data-generated/data
+
+          # Commit and push
+          cd /tmp/ra-data-generated
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+
+          SHORT_SHA="${GIT_SHA::7}"
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+          else
+            git commit -m "Generated from ra-data @ ${SHORT_SHA}"
+            git push origin main
+
+            # Tag with the source SHA for pinning
+            git tag "ra-data-${SHORT_SHA}"
+            git push origin "ra-data-${SHORT_SHA}"
+          fi
