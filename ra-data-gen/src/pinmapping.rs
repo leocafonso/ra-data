@@ -21,7 +21,7 @@ pub struct PinMappings {
 
 impl PinMappings {
     pub fn parse() -> anyhow::Result<Self> {
-        let pattern = "/home/lafonso/study/rust/ra-data/sources/pinmapping/PinCfg*.xml";
+        let pattern = "sources/pinmapping/PinCfg*.xml";
         let files: Vec<_> = glob(pattern)
             .context("Failed to read pinmapping glob pattern")?
             .map(Result::unwrap)
