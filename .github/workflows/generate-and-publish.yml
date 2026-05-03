@@ -26,7 +26,7 @@ jobs:
         uses: Swatinem/rust-cache@v2
 
       - name: Install chiptool
-        run: cargo install chiptool
+        run: cargo install --git https://github.com/embassy-rs/chiptool
 
       - name: Download SVD sources
         run: ./d download-all
